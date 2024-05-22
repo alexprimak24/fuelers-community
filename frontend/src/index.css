@@ -43,6 +43,7 @@ html {
 body {
   max-width: 1560px;
   margin: 0 auto;
+  color: #F5F5F5;
   padding: 10px, 0, 50px, 0;
   font-family: 'Px Grotesk Pan', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
