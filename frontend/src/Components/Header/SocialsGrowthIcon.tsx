@@ -13,7 +13,7 @@ function SocialsGrowth({ image, socialLink, subsForMonth }: SocialsGrowthProps) 
     window.location.href = socialLink;
   }
   return (
-    <div className='h-[45px] flex flex-col items-center gap-[8px] mt-[3px]'>
+    <div className='h-[45px] flex flex-col items-center gap-[8px] '>
       <div className="cursor-pointer" onClick={handleSocialClick}>
         <img src={image} alt="socialIcon" className='hover:text-[#00F58C]' />
       </div>

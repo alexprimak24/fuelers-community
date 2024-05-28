@@ -3,21 +3,21 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: 'Px Grotesk Pan';
+  font-family: 'Px_Grotesk_Pan-Bold';
   src: url('./fonts/PxGroteskPan/PxGroteskPan-Bold.woff') format("woff"),
     url('./fonts/PxGroteskPan/PxGroteskPan-Bold.woff2') format("woff2");
   font-weight: 700;
 }
 
 @font-face {
-  font-family: 'Px Grotesk Pan';
+  font-family: 'Px_Grotesk_Pan-Regular';
   src: url('./fonts/PxGroteskPan/PxGroteskPan-Regular.woff') format("woff"),
     url('./fonts/PxGroteskPan/PxGroteskPan-Regular.woff2') format("woff2");
   font-weight: 400;
 }
 
 @font-face {
-  font-family: 'Px Grotesk';
+  font-family: 'Px_Grotesk-Light';
   src: url('./fonts/PxGrotesk/Px-Grotesk-Light.woff') format("woff"),
     url('./fonts/PxGrotesk/Px-Grotesk-Light.woff2') format("woff2");
   font-weight: 300;
@@ -31,6 +31,11 @@
   font-weight: 400;
 }
 
+* {
+  box-sizing: border-box;
+  -webkit-font-smoothing: inherit;
+}
+
 body,
 html {
   display: flex;
@@ -41,13 +46,23 @@ html {
 }
 
 body {
-  max-width: 1560px;
   margin: 0 auto;
   color: #F5F5F5;
   padding: 10px, 0, 50px, 0;
-  font-family: 'Px Grotesk Pan', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: 'Px_Grotesk_Pan-Regular', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.socialIcon {
+  fill: #ff0000;
+}
+
+.socialIcon:hover {
+  fill: #ff0000;
+  background: #ff0000;
+  color: #ff0000;
+
 }
