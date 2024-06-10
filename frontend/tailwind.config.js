@@ -5,6 +5,10 @@ module.exports = {
   ],
   theme: {
     extend: {
+      zIndex: {
+        '-1': '-1',
+        '1': '1',
+      },
       colors: {
         'semi-transparent-black': 'rgba(30, 30, 30, 0.2)',
         'defaultgreen': '#00F58C',

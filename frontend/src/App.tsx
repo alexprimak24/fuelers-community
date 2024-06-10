@@ -4,8 +4,8 @@ import Footer from './Components/Header/Header';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import LandingPart from './Components/Landing/LandingPart';
 import { Theme, ThemeContext } from './Theme/themeContext'
-import Particle from "./Components/Particles/Particle";
-
+import cybercity from './images/cyberFuelCity.jpg'
+import { motion, useScroll, useTransform } from 'framer-motion';
 const colorsMaterial = createTheme({
   palette: {
     primary: {
@@ -23,16 +23,35 @@ const colorsMaterial = createTheme({
 });
 
 
+
 function App() {
   const [theme, setTheme] = useState<Theme>(window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-
+  const { scrollY } = useScroll();
+  const y = useTransform(scrollY, [0, 300], [0, -300]);
 
   return (
     <ThemeProvider theme={colorsMaterial}>
       <ThemeContext.Provider value={{ setTheme, theme }}>
         <Footer />
         <LandingPart />
-        <Particle />
+        <div className="relative bg-black h-fit w-[100%] text-white z-30">
+          <motion.div className="relative z-20 " style={{ y }}>
+            <img
+              src={cybercity}
+              alt="Scrolling Image"
+              className="w-full h-[657px] object-cover border-y-solid border-y-defaultwhite border-y-[2px]"
+            />
+          </motion.div>
+
+          <img
+            src={cybercity}
+            alt="Scrolling Image"
+            className="w-full h-[657px] object-cover border-y-solid border-y-defaultwhite border-y-[2px]"
+          />
+          <p>dfgoiuysdfgouisdfgouisdfopiusdfhpgfiusdfhg
+            fg
+          </p>
+        </div>
       </ThemeContext.Provider>
     </ThemeProvider>
   );
