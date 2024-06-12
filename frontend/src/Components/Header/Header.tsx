@@ -1,5 +1,5 @@
 import React from 'react'
-import SocialsGrowth from './SocialsGrowthIcon'
+import SocialsGrowth from '../utils/SocialsGrowthIcon'
 import SwitchThemeButton from '../../Theme/SwitchThemeButton'
 import DiscordLogo from '../../images/DiscordLogo.svg'
 import TelegramLogo from '../../images/TelegramLogo.svg'
@@ -24,5 +24,3 @@ function Footer() {
 }
 
 export default Footer
-// opacity-20
-// bg-semi-transparent-black

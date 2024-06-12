@@ -1,8 +1,9 @@
 import React, { useEffect, useMemo, useState } from "react";
 import './App.css';
-import Footer from './Components/Header/Header';
+import Header from './Components/Header/Header';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import LandingPart from './Components/Landing/LandingPart';
+import Footer from "./Components/Footer/Footer";
 import { Theme, ThemeContext } from './Theme/themeContext'
 import cybercity from './images/cyberFuelCity.jpg'
 import { motion, useScroll, useTransform } from 'framer-motion';
@@ -32,7 +33,7 @@ function App() {
   return (
     <ThemeProvider theme={colorsMaterial}>
       <ThemeContext.Provider value={{ setTheme, theme }}>
-        <Footer />
+        <Header />
         <LandingPart />
         <div className="relative bg-black h-fit w-[100%] text-white z-30">
           <motion.div className="relative z-20 " style={{ y }}>
@@ -41,16 +42,8 @@ function App() {
               alt="Scrolling Image"
               className="w-full h-[657px] object-cover border-y-solid border-y-defaultwhite border-y-[2px]"
             />
+            <Footer/>
           </motion.div>
-
-          <img
-            src={cybercity}
-            alt="Scrolling Image"
-            className="w-full h-[657px] object-cover border-y-solid border-y-defaultwhite border-y-[2px]"
-          />
-          <p>dfgoiuysdfgouisdfgouisdfopiusdfhpgfiusdfhg
-            fg
-          </p>
         </div>
       </ThemeContext.Provider>
     </ThemeProvider>

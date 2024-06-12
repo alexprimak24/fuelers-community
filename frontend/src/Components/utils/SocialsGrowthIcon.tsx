@@ -4,7 +4,7 @@ import PlusSign from '../../images/PlusSign.svg'
 export interface SocialsGrowthProps {
   image: string;
   socialLink: string;
-  subsForMonth: string;
+  subsForMonth?: string;
 }
 
 function SocialsGrowth({ image, socialLink, subsForMonth }: SocialsGrowthProps) {
@@ -13,14 +13,14 @@ function SocialsGrowth({ image, socialLink, subsForMonth }: SocialsGrowthProps) 
     window.location.href = socialLink;
   }
   return (
-    <div className='h-[45px] flex flex-col items-center gap-[8px] '>
+    <div className='max-h-[45px] flex flex-col items-center gap-[8px] '>
       <div className="cursor-pointer" onClick={handleSocialClick}>
         <img src={image} alt="socialIcon" className='hover:text-[#00F58C]' />
       </div>
-      <div className="flex gap-[3px]">
+      {subsForMonth && <div className="flex gap-[3px]">
         <img src={PlusSign} alt="PlusSign" />
         <p className="[font-family:'Px_Grotesk-Light',Helvetica] font-light text-xs">{subsForMonth}k</p>
-      </div>
+      </div>}
     </div>
   )
 }
