@@ -41,7 +41,7 @@ const Particle = () => {
         "defaultThemes": {},
         "delay": 0,
         "fullScreen": {
-          "enable": true,
+          "enable": false,
           "zIndex": 0
         },
         "detectRetina": true,
@@ -455,6 +455,7 @@ const Particle = () => {
   if (init) {
     return (
       <Particles
+        className="absolute inset-0"
         id="tsparticles"
         particlesLoaded={particlesLoaded}
         options={options}
