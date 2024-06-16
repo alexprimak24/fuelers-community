@@ -1,6 +1,6 @@
-import React from 'react';
-import LandingImg from '../../images/LandingImg.png';
-import Particle from '../Particles/Particle';
+import React from "react";
+import LandingImg from "../../images/LandingImg.png";
+import Particle from "../Particles/Particle";
 
 const LandingPart = () => (
   <section className="relative w-full h-screen">
@@ -10,7 +10,7 @@ const LandingPart = () => (
   </section>
 );
 
-const BackgroundImage = ({ src } : {src:string}) => (
+const BackgroundImage = ({ src }: { src: string }) => (
   <div className="absolute inset-0">
     <img src={src} alt="Background" className="w-full h-full object-cover" />
   </div>
@@ -26,15 +26,17 @@ const OverlayContent = () => (
 );
 
 const Title = () => (
-  <div className="flex flex-col gap-6">
-    <h1 className="text-[144px] tracking-tight leading-none opacity-20">Fuelers</h1>
-    <h1 className="text-[144px] tracking-tight leading-none opacity-20">Community</h1>
+  <div className="flex flex-row gap-6">
+    <h1 className="text-[144px] tracking-tight leading-none opacity-20">
+      Fuelers
+    </h1>
+    <h1 className="text-[144px] tracking-tight leading-none opacity-20">
+      Community
+    </h1>
   </div>
 );
 
-const Separator = () => (
-  <div className="w-[291px] h-[2px] bg-white mt-9" />
-);
+const Separator = () => <div className="w-[291px] h-[2px] bg-white mt-9" />;
 
 const PoweredBy = () => (
   <div className="flex items-center mt-7 font-grotesk">

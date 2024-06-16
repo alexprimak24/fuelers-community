@@ -3,31 +3,34 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: 'Px_Grotesk_Pan-Bold';
-  src: url('./fonts/PxGroteskPan/PxGroteskPan-Bold.woff') format("woff"),
-    url('./fonts/PxGroteskPan/PxGroteskPan-Bold.woff2') format("woff2");
+  font-family: "Px_Grotesk_Pan-Bold";
+  src:
+    url("./fonts/PxGroteskPan/PxGroteskPan-Bold.woff") format("woff"),
+    url("./fonts/PxGroteskPan/PxGroteskPan-Bold.woff2") format("woff2");
   font-weight: 700;
 }
 
 @font-face {
-  font-family: 'Px_Grotesk_Pan-Regular';
-  src: url('./fonts/PxGroteskPan/PxGroteskPan-Regular.woff') format("woff"),
-    url('./fonts/PxGroteskPan/PxGroteskPan-Regular.woff2') format("woff2");
+  font-family: "Px_Grotesk_Pan-Regular";
+  src:
+    url("./fonts/PxGroteskPan/PxGroteskPan-Regular.woff") format("woff"),
+    url("./fonts/PxGroteskPan/PxGroteskPan-Regular.woff2") format("woff2");
   font-weight: 400;
 }
 
 @font-face {
-  font-family: 'Px_Grotesk-Light';
-  src: url('./fonts/PxGrotesk/Px-Grotesk-Light.woff') format("woff"),
-    url('./fonts/PxGrotesk/Px-Grotesk-Light.woff2') format("woff2");
+  font-family: "Px_Grotesk-Light";
+  src:
+    url("./fonts/PxGrotesk/Px-Grotesk-Light.woff") format("woff"),
+    url("./fonts/PxGrotesk/Px-Grotesk-Light.woff2") format("woff2");
   font-weight: 300;
 }
 
-
 @font-face {
-  font-family: 'Questrial';
-  src: url('./fonts/Questrial/Questrial-Regular.woff') format("woff"),
-    url('./fonts/Questrial/Questrial-Regular.woff2') format("woff2");
+  font-family: "Questrial";
+  src:
+    url("./fonts/Questrial/Questrial-Regular.woff") format("woff"),
+    url("./fonts/Questrial/Questrial-Regular.woff2") format("woff2");
   font-weight: 400;
 }
 
@@ -47,22 +50,30 @@ html {
 
 body {
   margin: 0 auto;
-  color: #F5F5F5;
+  color: #f5f5f5;
   padding: 10px, 0, 50px, 0;
-  font-family: 'Px_Grotesk_Pan-Regular', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family:
+    "Px_Grotesk_Pan-Regular",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    "Roboto",
+    "Oxygen",
+    "Ubuntu",
+    "Cantarell",
+    "Fira Sans",
+    "Droid Sans",
+    "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-.socialIcon {
-  fill: #ff0000;
+a {
+  outline: none;
 }
 
-.socialIcon:hover {
-  fill: #ff0000;
-  background: #ff0000;
-  color: #ff0000;
-
+a:focus,
+a:active {
+  outline: none;
 }
