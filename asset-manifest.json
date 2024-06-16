@@ -1,0 +1,37 @@
+{
+  "files": {
+    "main.css": "/fuel-community/static/css/main.4bf54f64.css",
+    "main.js": "/fuel-community/static/js/main.167566e2.js",
+    "static/js/453.d855a71b.chunk.js": "/fuel-community/static/js/453.d855a71b.chunk.js",
+    "static/media/cyberFuelCity.jpg": "/fuel-community/static/media/cyberFuelCity.f1b5e6536858d9a7c60b.jpg",
+    "static/media/LandingImg.png": "/fuel-community/static/media/LandingImg.9677fb273eabca0ae74f.png",
+    "static/media/deploy.png": "/fuel-community/static/media/deploy.4a3cdae7fd28f33c660e.png",
+    "static/media/PxGroteskPan-Bold.woff": "/fuel-community/static/media/PxGroteskPan-Bold.f9d6f9b8109a6e129b70.woff",
+    "static/media/PxGroteskPan-Regular.woff": "/fuel-community/static/media/PxGroteskPan-Regular.1495013afe2307da60e7.woff",
+    "static/media/PxGroteskPan-Bold.woff2": "/fuel-community/static/media/PxGroteskPan-Bold.e3ba992e289e1953858b.woff2",
+    "static/media/PxGroteskPan-Regular.woff2": "/fuel-community/static/media/PxGroteskPan-Regular.363d9dfcdca3ab12a181.woff2",
+    "static/media/Px-Grotesk-Light.woff": "/fuel-community/static/media/Px-Grotesk-Light.496aea032b9087018e80.woff",
+    "static/media/Questrial-Regular.woff": "/fuel-community/static/media/Questrial-Regular.d86cfc277b69ecdb71ef.woff",
+    "static/media/Px-Grotesk-Light.woff2": "/fuel-community/static/media/Px-Grotesk-Light.8000bba41c0982dcab45.woff2",
+    "static/media/Questrial-Regular.woff2": "/fuel-community/static/media/Questrial-Regular.a19495df69b0d14cb520.woff2",
+    "static/media/slick.svg": "/fuel-community/static/media/slick.2630a3e3eab21c607e21.svg",
+    "static/media/DiscordLogo.svg": "/fuel-community/static/media/DiscordLogo.0037842f67a79e5a68f134f0e2fa43b3.svg",
+    "static/media/slick.eot": "/fuel-community/static/media/slick.a4e97f5a2a64f0ab1323.eot",
+    "static/media/slick.ttf": "/fuel-community/static/media/slick.c94f7671dcc99dce43e2.ttf",
+    "static/media/slick.woff": "/fuel-community/static/media/slick.295183786cd8a1389865.woff",
+    "static/media/FuelCommunityLogo.svg": "/fuel-community/static/media/FuelCommunityLogo.ba52daf9f07a31e73c3bb799bed5edf0.svg",
+    "static/media/GithubLogo.svg": "/fuel-community/static/media/GithubLogo.2cc341d2756d1059bcfb4af0d8bc9c10.svg",
+    "static/media/TelegramLogo.svg": "/fuel-community/static/media/TelegramLogo.3d9953448b75413b3df6a82b7c2a72e4.svg",
+    "static/media/PlusSign.svg": "/fuel-community/static/media/PlusSign.a2b000a3c1918a43f128b3168a806e3c.svg",
+    "index.html": "/fuel-community/index.html",
+    "static/media/ForumLogo.svg": "/fuel-community/static/media/ForumLogo.858df97d567898f5054fc5311e0f5395.svg",
+    "static/media/XLogo.svg": "/fuel-community/static/media/XLogo.f5e319daf7103fddd5e3a844a3cf4a44.svg",
+    "main.4bf54f64.css.map": "/fuel-community/static/css/main.4bf54f64.css.map",
+    "main.167566e2.js.map": "/fuel-community/static/js/main.167566e2.js.map",
+    "453.d855a71b.chunk.js.map": "/fuel-community/static/js/453.d855a71b.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.4bf54f64.css",
+    "static/js/main.167566e2.js"
+  ]
+}
