@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-import cyberCity from "../../images/cyberFuelCity.jpg";
 import Slide from "./Slide";
+import appwriteService from "../../appwrite/config";
 
 // // Example data
 // const data = [
@@ -11,6 +11,15 @@ import Slide from "./Slide";
 //   { id: 2, title: "Slide 2", description: "Description 2", image: "image2.jpg" },
 //   // Add more slides as needed
 // ];
+interface contributionsProps {
+  imageUrl: string;
+  title: string;
+  contentUrl: string;
+  language: string;
+}
+interface documentProps {
+  document: contributionsProps;
+}
 
 interface ResponsiveSettings {
   breakpoint: number;
@@ -48,6 +57,31 @@ interface CarouselComponentProps {
 }
 
 const Carousel: React.FC<CarouselComponentProps> = ({ settings, data }) => {
+  const [posts, setPosts] = useState<documentProps[]>([]);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      const response = await appwriteService.getPosts();
+      console.log("Fetched response:", response); // Add this line for debugging
+
+      if (response && response.documents) {
+        const mappedPosts = response.documents.map((doc: any) => ({
+          document: {
+            imageUrl: doc.imageUrl,
+            title: doc.title,
+            contentUrl: doc.contentUrl,
+            language: doc.language,
+          },
+        }));
+        setPosts(mappedPosts);
+      } else {
+        console.log("No documents found"); // Add this line for debugging
+      }
+    };
+
+    fetchPosts();
+  }, []);
+
   const defaultSettings: CarouselProps = {
     dots: false,
     infinite: true,
@@ -88,16 +122,19 @@ const Carousel: React.FC<CarouselComponentProps> = ({ settings, data }) => {
   };
 
   const finalSettings = { ...defaultSettings, ...settings };
-
+  //TO DO CAROUSEL FIX
   return (
     <div className=" bg-defaultblack2 flex items-center mt-[25px]">
       <div className="slider-container max-w-full">
         <Slider {...finalSettings}>
-          <Slide key={1} />
-          <Slide key={2} />
-          <Slide key={3} />
-          <Slide key={4} />
-          <Slide key={5} />
+          {posts.map((slide) => (
+            <Slide
+              key={slide.document.contentUrl}
+              imageUrl={slide.document.imageUrl}
+              title={slide.document.title}
+              contentUrl={slide.document.contentUrl}
+            />
+          ))}
         </Slider>
       </div>
     </div>
@@ -105,7 +142,3 @@ const Carousel: React.FC<CarouselComponentProps> = ({ settings, data }) => {
 };
 
 export default Carousel;
-
-// {data.map((slide) => (
-//   <Card key={slide.id} {...slide} />
-// ))}

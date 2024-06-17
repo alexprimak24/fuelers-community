@@ -1,16 +1,27 @@
-import React, { useState } from "react";
-import deploy from "../../images/deploy.png";
+import React, { useState, useEffect } from "react";
+import appwriteService from "../../appwrite/config";
 
-export default function Slide() {
+interface contributionsProps {
+  imageUrl: string;
+  title: string;
+  contentUrl: string;
+  language: string;
+}
+
+interface SlideProps {
+  imageUrl: string;
+  title: string;
+  contentUrl: string;
+}
+export default function Slide({ imageUrl, title, contentUrl }: SlideProps) {
   const [hover, setHover] = useState(false);
-
   const defaultShadow = "0 0 10px 7px var(--Default-green, #00F58C)";
   const hoverShadow = "0 0 5px 7px var(--Default-green, #00F58C)";
 
   return (
     <div className="flex flex-col gap-[10px] mx-[15px] mb-[7px] pt-[31px]">
       <a
-        href=""
+        href={contentUrl}
         onMouseOver={() => setHover(true)}
         onMouseOut={() => setHover(false)}
         className="transition-shadow duration-300 ease-in-out"
@@ -19,18 +30,25 @@ export default function Slide() {
           maxHeight: "420px",
           height: "100%",
           boxShadow: hover ? hoverShadow : defaultShadow,
-          borderRadius: "4px", // optional: to match the border radius if needed
+          borderRadius: "4px",
         }}
       >
         <img
-          src={deploy}
+          src={imageUrl}
           alt=""
           className="max-h-[420px] h-full border-[4px] border-defaultgreen shadow-fancy hover:shadow-fancy-hover transition-shadow duration-300 ease-in-out"
         />
       </a>
-      <p className="text-defaultwhite text-opacity-50 text-2xl">
-        How to deploy on Beta-5
-      </p>
+      <p className="text-defaultwhite text-opacity-50 text-2xl">{title}</p>
     </div>
   );
 }
+
+// const dbPost = await appwriteService.createPost({
+//   title: data.title,
+//   slug: data.slug,
+//   content: data.content,
+//   featuredImage: fileId,
+//   status: data.status,
+//   userId: userData.$id,
+// });
