@@ -18,20 +18,13 @@ export default function Slide({ imageUrl, title, contentUrl }: SlideProps) {
         target="_blank"
         onMouseOver={() => setHover(true)}
         onMouseOut={() => setHover(false)}
-        className="transition-shadow duration-300 ease-in-out"
+        className="transition-shadow duration-400 ease-in-out border-[4px] border-defaultgreen shadow-fancy hover:shadow-fancy-hover transition-shadow duration-300 ease-in-out rounded-lg"
         style={{
-          display: "block",
-          maxHeight: "420px",
           height: "100%",
           boxShadow: hover ? hoverShadow : defaultShadow,
-          borderRadius: "4px",
         }}
       >
-        <img
-          src={imageUrl}
-          alt=""
-          className="max-h-[420px] h-full border-[4px] border-defaultgreen shadow-fancy hover:shadow-fancy-hover transition-shadow duration-300 ease-in-out"
-        />
+        <img src={imageUrl} alt="" className="max-h-[420px] " />
       </a>
       <p className="text-defaultwhite text-opacity-50 text-2xl">{title}</p>
     </div>

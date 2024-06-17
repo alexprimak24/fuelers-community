@@ -44,16 +44,8 @@ interface CarouselProps {
   pauseOnFocus?: boolean;
 }
 
-interface DataProps {
-  id: number;
-  title: string;
-  description: string;
-  image: string;
-}
-
 interface CarouselComponentProps {
   settings?: CarouselProps;
-  //remove ? from data?: DataProps[];
 }
 
 const Carousel: React.FC<CarouselComponentProps> = ({ settings }) => {
@@ -97,34 +89,44 @@ const Carousel: React.FC<CarouselComponentProps> = ({ settings }) => {
         breakpoint: 1560,
         settings: {
           slidesToShow: 2,
+          speed: 3000,
         },
       },
       {
         breakpoint: 1024,
         settings: {
           slidesToShow: 1.5,
+          speed: 2000,
         },
       },
       {
         breakpoint: 764,
         settings: {
           slidesToShow: 1.2,
+          speed: 2000,
         },
       },
       {
         breakpoint: 560,
         settings: {
           slidesToShow: 1,
+          speed: 2000,
         },
       },
     ],
   };
-
+  //const defaultShadow =
+  //  "inset 20px 0 20px -20px var(--Default-green, #00F58C), inset -20px 0 20px -20px var(--Default-green, #00F58C)";
   const finalSettings = { ...defaultSettings, ...settings };
   //TO DO CAROUSEL FIX
   return (
     // <div className=" bg-defaultblack2 flex items-center mt-[25px] ">
-    <div className="mt-[25px] ">
+    <div
+      className="mt-[25px] "
+      // style={{
+      //   boxShadow: defaultShadow,
+      // }}
+    >
       <Slider {...finalSettings}>
         {posts.map((slide) => {
           return (

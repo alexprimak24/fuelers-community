@@ -71,9 +71,11 @@ body {
 
 a {
   outline: none;
+  text-decoration: none;
 }
 
 a:focus,
 a:active {
   outline: none;
+  text-decoration: none;
 }

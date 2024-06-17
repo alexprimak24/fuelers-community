@@ -9,6 +9,7 @@ import cybercity from "./images/cyberFuelCity.jpg";
 import { motion, useScroll, useTransform } from "framer-motion";
 import SocialsGrowth from "./Components/utils/shared";
 import Carousel from "./Components/Carousel/Carousel";
+import AllContributions from "./Components/AllContributions/AllContributions";
 
 const colorsMaterial = createTheme({
   palette: {
@@ -41,11 +42,12 @@ function App() {
         <img
           src={cybercity}
           alt="Scrolling Image"
-          className="w-full h-[657px] object-cover border-y-solid border-y-defaultwhite border-y-[2px]"
+          className="w-full max-h-[657px] object-cover border-y-solid border-y-defaultwhite border-y-[2px]"
         />
         <SocialsGrowth title="Recent works." />
         <Carousel />
-        {/* <SocialsGrowth title="Best activity of the month." /> */}
+        <SocialsGrowth title="Best activity of the month." />
+        <AllContributions />
         <Footer />
       </ThemeContext.Provider>
     </ThemeProvider>
