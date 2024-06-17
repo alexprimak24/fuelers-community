@@ -41,6 +41,7 @@ interface CarouselProps {
   responsive?: ResponsiveSettings[];
   centerPadding?: string;
   arrows?: boolean;
+  pauseOnFocus?: boolean;
 }
 
 interface DataProps {
@@ -52,18 +53,15 @@ interface DataProps {
 
 interface CarouselComponentProps {
   settings?: CarouselProps;
-  data?: DataProps[];
   //remove ? from data?: DataProps[];
 }
 
-const Carousel: React.FC<CarouselComponentProps> = ({ settings, data }) => {
+const Carousel: React.FC<CarouselComponentProps> = ({ settings }) => {
   const [posts, setPosts] = useState<documentProps[]>([]);
 
   useEffect(() => {
     const fetchPosts = async () => {
       const response = await appwriteService.getPosts();
-      console.log("Fetched response:", response); // Add this line for debugging
-
       if (response && response.documents) {
         const mappedPosts = response.documents.map((doc: any) => ({
           document: {
@@ -75,7 +73,7 @@ const Carousel: React.FC<CarouselComponentProps> = ({ settings, data }) => {
         }));
         setPosts(mappedPosts);
       } else {
-        console.log("No documents found"); // Add this line for debugging
+        console.log("No documents found");
       }
     };
 
@@ -86,11 +84,12 @@ const Carousel: React.FC<CarouselComponentProps> = ({ settings, data }) => {
     dots: false,
     infinite: true,
     arrows: false,
-    slidesToShow: 4,
+    slidesToShow: 3.5,
     autoplay: true,
     speed: 4000,
+    pauseOnFocus: true,
     pauseOnHover: true,
-    cssEase: "linear",
+    // cssEase: "linear",
     autoplaySpeed: 0,
 
     responsive: [
@@ -124,20 +123,22 @@ const Carousel: React.FC<CarouselComponentProps> = ({ settings, data }) => {
   const finalSettings = { ...defaultSettings, ...settings };
   //TO DO CAROUSEL FIX
   return (
-    <div className=" bg-defaultblack2 flex items-center mt-[25px]">
-      <div className="slider-container max-w-full">
-        <Slider {...finalSettings}>
-          {posts.map((slide) => (
+    // <div className=" bg-defaultblack2 flex items-center mt-[25px] ">
+    <div className="mt-[25px] ">
+      <Slider {...finalSettings}>
+        {posts.map((slide) => {
+          return (
             <Slide
               key={slide.document.contentUrl}
               imageUrl={slide.document.imageUrl}
               title={slide.document.title}
               contentUrl={slide.document.contentUrl}
             />
-          ))}
-        </Slider>
-      </div>
+          );
+        })}
+      </Slider>
     </div>
+    // </div>
   );
 };
 

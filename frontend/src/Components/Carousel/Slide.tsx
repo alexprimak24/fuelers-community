@@ -1,18 +1,11 @@
-import React, { useState, useEffect } from "react";
-import appwriteService from "../../appwrite/config";
-
-interface contributionsProps {
-  imageUrl: string;
-  title: string;
-  contentUrl: string;
-  language: string;
-}
+import React, { useState } from "react";
 
 interface SlideProps {
   imageUrl: string;
   title: string;
   contentUrl: string;
 }
+
 export default function Slide({ imageUrl, title, contentUrl }: SlideProps) {
   const [hover, setHover] = useState(false);
   const defaultShadow = "0 0 10px 7px var(--Default-green, #00F58C)";
@@ -22,6 +15,7 @@ export default function Slide({ imageUrl, title, contentUrl }: SlideProps) {
     <div className="flex flex-col gap-[10px] mx-[15px] mb-[7px] pt-[31px]">
       <a
         href={contentUrl}
+        target="_blank"
         onMouseOver={() => setHover(true)}
         onMouseOut={() => setHover(false)}
         className="transition-shadow duration-300 ease-in-out"
