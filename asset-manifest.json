@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/fuel-community/static/css/main.6b4f67c4.css",
-    "main.js": "/fuel-community/static/js/main.5c9fa644.js",
+    "main.css": "/fuel-community/static/css/main.97346d22.css",
+    "main.js": "/fuel-community/static/js/main.97d763fb.js",
     "static/js/453.d855a71b.chunk.js": "/fuel-community/static/js/453.d855a71b.chunk.js",
     "static/media/cyberFuelCity.jpg": "/fuel-community/static/media/cyberFuelCity.f1b5e6536858d9a7c60b.jpg",
     "static/media/LandingImg.png": "/fuel-community/static/media/LandingImg.9677fb273eabca0ae74f.png",
@@ -25,12 +25,12 @@
     "index.html": "/fuel-community/index.html",
     "static/media/ForumLogo.svg": "/fuel-community/static/media/ForumLogo.858df97d567898f5054fc5311e0f5395.svg",
     "static/media/XLogo.svg": "/fuel-community/static/media/XLogo.f5e319daf7103fddd5e3a844a3cf4a44.svg",
-    "main.6b4f67c4.css.map": "/fuel-community/static/css/main.6b4f67c4.css.map",
-    "main.5c9fa644.js.map": "/fuel-community/static/js/main.5c9fa644.js.map",
+    "main.97346d22.css.map": "/fuel-community/static/css/main.97346d22.css.map",
+    "main.97d763fb.js.map": "/fuel-community/static/js/main.97d763fb.js.map",
     "453.d855a71b.chunk.js.map": "/fuel-community/static/js/453.d855a71b.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.6b4f67c4.css",
-    "static/js/main.5c9fa644.js"
+    "static/css/main.97346d22.css",
+    "static/js/main.97d763fb.js"
   ]
 }
