@@ -3,23 +3,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import Slide from "./Slide";
-import appwriteService from "../../appwrite/config";
-
-// // Example data
-// const data = [
-//   { id: 1, title: "Slide 1", description: "Description 1", image: "image1.jpg" },
-//   { id: 2, title: "Slide 2", description: "Description 2", image: "image2.jpg" },
-//   // Add more slides as needed
-// ];
-interface contributionsProps {
-  imageUrl: string;
-  title: string;
-  contentUrl: string;
-  language: string;
-}
-interface documentProps {
-  document: contributionsProps;
-}
+import { DocumentProps } from "../../App";
 
 interface ResponsiveSettings {
   breakpoint: number;
@@ -46,32 +30,10 @@ interface CarouselProps {
 
 interface CarouselComponentProps {
   settings?: CarouselProps;
+  contributions: DocumentProps[];
 }
 
-const Carousel: React.FC<CarouselComponentProps> = ({ settings }) => {
-  const [posts, setPosts] = useState<documentProps[]>([]);
-
-  useEffect(() => {
-    const fetchPosts = async () => {
-      const response = await appwriteService.getPosts();
-      if (response && response.documents) {
-        const mappedPosts = response.documents.map((doc: any) => ({
-          document: {
-            imageUrl: doc.imageUrl,
-            title: doc.title,
-            contentUrl: doc.contentUrl,
-            language: doc.language,
-          },
-        }));
-        setPosts(mappedPosts);
-      } else {
-        console.log("No documents found");
-      }
-    };
-
-    fetchPosts();
-  }, []);
-
+function Carousel({ settings, contributions }: CarouselComponentProps) {
   const defaultSettings: CarouselProps = {
     dots: false,
     infinite: true,
@@ -128,13 +90,13 @@ const Carousel: React.FC<CarouselComponentProps> = ({ settings }) => {
       // }}
     >
       <Slider {...finalSettings}>
-        {posts.map((slide) => {
+        {contributions.map((contribution) => {
           return (
             <Slide
-              key={slide.document.contentUrl}
-              imageUrl={slide.document.imageUrl}
-              title={slide.document.title}
-              contentUrl={slide.document.contentUrl}
+              key={contribution.document.contentUrl}
+              imageUrl={contribution.document.imageUrl}
+              title={contribution.document.title}
+              contentUrl={contribution.document.contentUrl}
             />
           );
         })}
@@ -142,6 +104,6 @@ const Carousel: React.FC<CarouselComponentProps> = ({ settings }) => {
     </div>
     // </div>
   );
-};
+}
 
 export default Carousel;

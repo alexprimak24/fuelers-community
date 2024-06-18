@@ -16,6 +16,7 @@ module.exports = {
         defaultwhitesemi: "rgba(245, 245, 245, 0.5)",
         defaultblack2: "#1E1E1E",
         verylightblue: "#E9E7FB",
+        black07: "rgba(30, 30, 30, 0.7)",
       },
       fontFamily: {
         groteskpan: ["Px_Grotesk_Pan-Regular", "Helvetica"],

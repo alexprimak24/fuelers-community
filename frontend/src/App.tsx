@@ -10,6 +10,17 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import SocialsGrowth from "./Components/utils/shared";
 import Carousel from "./Components/Carousel/Carousel";
 import AllContributions from "./Components/AllContributions/AllContributions";
+import appwriteService from "../src/appwrite/config";
+
+interface contributionsProps {
+  imageUrl: string;
+  title: string;
+  contentUrl: string;
+  language: string;
+}
+export interface DocumentProps {
+  document: contributionsProps;
+}
 
 const colorsMaterial = createTheme({
   palette: {
@@ -28,6 +39,29 @@ const colorsMaterial = createTheme({
 });
 
 function App() {
+  const [contributions, setContributions] = useState<DocumentProps[]>([]);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      const response = await appwriteService.getPosts();
+      if (response && response.documents) {
+        const mappedPosts = response.documents.map((doc: any) => ({
+          document: {
+            imageUrl: doc.imageUrl,
+            title: doc.title,
+            contentUrl: doc.contentUrl,
+            language: doc.language,
+          },
+        }));
+        setContributions(mappedPosts);
+      } else {
+        console.log("No documents found");
+      }
+    };
+
+    fetchPosts();
+  }, []);
+
   const [theme, setTheme] = useState<Theme>(
     window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"
   );
@@ -45,7 +79,7 @@ function App() {
           className="w-full max-h-[657px] object-cover border-y-solid border-y-defaultwhite border-y-[2px]"
         />
         <SocialsGrowth title="Recent works." />
-        <Carousel />
+        <Carousel contributions={contributions} />
         <SocialsGrowth title="Best activity of the month." />
         <AllContributions />
         <Footer />

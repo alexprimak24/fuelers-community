@@ -18,7 +18,7 @@ export default function Slide({ imageUrl, title, contentUrl }: SlideProps) {
         target="_blank"
         onMouseOver={() => setHover(true)}
         onMouseOut={() => setHover(false)}
-        className="transition-shadow duration-400 ease-in-out border-[4px] border-defaultgreen shadow-fancy hover:shadow-fancy-hover transition-shadow duration-300 ease-in-out rounded-lg"
+        className="transition-shadow duration-400 ease-in-out border-4 border-defaultgreen shadow-fancy hover:shadow-fancy-hover transition-shadow duration-300 ease-in-out rounded-lg"
         style={{
           height: "100%",
           boxShadow: hover ? hoverShadow : defaultShadow,

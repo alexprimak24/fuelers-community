@@ -11,7 +11,7 @@ export default function SocialsGrowth({ title }: { title: string }) {
   const words = title.split(" ");
 
   return (
-    <div className="pt-[300px] px-[140px] w-[100%] flex flex-col">
+    <div className="pt-[300px] px-[140px] max-w-[2560px] w-[100%] flex flex-col">
       <h1 className="flex text-7xl text-defaultwhite font-groteskpanbold relative w-max">
         <span className="mr-3">{words[0]}</span>
         <span className="flex flex-row opacity-50">
