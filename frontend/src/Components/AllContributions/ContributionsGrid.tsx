@@ -16,7 +16,7 @@ function ContributionsGrid({ contributions }: ContributionGridProps) {
         <Grid container spacing={3}>
           {contributions.map((contribution) => {
             return (
-              <Grid item xs={4}>
+              <Grid item xs={4} key={contribution.document.index}>
                 <Contribution
                   key={contribution.document.index}
                   contentImg={contribution.document.contentImg}

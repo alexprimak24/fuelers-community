@@ -69,6 +69,7 @@ function App() {
 
     fetchPosts();
   }, []);
+  console.log(contributions);
 
   const [theme, setTheme] = useState<Theme>(
     window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"

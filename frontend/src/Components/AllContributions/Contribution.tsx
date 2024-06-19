@@ -34,51 +34,53 @@ function Contribution({
   language,
 }: ContributionProps) {
   return (
-    <div className="relative group">
-      <div className="relative">
-        <Card sx={{ background: "transparent" }}>
-          <div className="relative">
-            <div className="absolute inset-0 border-2 border-defaultgreen rounded-lg z-10 pointer-events-none"></div>
-            <a href={contentLink} target="_blank">
+    <a href={contentLink} target="_blank">
+      <div className="relative group">
+        <div className="relative">
+          <Card sx={{ background: "transparent" }}>
+            <div className="relative">
+              <div className="absolute inset-0 border-2 border-defaultgreen rounded-lg z-10 pointer-events-none"></div>
+
               <CardMedia
                 component="img"
                 alt="contribtuionImage"
                 image={contentImg}
                 className="rounded-lg h-[220px]"
               />
-            </a>
-          </div>
-          <CardContent
-            sx={{ paddingLeft: 0, paddingRight: 0, paddingTop: "20px" }}
-          >
-            <p className="font-questrial text-2xl text-defaultwhite mb-[10px]">
-              {title}
-            </p>
-            <div className="">
-              <div className="flex justify-between items-center">
-                <div className="flex gap-[10px] items-center">
-                  <CalendarMonthIcon color="primary" />
-                  <p className="font-grotesk text-base text-defaultlightgreen">
-                    {date}
-                  </p>
-                </div>
-                <div className="flex gap-[10px] items-center mr-[50px]">
-                  <Avatar
-                    alt="ContributorPfp"
-                    src={pfp}
-                    sx={{ width: 30, height: 30 }}
-                  />
-                  <p className="font-grotesk text-base text-defaultwhite">
-                    {username}
-                  </p>
+            </div>
+            <CardContent
+              sx={{ paddingLeft: 0, paddingRight: 0, paddingTop: "20px" }}
+            >
+              <p className="font-questrial text-2xl text-defaultwhite mb-[10px]">
+                {title}
+              </p>
+              <div className="">
+                <div className="flex justify-between items-center">
+                  <div className="flex gap-[10px] items-center">
+                    <CalendarMonthIcon color="primary" />
+                    <p className="font-grotesk text-base text-defaultlightgreen">
+                      {date}
+                    </p>
+                  </div>
+                  <div className="flex gap-[10px] items-center mr-[50px]">
+                    <Avatar
+                      alt="ContributorPfp"
+                      src={pfp}
+                      sx={{ width: 30, height: 30 }}
+                    />
+                    <p className="font-grotesk text-base text-defaultwhite">
+                      {username}
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
-          </CardContent>
-        </Card>
-        <div className="absolute inset-0 bg-black opacity-50 group-hover:opacity-0 transition-opacity duration-500 rounded-lg z-5"></div>
+            </CardContent>
+          </Card>
+
+          <div className="absolute inset-0 bg-black opacity-50 group-hover:opacity-0 transition-opacity duration-500 rounded-lg z-5"></div>
+        </div>
       </div>
-    </div>
+    </a>
   );
 }
 

@@ -9,7 +9,7 @@ const LanguagesVariants = [
   "All",
   "EN",
   "FR",
-  "ZH",
+  "CH",
   "RU",
   "UA",
   "ES",

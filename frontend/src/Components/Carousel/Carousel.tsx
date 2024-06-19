@@ -90,7 +90,7 @@ function Carousel({ settings, contributions }: CarouselComponentProps) {
       // }}
     >
       <Slider {...finalSettings}>
-        {contributions.map((contribution) => {
+        {contributions.slice(-10).map((contribution) => {
           return (
             <Slide
               key={contribution.document.index}

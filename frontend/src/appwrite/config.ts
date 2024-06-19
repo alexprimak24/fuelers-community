@@ -57,12 +57,26 @@ export class Service {
   }
   // queries = [Query.equal("language", "EN")]
   async getPosts() {
+    const limit = 100;
+    let offset = 0;
+    let allDocuments: any[] = [];
+    let hasMore = true;
+
     try {
-      return await this.databases.listDocuments(
-        conf.appwriteDatabaseId,
-        conf.appwriteCollectionIdAll
-        // queries
-      );
+      while (hasMore) {
+        const response = await this.databases.listDocuments(
+          conf.appwriteDatabaseId,
+          conf.appwriteCollectionIdAll,
+          [Query.limit(limit), Query.offset(offset)]
+        );
+        if (response.documents.length > 0) {
+          allDocuments = allDocuments.concat(response.documents);
+          offset += response.documents.length;
+        } else {
+          hasMore = false;
+        }
+      }
+      return { documents: allDocuments };
     } catch (error) {
       console.log("Appwrite service :: getPosts() ::", error);
       return false;
