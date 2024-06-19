@@ -13,10 +13,14 @@ import AllContributions from "./Components/AllContributions/AllContributions";
 import appwriteService from "../src/appwrite/config";
 
 interface contributionsProps {
-  imageUrl: string;
-  title: string;
-  contentUrl: string;
+  contentImg: string;
+  contentLink: string;
+  pfp: string;
+  username: string;
+  date: string;
   language: string;
+  index: number;
+  title: string;
 }
 export interface DocumentProps {
   document: contributionsProps;
@@ -47,10 +51,14 @@ function App() {
       if (response && response.documents) {
         const mappedPosts = response.documents.map((doc: any) => ({
           document: {
-            imageUrl: doc.imageUrl,
-            title: doc.title,
-            contentUrl: doc.contentUrl,
+            contentImg: doc.contentImg,
+            contentLink: doc.contentLink,
+            pfp: doc.pfp,
+            username: doc.username,
+            date: doc.date,
             language: doc.language,
+            index: doc.index,
+            title: doc.title,
           },
         }));
         setContributions(mappedPosts);
@@ -81,7 +89,7 @@ function App() {
         <SocialsGrowth title="Recent works." />
         <Carousel contributions={contributions} />
         <SocialsGrowth title="Best activity of the month." />
-        <AllContributions />
+        <AllContributions contributions={contributions} />
         <Footer />
       </ThemeContext.Provider>
     </ThemeProvider>

@@ -93,10 +93,10 @@ function Carousel({ settings, contributions }: CarouselComponentProps) {
         {contributions.map((contribution) => {
           return (
             <Slide
-              key={contribution.document.contentUrl}
-              imageUrl={contribution.document.imageUrl}
+              key={contribution.document.index}
+              contentImg={contribution.document.contentImg}
               title={contribution.document.title}
-              contentUrl={contribution.document.contentUrl}
+              contentLink={contribution.document.contentLink}
             />
           );
         })}

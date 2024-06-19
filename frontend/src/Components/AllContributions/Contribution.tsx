@@ -10,13 +10,13 @@ import Avatar from "@mui/material/Avatar";
 //REMOVE OPTIONAL
 interface ContributionProps {
   id?: number;
-  title?: string;
-  contentImg?: string;
-  contentLink?: string;
-  pfp?: string;
-  username?: string;
-  date?: string;
-  language?: string;
+  title: string;
+  contentImg: string;
+  contentLink: string;
+  pfp: string;
+  username: string;
+  date: string;
+  language: string;
 }
 
 export interface ContributionObj {
@@ -39,35 +39,37 @@ function Contribution({
         <Card sx={{ background: "transparent" }}>
           <div className="relative">
             <div className="absolute inset-0 border-2 border-defaultgreen rounded-lg z-10 pointer-events-none"></div>
-            <CardMedia
-              component="img"
-              alt="contribtuionImage"
-              image={cyberCity}
-              className="rounded-lg h-[220px]"
-            />
+            <a href={contentLink} target="_blank">
+              <CardMedia
+                component="img"
+                alt="contribtuionImage"
+                image={contentImg}
+                className="rounded-lg h-[220px]"
+              />
+            </a>
           </div>
           <CardContent
             sx={{ paddingLeft: 0, paddingRight: 0, paddingTop: "20px" }}
           >
             <p className="font-questrial text-2xl text-defaultwhite mb-[10px]">
-              Support for all Ethereum wallets
+              {title}
             </p>
             <div className="">
               <div className="flex justify-between items-center">
                 <div className="flex gap-[10px] items-center">
                   <CalendarMonthIcon color="primary" />
                   <p className="font-grotesk text-base text-defaultlightgreen">
-                    May 13, 2024
+                    {date}
                   </p>
                 </div>
                 <div className="flex gap-[10px] items-center mr-[50px]">
                   <Avatar
                     alt="ContributorPfp"
-                    src={cyberCity}
+                    src={pfp}
                     sx={{ width: 30, height: 30 }}
                   />
                   <p className="font-grotesk text-base text-defaultwhite">
-                    alexprimak
+                    {username}
                   </p>
                 </div>
               </div>

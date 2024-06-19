@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 
 interface SlideProps {
-  imageUrl: string;
+  contentImg: string;
   title: string;
-  contentUrl: string;
+  contentLink: string;
 }
 
-export default function Slide({ imageUrl, title, contentUrl }: SlideProps) {
+export default function Slide({ contentImg, title, contentLink }: SlideProps) {
   const [hover, setHover] = useState(false);
   const defaultShadow = "0 0 10px 7px var(--Default-green, #00F58C)";
   const hoverShadow = "0 0 5px 7px var(--Default-green, #00F58C)";
@@ -14,7 +14,7 @@ export default function Slide({ imageUrl, title, contentUrl }: SlideProps) {
   return (
     <div className="flex flex-col gap-[10px] mx-[15px] mb-[7px] pt-[31px]">
       <a
-        href={contentUrl}
+        href={contentLink}
         target="_blank"
         onMouseOver={() => setHover(true)}
         onMouseOut={() => setHover(false)}
@@ -24,7 +24,7 @@ export default function Slide({ imageUrl, title, contentUrl }: SlideProps) {
           boxShadow: hover ? hoverShadow : defaultShadow,
         }}
       >
-        <img src={imageUrl} alt="" className="max-h-[420px] " />
+        <img src={contentImg} alt="" className="max-h-[420px] " />
       </a>
       <p className="text-defaultwhite text-opacity-50 text-2xl">{title}</p>
     </div>

@@ -3,65 +3,34 @@ import Contribution from "./Contribution";
 import Grid from "@mui/material/Grid";
 import appwriteService from "../../appwrite/config";
 import { ContributionObj } from "./Contribution";
+import { DocumentProps } from "../../App";
 
-function ContributionsGrid() {
-  const [contribution, setContribution] = useState<ContributionObj[]>([]);
+interface ContributionGridProps {
+  contributions: DocumentProps[];
+}
 
-  useEffect(() => {
-    const fetchPosts = async () => {
-      const response = await appwriteService.getPosts();
-      if (response && response.documents) {
-        const mappedPosts = response.documents.map((doc: any) => ({
-          document: {
-            imageUrl: doc.imageUrl,
-            title: doc.title,
-            contentUrl: doc.contentUrl,
-            language: doc.language,
-          },
-        }));
-        setContribution(mappedPosts);
-      } else {
-        console.log("No documents found");
-      }
-    };
-
-    fetchPosts();
-  }, []);
-
+function ContributionsGrid({ contributions }: ContributionGridProps) {
   return (
     <>
       <div className="my-[75px]">
         <Grid container spacing={3}>
-          <Grid item xs={4}>
-            <Contribution />
-          </Grid>
-          <Grid item xs={4}>
-            <Contribution />
-          </Grid>
-          <Grid item xs={4}>
-            <Contribution />
-          </Grid>
-          <Grid item xs={4}>
-            <Contribution />
-          </Grid>
-          <Grid item xs={4}>
-            <Contribution />
-          </Grid>
-          <Grid item xs={4}>
-            <Contribution />
-          </Grid>
-          <Grid item xs={4}>
-            <Contribution />
-          </Grid>
-          <Grid item xs={4}>
-            <Contribution />
-          </Grid>
-          <Grid item xs={4}>
-            <Contribution />
-          </Grid>
-          <Grid item xs={4}>
-            <Contribution />
-          </Grid>
+          {contributions.map((contribution) => {
+            return (
+              <Grid item xs={4}>
+                <Contribution
+                  key={contribution.document.index}
+                  contentImg={contribution.document.contentImg}
+                  contentLink={contribution.document.contentLink}
+                  pfp={contribution.document.pfp}
+                  username={contribution.document.username}
+                  date={contribution.document.date}
+                  language={contribution.document.language}
+                  //index={contribution.document.index}
+                  title={contribution.document.title}
+                />
+              </Grid>
+            );
+          })}
         </Grid>
       </div>
     </>
