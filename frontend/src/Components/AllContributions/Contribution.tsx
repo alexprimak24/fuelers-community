@@ -37,7 +37,7 @@ function Contribution({
     <a href={contentLink} target="_blank">
       <div className="relative group">
         <div className="relative">
-          <Card sx={{ background: "transparent" }}>
+          <Card sx={{ background: "transparent", maxWidth: "400px" }}>
             <div className="relative">
               <div className="absolute inset-0 border-2 border-defaultgreen rounded-lg z-10 pointer-events-none"></div>
 

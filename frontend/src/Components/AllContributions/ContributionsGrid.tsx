@@ -8,7 +8,8 @@ import { DocumentProps } from "../../App";
 interface ContributionGridProps {
   contributions: DocumentProps[];
 }
-
+//https://mui.com/material-ui/customization/breakpoints/#custom-breakpoints
+//when I'll make an adaptive check this.
 function ContributionsGrid({ contributions }: ContributionGridProps) {
   return (
     <>
@@ -16,7 +17,15 @@ function ContributionsGrid({ contributions }: ContributionGridProps) {
         <Grid container spacing={3}>
           {contributions.map((contribution) => {
             return (
-              <Grid item xs={4} key={contribution.document.index}>
+              <Grid
+                item
+                xs={12}
+                sm={12}
+                md={6}
+                lg={4}
+                xl={2}
+                key={contribution.document.index}
+              >
                 <Contribution
                   key={contribution.document.index}
                   contentImg={contribution.document.contentImg}
