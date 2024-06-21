@@ -21,7 +21,9 @@ function AllContributions({
   return (
     <div className="flex items-center justify-center max-w-[2560px]">
       <div className="mx-[140px] self-center">
-        <LanguageSelector />
+        <div className="w-full">
+          <LanguageSelector />
+        </div>
         <ContributionsGrid contributions={contributions} />
         <div className="flex justify-end mr-[10px]">
           <Pagination

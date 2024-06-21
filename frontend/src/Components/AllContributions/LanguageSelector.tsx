@@ -53,7 +53,7 @@ function LanguageSelector() {
   const [language, setLanguage] = useState<Languages>("All");
 
   return (
-    <div className="max-h-[100px] mt-[200px]">
+    <div className="max-h-[100px] mt-[200px] w-full">
       <div className="flex text-center justify-between w-full  rounded-[30px] border border-solid border-defaultwhite px-[50px] py-[25px]">
         <p className="text-[32px]">Best work of all time</p>
         {/* CHANGE IT WHEN TIME ONCE DOING DAKR THEME */}

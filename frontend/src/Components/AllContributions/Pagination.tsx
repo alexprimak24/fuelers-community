@@ -21,6 +21,9 @@ const StyledPagination = styled(MuiPagination)<{ theme?: string }>`
         border: 1px solid #00F58C
       }
     }
+      .MuiPaginationItem-root {
+      color: white;
+      }
    
   `}
 `;

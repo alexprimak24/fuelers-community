@@ -10,6 +10,10 @@ import SocialsGrowth from "./Components/utils/shared";
 import Carousel from "./Components/Carousel/Carousel";
 import AllContributions from "./Components/AllContributions/AllContributions";
 import appwriteService from "../src/appwrite/config";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import InputLabel from "@mui/material/InputLabel";
 
 interface contributionsProps {
   contentImg: string;
@@ -43,8 +47,13 @@ const colorsMaterial = createTheme({
 
 function App() {
   const [contributions, setContributions] = useState<DocumentProps[]>([]);
+  const [filteredContributions, setFilteredContributions] = useState<
+    DocumentProps[]
+  >([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setPostsPerPage] = useState(9);
+  const [languages, setLanguages] = useState<string[]>([]);
+  const [selectedLanguage, setSelectedLanguage] = useState<string>("");
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -63,6 +72,11 @@ function App() {
           },
         }));
         setContributions(mappedPosts);
+        setFilteredContributions(mappedPosts);
+        const uniqueLanguages = [
+          ...new Set(mappedPosts.map((post) => post.document.language)),
+        ];
+        setLanguages(uniqueLanguages);
       } else {
         console.log("No documents found");
       }
@@ -70,16 +84,37 @@ function App() {
 
     fetchPosts();
   }, []);
-  console.log(contributions);
+
+  useEffect(() => {
+    if (selectedLanguage) {
+      setFilteredContributions(
+        contributions.filter(
+          (contribution) => contribution.document.language === selectedLanguage
+        )
+      );
+    } else {
+      setFilteredContributions(contributions);
+    }
+    setCurrentPage(1);
+  }, [selectedLanguage, contributions]);
 
   const lastPostIndex = currentPage * postsPerPage;
   const firstPostIndex = lastPostIndex - postsPerPage;
-  const currentPosts = contributions.slice(firstPostIndex, lastPostIndex);
-  const totalPages = Math.ceil(contributions.length / postsPerPage);
+  const currentPosts = filteredContributions.slice(
+    firstPostIndex,
+    lastPostIndex
+  );
+  const totalPages = Math.ceil(filteredContributions.length / postsPerPage);
+
+  console.log(contributions);
 
   const [theme, setTheme] = useState<Theme>(
     window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"
   );
+
+  const handleLanguageChange = (event: SelectChangeEvent<string>) => {
+    setSelectedLanguage(event.target.value);
+  };
 
   return (
     <ThemeProvider theme={colorsMaterial}>
@@ -100,6 +135,27 @@ function App() {
           totalPages={totalPages}
           onPageChange={(event, page) => setCurrentPage(page)}
         />
+
+        <FormControl
+          variant="outlined"
+          style={{ minWidth: 120, margin: "20px 0" }}
+        >
+          <InputLabel>Language</InputLabel>
+          <Select
+            value={selectedLanguage}
+            onChange={handleLanguageChange}
+            label="Language"
+          >
+            <MenuItem value="">
+              <em>All</em>
+            </MenuItem>
+            {languages.map((language) => (
+              <MenuItem key={language} value={language}>
+                {language}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
         <Footer />
       </ThemeContext.Provider>
     </ThemeProvider>
