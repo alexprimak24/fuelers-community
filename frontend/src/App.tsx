@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import Header from "./Components/Header/Header";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -6,7 +6,6 @@ import LandingPart from "./Components/Landing/LandingPart";
 import Footer from "./Components/Footer/Footer";
 import { Theme, ThemeContext } from "./Theme/themeContext";
 import cybercity from "./images/cyberFuelCity.jpg";
-import { motion, useScroll, useTransform } from "framer-motion";
 import SocialsGrowth from "./Components/utils/shared";
 import Carousel from "./Components/Carousel/Carousel";
 import AllContributions from "./Components/AllContributions/AllContributions";
@@ -44,6 +43,8 @@ const colorsMaterial = createTheme({
 
 function App() {
   const [contributions, setContributions] = useState<DocumentProps[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage, _setPostsPerPage] = useState(9);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -71,11 +72,13 @@ function App() {
   }, []);
   console.log(contributions);
 
+  const lastPostIndex = currentPage * postsPerPage;
+  const firstPostIndex = lastPostIndex - postsPerPage;
+  const currentPosts = contributions.slice(firstPostIndex, lastPostIndex);
+
   const [theme, setTheme] = useState<Theme>(
     window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"
   );
-  const { scrollY } = useScroll();
-  const y = useTransform(scrollY, [0, 300], [0, -300]);
 
   return (
     <ThemeProvider theme={colorsMaterial}>
@@ -90,7 +93,12 @@ function App() {
         <SocialsGrowth title="Recent works." />
         <Carousel contributions={contributions} />
         <SocialsGrowth title="Best activity of the month." />
-        <AllContributions contributions={contributions} />
+        <AllContributions
+          contributions={currentPosts}
+          currentPage={currentPage}
+          totalPages={Math.ceil(contributions.length / postsPerPage)}
+          onPageChange={(_event, page) => setCurrentPage(page)}
+        />
         <Footer />
       </ThemeContext.Provider>
     </ThemeProvider>

@@ -3,43 +3,41 @@ import Contribution from "./Contribution";
 import Grid from "@mui/material/Grid";
 import appwriteService from "../../appwrite/config";
 import { ContributionObj } from "./Contribution";
+import { useInView } from "react-intersection-observer";
 import { DocumentProps } from "../../App";
 
-interface ContributionGridProps {
+interface ContributionsGridProps {
   contributions: DocumentProps[];
 }
+
 //https://mui.com/material-ui/customization/breakpoints/#custom-breakpoints
 //when I'll make an adaptive check this.
-function ContributionsGrid({ contributions }: ContributionGridProps) {
+function ContributionsGrid({ contributions }: ContributionsGridProps) {
   return (
     <>
       <div className="my-[75px]">
         <Grid container spacing={3}>
-          {contributions.map((contribution) => {
-            return (
-              <Grid
-                item
-                xs={12}
-                sm={12}
-                md={6}
-                lg={4}
-                xl={2}
-                key={contribution.document.index}
-              >
-                <Contribution
-                  key={contribution.document.index}
-                  contentImg={contribution.document.contentImg}
-                  contentLink={contribution.document.contentLink}
-                  pfp={contribution.document.pfp}
-                  username={contribution.document.username}
-                  date={contribution.document.date}
-                  language={contribution.document.language}
-                  //index={contribution.document.index}
-                  title={contribution.document.title}
-                />
-              </Grid>
-            );
-          })}
+          {contributions.map((contribution) => (
+            <Grid
+              item
+              xs={12}
+              sm={12}
+              md={6}
+              lg={4}
+              xl={4}
+              key={contribution.document.index}
+            >
+              <Contribution
+                contentImg={contribution.document.contentImg}
+                contentLink={contribution.document.contentLink}
+                pfp={contribution.document.pfp}
+                username={contribution.document.username}
+                date={contribution.document.date}
+                language={contribution.document.language}
+                title={contribution.document.title}
+              />
+            </Grid>
+          ))}
         </Grid>
       </div>
     </>

@@ -3,17 +3,33 @@ import LanguageSelector from "./LanguageSelector";
 import Contribution from "./Contribution";
 import ContributionsGrid from "./ContributionsGrid";
 import { DocumentProps } from "../../App";
+import Pagination from "./Pagination";
 
 interface AllContributionsProps {
   contributions: DocumentProps[];
+  currentPage: number;
+  totalPages: number;
+  onPageChange: (event: React.ChangeEvent<unknown>, page: number) => void;
 }
 
-function AllContributions({ contributions }: AllContributionsProps) {
+function AllContributions({
+  contributions,
+  totalPages,
+  currentPage,
+  onPageChange,
+}: AllContributionsProps) {
   return (
     <div className="flex items-center justify-center max-w-[2560px]">
       <div className="mx-[140px] self-center">
         <LanguageSelector />
         <ContributionsGrid contributions={contributions} />
+        <div className="flex justify-end mt-[15px]">
+          <Pagination
+            count={totalPages}
+            page={currentPage}
+            onChange={onPageChange}
+          />
+        </div>
       </div>
     </div>
   );
