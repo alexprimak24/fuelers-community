@@ -9,38 +9,32 @@ interface PaginationProps {
   onChange: (event: React.ChangeEvent<unknown>, page: number) => void;
 }
 
-const StyledPagination = styled(Pagination)<{ theme?: string }>`
+const StyledPagination = styled(MuiPagination)<{ theme?: string }>`
   ${(props) =>
-    props.theme === "dark" &&
+    //uncomment it once doing dark theme
+    // props.theme === "dark" &&
     `
-   & fieldset {
-      border: none;
-    }
-    .MuiPagination-root {
-      background-color: #181818;
-      color: #E9E7FB;
-      border-bottom: 1px solid #E9E7FB;
-      border-right: 1px solid #E9E7FB;
+    .MuiButtonBase-root {
+      color: white;
       &:hover {
-        background: black;
+        background-color: rgba(0, 245, 140, 0.2);
+        border: 1px solid #00F58C
       }
     }
-    .MuiPagination-root {
-      padding-left: 0;
-      padding right: 0;
-    }
-    .MuiPagination-root {
-      color: #E0FFFF;
-    }
-    .MuiPagination-root {
-      color: #E9E7FB;
-    }
+   
   `}
 `;
 
 function Pagination({ count, page, onChange }: PaginationProps) {
   return (
-    <StyledPagination count={count} page={page} onChange={onChange} sx={{}} />
+    <StyledPagination
+      count={count}
+      page={page}
+      onChange={onChange}
+      color="primary"
+      variant="outlined"
+      shape="rounded"
+    />
   );
 }
 

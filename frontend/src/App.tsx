@@ -44,7 +44,7 @@ const colorsMaterial = createTheme({
 function App() {
   const [contributions, setContributions] = useState<DocumentProps[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage, _setPostsPerPage] = useState(9);
+  const [postsPerPage, setPostsPerPage] = useState(9);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -75,6 +75,7 @@ function App() {
   const lastPostIndex = currentPage * postsPerPage;
   const firstPostIndex = lastPostIndex - postsPerPage;
   const currentPosts = contributions.slice(firstPostIndex, lastPostIndex);
+  const totalPages = Math.ceil(contributions.length / postsPerPage);
 
   const [theme, setTheme] = useState<Theme>(
     window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"
@@ -96,8 +97,8 @@ function App() {
         <AllContributions
           contributions={currentPosts}
           currentPage={currentPage}
-          totalPages={Math.ceil(contributions.length / postsPerPage)}
-          onPageChange={(_event, page) => setCurrentPage(page)}
+          totalPages={totalPages}
+          onPageChange={(event, page) => setCurrentPage(page)}
         />
         <Footer />
       </ThemeContext.Provider>

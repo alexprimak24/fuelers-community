@@ -15,7 +15,7 @@ interface ContributionsGridProps {
 function ContributionsGrid({ contributions }: ContributionsGridProps) {
   return (
     <>
-      <div className="my-[75px]">
+      <div className="mt-[75px] mb-[15px]">
         <Grid container spacing={3}>
           {contributions.map((contribution) => (
             <Grid

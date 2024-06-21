@@ -23,7 +23,7 @@ function AllContributions({
       <div className="mx-[140px] self-center">
         <LanguageSelector />
         <ContributionsGrid contributions={contributions} />
-        <div className="flex justify-end mt-[15px]">
+        <div className="flex justify-end mr-[10px]">
           <Pagination
             count={totalPages}
             page={currentPage}
