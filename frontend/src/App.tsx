@@ -5,15 +5,12 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import LandingPart from "./Components/Landing/LandingPart";
 import Footer from "./Components/Footer/Footer";
 import { Theme, ThemeContext } from "./Theme/themeContext";
-import cybercity from "./images/cyberFuelCity.jpg";
 import SocialsGrowth from "./Components/utils/shared";
 import Carousel from "./Components/Carousel/Carousel";
 import AllContributions from "./Components/AllContributions/AllContributions";
 import appwriteService from "../src/appwrite/config";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import InputLabel from "@mui/material/InputLabel";
+import DividerImage from "./Components/DividerImage/DividerImage";
 
 interface contributionsProps {
   contentImg: string;
@@ -51,9 +48,9 @@ function App() {
     DocumentProps[]
   >([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage, setPostsPerPage] = useState(9);
+  const [postsPerPage, _setPostsPerPage] = useState(9);
   const [languages, setLanguages] = useState<string[]>([]);
-  const [selectedLanguage, setSelectedLanguage] = useState<string>("");
+  const [selectedLanguage, setSelectedLanguage] = useState<string>("All");
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -71,9 +68,10 @@ function App() {
             title: doc.title,
           },
         }));
-        setContributions(mappedPosts);
+        setContributions(mappedPosts.reverse());
         setFilteredContributions(mappedPosts);
         const uniqueLanguages = [
+          "All",
           ...new Set(mappedPosts.map((post) => post.document.language)),
         ];
         setLanguages(uniqueLanguages);
@@ -87,11 +85,16 @@ function App() {
 
   useEffect(() => {
     if (selectedLanguage) {
-      setFilteredContributions(
-        contributions.filter(
-          (contribution) => contribution.document.language === selectedLanguage
-        )
-      );
+      if (selectedLanguage === "All") {
+        setFilteredContributions(contributions);
+      } else {
+        setFilteredContributions(
+          contributions.filter(
+            (contribution) =>
+              contribution.document.language === selectedLanguage
+          )
+        );
+      }
     } else {
       setFilteredContributions(contributions);
     }
@@ -121,11 +124,7 @@ function App() {
       <ThemeContext.Provider value={{ setTheme, theme }}>
         <Header />
         <LandingPart />
-        <img
-          src={cybercity}
-          alt="Scrolling Image"
-          className="w-full max-h-[657px] object-cover border-y-solid border-y-defaultwhite border-y-[2px]"
-        />
+        <DividerImage />
         <SocialsGrowth title="Recent works." />
         <Carousel contributions={contributions} />
         <SocialsGrowth title="Best activity of the month." />
@@ -133,29 +132,11 @@ function App() {
           contributions={currentPosts}
           currentPage={currentPage}
           totalPages={totalPages}
-          onPageChange={(event, page) => setCurrentPage(page)}
+          onPageChange={(_event, page) => setCurrentPage(page)}
+          languages={languages}
+          handleLanguageChange={handleLanguageChange}
+          selectedLanguage={selectedLanguage}
         />
-
-        <FormControl
-          variant="outlined"
-          style={{ minWidth: 120, margin: "20px 0" }}
-        >
-          <InputLabel>Language</InputLabel>
-          <Select
-            value={selectedLanguage}
-            onChange={handleLanguageChange}
-            label="Language"
-          >
-            <MenuItem value="">
-              <em>All</em>
-            </MenuItem>
-            {languages.map((language) => (
-              <MenuItem key={language} value={language}>
-                {language}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
         <Footer />
       </ThemeContext.Provider>
     </ThemeProvider>
