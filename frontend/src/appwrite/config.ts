@@ -84,6 +84,7 @@ export class Service {
   }
 
   getFilePreview({ fileId }: FileIdProps) {
+    console.log(this.bucket.getFilePreview(conf.appwriteBucketId, fileId).href);
     return this.bucket.getFilePreview(conf.appwriteBucketId, fileId).href;
   }
 }

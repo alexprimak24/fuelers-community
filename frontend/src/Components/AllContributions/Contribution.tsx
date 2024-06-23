@@ -6,7 +6,7 @@ import CardMedia from "@mui/material/CardMedia";
 import cyberCity from "../../images/cyberFuelCity.jpg";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import Avatar from "@mui/material/Avatar";
-
+import appwriteService from "../../appwrite/config";
 //REMOVE OPTIONAL
 interface ContributionProps {
   id?: number;
@@ -40,11 +40,11 @@ function Contribution({
           <Card sx={{ background: "transparent", maxWidth: "400px" }}>
             <div className="relative">
               <div className="absolute inset-0 border-2 border-defaultgreen rounded-lg z-10 pointer-events-none"></div>
-
               <CardMedia
                 component="img"
-                alt="contribtuionImage"
-                image={contentImg}
+                image={appwriteService.getFilePreview({
+                  fileId: contentImg,
+                })}
                 className="rounded-lg h-[220px]"
               />
             </div>

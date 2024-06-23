@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import appwriteService from "../../appwrite/config";
 interface SlideProps {
   contentImg: string;
   title: string;
@@ -8,6 +8,7 @@ interface SlideProps {
 
 export default function Slide({ contentImg, title, contentLink }: SlideProps) {
   const [hover, setHover] = useState(false);
+  const [loading, setLoading] = useState(true);
   const defaultShadow = "0 0 10px 7px var(--Default-green, #00F58C)";
   const hoverShadow = "0 0 5px 7px var(--Default-green, #00F58C)";
 
@@ -24,7 +25,22 @@ export default function Slide({ contentImg, title, contentLink }: SlideProps) {
           boxShadow: hover ? hoverShadow : defaultShadow,
         }}
       >
-        <img src={contentImg} alt="" className="max-h-[420px] " />
+        <img
+          src={appwriteService.getFilePreview({
+            fileId: contentImg,
+          })}
+          alt=""
+          loading="lazy"
+          onLoad={() => setLoading(false)}
+          className={`max-h-[420px] ${loading ? "blur-lg" : "blur-0"} transition-blur duration-300`}
+        />
+        {/* <img
+          src={contentImg}
+          alt=""
+          loading="lazy"
+          onLoad={() => setLoading(false)}
+          className={`max-h-[420px] ${loading ? "blur-lg" : "blur-0"} transition-blur duration-300`}
+        /> */}
       </a>
       <p className="text-defaultwhite text-opacity-50 text-2xl">{title}</p>
     </div>
