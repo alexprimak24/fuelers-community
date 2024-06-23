@@ -1,10 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "@emotion/styled";
-import { darkColors } from "@fuel-ui/css";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
-import InputLabel from "@mui/material/InputLabel";
 
 interface LanguageSelectorProps {
   languages: string[];

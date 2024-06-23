@@ -5,6 +5,7 @@ import ContributionsGrid from "./ContributionsGrid";
 import { DocumentProps } from "../../App";
 import Pagination from "./Pagination";
 import { SelectChangeEvent } from "@mui/material/Select";
+import Container from "../Container/Container";
 
 interface AllContributionsProps {
   contributions: DocumentProps[];
@@ -27,23 +28,25 @@ function AllContributions({
 }: AllContributionsProps) {
   return (
     <div className="flex items-center justify-center max-w-[2560px]">
-      <div className="mx-[140px] self-center">
-        <div className="w-full">
-          <LanguageSelector
-            languages={languages}
-            handleLanguageChange={handleLanguageChange}
-            selectedLanguage={selectedLanguage}
-          />
+      <Container>
+        <div className="self-center">
+          <div className="w-full">
+            <LanguageSelector
+              languages={languages}
+              handleLanguageChange={handleLanguageChange}
+              selectedLanguage={selectedLanguage}
+            />
+          </div>
+          <ContributionsGrid contributions={contributions} />
+          <div className="flex justify-end mr-[10px]">
+            <Pagination
+              count={totalPages}
+              page={currentPage}
+              onChange={onPageChange}
+            />
+          </div>
         </div>
-        <ContributionsGrid contributions={contributions} />
-        <div className="flex justify-end mr-[10px]">
-          <Pagination
-            count={totalPages}
-            page={currentPage}
-            onChange={onPageChange}
-          />
-        </div>
-      </div>
+      </Container>
     </div>
   );
 }
