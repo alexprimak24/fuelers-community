@@ -5,7 +5,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import LandingPart from "./Components/Landing/LandingPart";
 import Footer from "./Components/Footer/Footer";
 import { Theme, ThemeContext } from "./Theme/themeContext";
-import SocialsGrowth from "./Components/utils/shared";
+import SectionTitle from "./Components/utils/shared";
 import Carousel from "./Components/Carousel/Carousel";
 import AllContributions from "./Components/AllContributions/AllContributions";
 import appwriteService from "../src/appwrite/config";
@@ -74,6 +74,7 @@ function App() {
           "All",
           ...new Set(mappedPosts.map((post) => post.document.language)),
         ];
+        // .sort()
         setLanguages(uniqueLanguages);
       } else {
         console.log("No documents found");
@@ -125,9 +126,9 @@ function App() {
         <Header />
         <LandingPart />
         <DividerImage />
-        <SocialsGrowth title="Recent works." />
+        <SectionTitle title="Recent works." />
         <Carousel contributions={contributions} />
-        <SocialsGrowth title="Best activity of the month." />
+        <SectionTitle title="Best activity of the month." />
         <AllContributions
           contributions={currentPosts}
           currentPage={currentPage}

@@ -7,7 +7,7 @@ import styled from "@emotion/styled";
 //   border-radius: 5px;
 // `;
 
-export default function SocialsGrowth({ title }: { title: string }) {
+export default function SectionTitle({ title }: { title: string }) {
   const words = title.split(" ");
 
   return (
