@@ -11,6 +11,7 @@ import AllContributions from "./Components/AllContributions/AllContributions";
 import appwriteService from "../src/appwrite/config";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import DividerImage from "./Components/DividerImage/DividerImage";
+import Auth from "./Components/VotingSection/Auth";
 
 interface contributionsProps {
   contentImg: string;
@@ -110,7 +111,7 @@ function App() {
   );
   const totalPages = Math.ceil(filteredContributions.length / postsPerPage);
 
-  console.log(contributions);
+  // console.log(contributions);
 
   const [theme, setTheme] = useState<Theme>(
     window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"
@@ -129,6 +130,7 @@ function App() {
         <SectionTitle title="Recent works." />
         <Carousel contributions={contributions} />
         <SectionTitle title="Best activity of the month." />
+        <Auth />
         <AllContributions
           contributions={currentPosts}
           currentPage={currentPage}
