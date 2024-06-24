@@ -1,5 +1,5 @@
 import conf from "../conf/conf";
-import { Client, Account, ID, OAuthProvider } from "appwrite";
+import { Client, Account, ID, OAuthProvider, Databases, Query } from "appwrite";
 
 export interface createAccountProps {
   email: string;
@@ -12,17 +12,26 @@ export interface loginProps {
   password: string;
 }
 
+interface checkAndAddUserProps {
+  username: string;
+}
+interface createUserProps {
+  username: string;
+}
+
 export class AuthService {
   client = new Client();
+  databases: Databases;
   account;
 
   constructor() {
     this.client
       .setEndpoint(conf.appwriteUrl)
       .setProject(conf.appwriteProjectId);
+    this.databases = new Databases(this.client);
     this.account = new Account(this.client);
   }
-
+  //handle Discord login with OAuth2
   async handleLogin() {
     try {
       const response = await this.account.createOAuth2Session(
@@ -35,7 +44,7 @@ export class AuthService {
       console.log("Appwrite service :: handleLogin() ::", error);
     }
   }
-
+  //get current active user
   async getCurrentUser() {
     try {
       return await this.account.get();
@@ -44,7 +53,49 @@ export class AuthService {
     }
     return null;
   }
-
+  async checkAndAddUser({ username }: checkAndAddUserProps) {
+    if (username) {
+      try {
+        //check if the user exist
+        const response = await this.databases.listDocuments(
+          conf.appwriteDatabaseId,
+          conf.appwriteCollectionIdVoters,
+          [Query.equal("username", [username])]
+        );
+        //if the user don't exist => create user
+        if (response.documents.length === 0) {
+          const newUser = this.createUser({ username });
+          console.log("New user added:", newUser);
+          return newUser;
+        }
+        //if the user exist => return existing user
+        else {
+          console.log("User already exists:", response.documents[0]);
+          return response.documents[0];
+        }
+      } catch (error) {
+        console.error("Failed to create/check user", error);
+      }
+    }
+  }
+  //creating the user
+  // prettier-ignore
+  async createUser({ username }: createUserProps) {
+    if (username) {
+      try {
+        
+        const promise = this.databases.createDocument(
+          conf.appwriteDatabaseId,
+          conf.appwriteCollectionIdVoters,
+          ID.unique(),
+          { "username": username }
+        );
+        return promise;
+      } catch (error) {
+        console.log("Appwrite service :: createUser() ::", error);
+      }
+    }
+  }
   async getCurrentSession() {
     try {
       const session = await this.account.getSession("current");
