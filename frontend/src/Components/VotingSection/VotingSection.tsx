@@ -1,7 +1,8 @@
 import React from "react";
 import CategoryToVoteButton from "./CategoryToVoteButton";
 import Container from "../Container/Container";
-
+import OptionsRadio from "./OptionsRadio";
+import Auth from "./Auth";
 function VotingSection() {
   return (
     <Container>
@@ -11,6 +12,8 @@ function VotingSection() {
           <CategoryToVoteButton categoryName="Top contributor" />
           <CategoryToVoteButton categoryName="Best Activist" />
           <CategoryToVoteButton categoryName="Meme Machine" />
+          <OptionsRadio />
+          <Auth />
         </div>
       </div>
     </Container>

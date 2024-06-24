@@ -10,11 +10,11 @@ function OptionsRadio() {
       defaultValue="female"
       name="radio-buttons-group"
     >
-      <FormControlLabel value={cyberCity} control={<Radio />} label="Tank" />
-      <FormControlLabel value={cyberCity} control={<Radio />} label="Tank" />
-      <FormControlLabel value={cyberCity} control={<Radio />} label="Tank" />
-      <FormControlLabel value={cyberCity} control={<Radio />} label="Tank" />
-      <FormControlLabel value={cyberCity} control={<Radio />} label="Tank" />
+      <FormControlLabel value="Tank" control={<Radio />} label="Tank" />
+      <FormControlLabel value="Tank1" control={<Radio />} label="Tank1" />
+      <FormControlLabel value="Tank2" control={<Radio />} label="Tank2" />
+      <FormControlLabel value="Tank3" control={<Radio />} label="Tank3" />
+      <FormControlLabel value="Tank4" control={<Radio />} label="Tank4" />
     </RadioGroup>
   );
 }

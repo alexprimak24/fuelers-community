@@ -11,7 +11,6 @@ import AllContributions from "./Components/AllContributions/AllContributions";
 import appwriteService from "../src/appwrite/config";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import DividerImage from "./Components/DividerImage/DividerImage";
-import Auth from "./Components/VotingSection/Auth";
 import VotingSection from "./Components/VotingSection/VotingSection";
 
 interface contributionsProps {
@@ -132,7 +131,6 @@ function App() {
         <Carousel contributions={contributions} />
         <SectionTitle title="Best activity of the month." />
         <VotingSection />
-        <Auth />
         <AllContributions
           contributions={currentPosts}
           currentPage={currentPage}

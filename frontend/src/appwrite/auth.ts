@@ -25,13 +25,43 @@ export class AuthService {
 
   async handleLogin() {
     try {
-      await this.account.createOAuth2Session(
+      const response = await this.account.createOAuth2Session(
         OAuthProvider.Discord,
         "http://localhost:3000/",
         "http://localhost:3000/"
       );
+      return response;
     } catch (error) {
       console.log("Appwrite service :: handleLogin() ::", error);
+    }
+  }
+
+  async getCurrentUser() {
+    try {
+      return await this.account.get();
+    } catch (error) {
+      console.log("Appwrite service :: getCurrentUser() ::", error);
+    }
+    return null;
+  }
+
+  async getCurrentSession() {
+    try {
+      const session = await this.account.getSession("current");
+      return session.$id;
+    } catch (error) {
+      console.log("Appwrite service :: getCurrentSession() ::", error);
+    }
+    return null;
+  }
+  async logout() {
+    try {
+      const sessionId: string | null = await this.getCurrentSession();
+      if (sessionId) {
+        await this.account.deleteSession(sessionId);
+      }
+    } catch (error) {
+      console.log("Appwrite service :: logout() ::", error);
     }
   }
 }
