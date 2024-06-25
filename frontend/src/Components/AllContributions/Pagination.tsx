@@ -14,7 +14,7 @@ const StyledPagination = styled(MuiPagination)<{ theme?: string }>`
     //uncomment it once doing dark theme
     // props.theme === "dark" &&
     `
-    .MuiButtonBase-root {
+    .MuiButtonBase-root.MuiPaginationItem-root {
       color: white;
       &:hover {
         background-color: rgba(0, 245, 140, 0.2);
@@ -42,8 +42,3 @@ function Pagination({ count, page, onChange }: PaginationProps) {
 }
 
 export default Pagination;
-
-// .MuiPagination-outlined
-// .MuiPagination-root
-// .MuiPagination-text
-// .MuiPagination-ul

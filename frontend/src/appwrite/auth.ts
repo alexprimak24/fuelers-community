@@ -34,6 +34,7 @@ export class AuthService {
   //handle Discord login with OAuth2
   async handleLogin() {
     try {
+      localStorage.setItem("shouldScrollToVotingSection", "true");
       const response = await this.account.createOAuth2Session(
         OAuthProvider.Discord,
         "http://localhost:3000/",

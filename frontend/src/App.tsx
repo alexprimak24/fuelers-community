@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./App.css";
 import Header from "./Components/Header/Header";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -52,6 +52,10 @@ function App() {
   const [postsPerPage, _setPostsPerPage] = useState(9);
   const [languages, setLanguages] = useState<string[]>([]);
   const [selectedLanguage, setSelectedLanguage] = useState<string>("All");
+  const [theme, setTheme] = useState<Theme>(
+    window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"
+  );
+  const votingSectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -113,10 +117,6 @@ function App() {
 
   // console.log(contributions);
 
-  const [theme, setTheme] = useState<Theme>(
-    window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"
-  );
-
   const handleLanguageChange = (event: SelectChangeEvent<string>) => {
     setSelectedLanguage(event.target.value);
   };
@@ -130,7 +130,7 @@ function App() {
         <SectionTitle title="Recent works." />
         <Carousel contributions={contributions} />
         <SectionTitle title="Best activity of the month." />
-        <VotingSection />
+        <VotingSection ref={votingSectionRef} />
         <AllContributions
           contributions={currentPosts}
           currentPage={currentPage}
