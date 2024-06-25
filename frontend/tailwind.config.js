@@ -12,6 +12,7 @@ module.exports = {
         defaultgreen: "#00F58C",
         defaultlightgreen: "#B8FBCF",
         defaultdarkgreen: "#00854D",
+        default02green: "rgba(0, 245, 140, 0.2)",
         defaultwhite: "#F5F5F5",
         defaultwhitesemi: "rgba(245, 245, 245, 0.5)",
         defaultblack2: "#1E1E1E",
