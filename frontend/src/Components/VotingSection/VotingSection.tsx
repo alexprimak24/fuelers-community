@@ -1,9 +1,10 @@
 import React, { forwardRef } from "react";
-import CategoryToVoteButton from "./CategoryToVoteButton";
+
 import Container from "../Container/Container";
 import OptionsRadio from "./OptionsRadio";
 import Auth from "./Auth";
-
+import CategoryToVote from "./CategoryToVote";
+import CategoryToVoteButton from "./CategoryToVoteButton";
 interface VotingSectionProps {
   // Other props if needed
 }
@@ -18,10 +19,11 @@ const VotingSection = forwardRef<HTMLDivElement, VotingSectionProps>(
           className="rounded-[30px] border border-solid border-defaultwhite px-[45px] py-[50px] mt-[60px]"
         >
           <div className="self-end sm:inline-table">
-            <CategoryToVoteButton categoryName="Best Content" />
+            {/* <CategoryToVoteButton categoryName="Best Content" />
             <CategoryToVoteButton categoryName="Top contributor" />
-            <CategoryToVoteButton categoryName="Best Activist" />
-            <OptionsRadio />
+            <CategoryToVoteButton categoryName="Best Activist" /> */}
+            {/* <OptionsRadio /> */}
+            <CategoryToVote />
             <Auth />
           </div>
         </div>
