@@ -96,8 +96,7 @@ function Auth() {
           <div className="flex flex-col overflow-hidden">
             <p className="truncate">
               <span className="text-defaultgreen">@</span>
-              {/* {voter.username} */}
-              dfdfdgfgfdfggdfgdfgdf
+              {voter.username}
             </p>
             <Logout logOut={setLoggedIn} setVoter={setVoter} />
           </div>
