@@ -5,12 +5,13 @@ import OptionsRadio from "./OptionsRadio";
 import Auth from "./Auth";
 import CategoryToVote from "./CategoryToVote";
 import CategoryToVoteButton from "./CategoryToVoteButton";
+
 interface VotingSectionProps {
-  // Other props if needed
+  values: number[];
 }
 
 const VotingSection = forwardRef<HTMLDivElement, VotingSectionProps>(
-  (props, ref) => {
+  ({ values }, ref) => {
     return (
       <Container>
         <div
@@ -23,7 +24,7 @@ const VotingSection = forwardRef<HTMLDivElement, VotingSectionProps>(
             <CategoryToVoteButton categoryName="Top contributor" />
             <CategoryToVoteButton categoryName="Best Activist" /> */}
             {/* <OptionsRadio /> */}
-            <CategoryToVote />
+            <CategoryToVote values={values} />
             <Auth />
           </div>
         </div>

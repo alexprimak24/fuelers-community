@@ -52,6 +52,7 @@ function App() {
   const [postsPerPage, _setPostsPerPage] = useState(9);
   const [languages, setLanguages] = useState<string[]>([]);
   const [selectedLanguage, setSelectedLanguage] = useState<string>("All");
+  const values = [4, 2, 1, 3];
   const [theme, setTheme] = useState<Theme>(
     window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"
   );
@@ -125,12 +126,12 @@ function App() {
     <ThemeProvider theme={colorsMaterial}>
       <ThemeContext.Provider value={{ setTheme, theme }}>
         <Header />
-        <LandingPart />
+        {/* <LandingPart />
         <DividerImage />
         <SectionTitle title="Recent works." />
         <Carousel contributions={contributions} />
         <SectionTitle title="Best activity of the month." />
-        <VotingSection ref={votingSectionRef} />
+        <VotingSection ref={votingSectionRef} values={values} />
         <AllContributions
           contributions={currentPosts}
           currentPage={currentPage}
@@ -140,7 +141,7 @@ function App() {
           handleLanguageChange={handleLanguageChange}
           selectedLanguage={selectedLanguage}
         />
-        <Footer />
+        <Footer /> */}
       </ThemeContext.Provider>
     </ThemeProvider>
   );
