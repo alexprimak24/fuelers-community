@@ -3,6 +3,18 @@ module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
+      screens: {
+        xs: "0px",
+        aax: "440px",
+        ax: "510px",
+        sm: "600px",
+        aas: "720px",
+        as: "770px",
+        md: "900px",
+        am: "1100px",
+        lg: "1290px",
+        xl: "1360px",
+      },
       zIndex: {
         "-1": "-1",
         1: "1",

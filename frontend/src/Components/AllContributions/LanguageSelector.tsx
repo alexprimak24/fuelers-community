@@ -1,8 +1,9 @@
 import React from "react";
 import styled from "@emotion/styled";
 import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl/FormControl";
+import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
+import { useMediaQuery, useTheme } from "@mui/material";
 
 interface LanguageSelectorProps {
   languages: string[];
@@ -10,7 +11,10 @@ interface LanguageSelectorProps {
   selectedLanguage: string;
 }
 
-const StyledFormControl = styled(FormControl)<{ theme: string }>`
+const StyledFormControl = styled(FormControl)<{
+  theme: string;
+  isSmallScreen: boolean;
+}>`
   ${(props) =>
     props.theme === "dark" &&
     `
@@ -31,15 +35,14 @@ const StyledFormControl = styled(FormControl)<{ theme: string }>`
     }
     .MuiSelect-select {
       padding-left: 0;
-      padding right: 0;
+      padding-right: 0;
     }
     .MuiFormLabel-root {
       color: #E0FFFF;
     }
     .MuiSvgIcon-root {
       color: #E9E7FB;
-      font-size: 32px;
-      // opacity:0;
+      font-size: ${props.isSmallScreen ? "24px" : "32px"};
     }
   `}
 `;
@@ -49,13 +52,20 @@ function LanguageSelector({
   handleLanguageChange,
   selectedLanguage,
 }: LanguageSelectorProps) {
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
+
   return (
-    <div className="max-h-[100px] mt-[200px] w-full">
-      <div className="flex text-center justify-between w-full  rounded-[30px] border border-solid border-defaultwhite px-[50px] py-[25px]">
-        <p className="text-[32px]">Best work of all time</p>
-        {/* CHANGE IT WHEN TIME ONCE DOING DAKR THEME */}
-        <StyledFormControl size="small" theme={"dark"}>
-          {/* <InputLabel>Language</InputLabel> */}
+    <div className="max-h-[100px] mt-[140px] ax:mt-[200px] w-full">
+      <div className="flex text-center justify-between w-full rounded-[30px] border border-solid border-defaultwhite px-[25px] py-[17px] aax:px-[30px] sm:px-[50px] aax:py-[20px] sx:py-[25px]">
+        <p className="text-center text-[20px] aax:text-[24px] ax:text-[28px] sm:text-[32px]">
+          Best work of all time
+        </p>
+        <StyledFormControl
+          size="small"
+          theme={"dark"}
+          isSmallScreen={isSmallScreen}
+        >
           <Select
             MenuProps={{
               PaperProps: {
@@ -67,9 +77,8 @@ function LanguageSelector({
             }}
             labelId="demo-simple-select-label"
             id="demo-simple-select"
-            style={{ minWidth: "80px", maxHeight: "50px", fontSize: "20px" }}
+            className="min-w-[80px] max-h-[35px] font-[16px] ax:max-h-[50px] ax:font-[20px] sm:mt-[5px]"
             variant="outlined"
-            // label="Language"
             value={selectedLanguage}
             onChange={handleLanguageChange}
             defaultChecked={true}

@@ -16,7 +16,7 @@ function SocialsGrowth({
     window.location.href = socialLink;
   };
   return (
-    <div className="max-h-[45px] flex flex-col items-center gap-[8px] ">
+    <div className="max-h-[45px] flex flex-col items-center gap-[8px]">
       <div className="cursor-pointer" onClick={handleSocialClick}>
         <img src={image} alt="socialIcon" className="hover:text-[#00F58C]" />
       </div>

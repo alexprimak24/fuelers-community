@@ -9,8 +9,8 @@ function Footer() {
   return (
     <div className="fixed w-full z-30 ">
       <div className="w-full h-[70px] top-0 bg-semi-transparent-black pt-[10px] flex  justify-center">
-        <div className=" w-full max-w-[2560px] h-full flex justify-between mx-[140px]">
-          <div className="w-full max-w-[219px] flex justify-between pt-[3px]">
+        <div className=" w-full max-w-[2560px] h-full flex justify-evenly md:justify-between md:mx-[40px] xl:mx-[140px] lg:mx-[70px]">
+          <div className="hidden w-full max-w-[180px] am:max-w-[200px] lg:max-w-[219px] flex justify-between pt-[3px] md:flex">
             <SocialsGrowth
               image={DiscordLogo}
               socialLink={"https://discord.com/invite/fuelnetwork"}
@@ -28,7 +28,9 @@ function Footer() {
             />
           </div>
           <LogoAndName />
-          <SwitchThemeButton />
+          <div className="hidden md:block">
+            <SwitchThemeButton />
+          </div>
         </div>
       </div>
     </div>

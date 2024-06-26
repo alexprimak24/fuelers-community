@@ -12,8 +12,8 @@ export default function SectionTitle({ title }: { title: string }) {
 
   return (
     <Container>
-      <div className="pt-[300px] max-w-[2560px] w-[100%] flex flex-col">
-        <h1 className="flex text-7xl text-defaultwhite font-groteskpanbold relative w-max">
+      <div className="pt-[140px] ax:pt-[200px] as:pt-[300px] max-w-[2560px] w-[100%] flex flex-col">
+        <h1 className="flex text-2xl aax:text-3xl ax:text-4xl aas:text-5xl md:text-6xl am:text-7xl text-defaultwhite font-groteskpanbold relative w-max">
           <span className="mr-3">{words[0]}</span>
           <span className="flex flex-row opacity-50">
             {words.slice(1).join(" ")}

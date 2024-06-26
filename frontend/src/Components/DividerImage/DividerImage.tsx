@@ -6,7 +6,7 @@ function DividerImage() {
     <img
       src={cyberCity}
       alt="Scrolling Image"
-      className="w-full max-h-[657px] object-cover border-y-solid border-y-defaultwhite border-y-[2px]"
+      className="w-full h-auto min-h-[310px] max-h-[657px] object-cover border-y-2 border-y-defaultwhite"
     />
   );
 }
