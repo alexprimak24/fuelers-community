@@ -37,8 +37,8 @@ export class AuthService {
       localStorage.setItem("shouldScrollToVotingSection", "true");
       const response = await this.account.createOAuth2Session(
         OAuthProvider.Discord,
-        "http://localhost:3000/",
-        "http://localhost:3000/"
+        "https://fuelerscommunity.com/",
+        "https://fuelerscommunity.com/"
       );
       return response;
     } catch (error) {
