@@ -126,7 +126,7 @@ function App() {
     <ThemeProvider theme={colorsMaterial}>
       <ThemeContext.Provider value={{ setTheme, theme }}>
         <Header />
-        {/* <LandingPart />
+        <LandingPart />
         <DividerImage />
         <SectionTitle title="Recent works." />
         <Carousel contributions={contributions} />
@@ -141,7 +141,7 @@ function App() {
           handleLanguageChange={handleLanguageChange}
           selectedLanguage={selectedLanguage}
         />
-        <Footer /> */}
+        <Footer />
       </ThemeContext.Provider>
     </ThemeProvider>
   );
