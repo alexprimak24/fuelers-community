@@ -41,6 +41,15 @@ const colorsMaterial = createTheme({
       contrastText: "#1E1E1E",
     },
   },
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 600,
+      md: 760,
+      lg: 1280,
+      xl: 2000,
+    },
+  },
 });
 
 function App() {

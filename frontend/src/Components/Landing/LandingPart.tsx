@@ -27,16 +27,18 @@ const OverlayContent = () => (
 
 const Title = () => (
   <div className="flex  flex-col lg:flex-row gap-6">
-    <h1 className="text-[64px] aax:text-[74px] ax:text-[96px] sm:text-[110px] aas:text-[128px] md:text-[144px] tracking-tight leading-none opacity-20">
+    <h1 className="text-[68px] aax:text-[74px] ax:text-[96px] sm:text-[110px] aas:text-[128px] md:text-[144px] tracking-tight leading-none opacity-20">
       Fuelers
     </h1>
-    <h1 className="text-[64px] aax:text-[74px] ax:text-[96px] sm:text-[110px] aas:text-[128px] md:text-[144px] tracking-tight leading-none opacity-20">
+    <h1 className="text-[68px] aax:text-[74px] ax:text-[96px] sm:text-[110px] aas:text-[128px] md:text-[144px] tracking-tight leading-none opacity-20">
       Community
     </h1>
   </div>
 );
 
-const Separator = () => <div className="w-[291px] h-[2px] bg-white mt-9" />;
+const Separator = () => (
+  <div className="w-[210px]  aax:w-[231px] ax:w-[260px] sm:w-[291px] w-240px h-[2px] bg-white mt-9" />
+);
 
 const PoweredBy = () => (
   <div className="flex items-center mt-7 font-grotesk text-[12px] aax:text-[14px] sm:text-base">

@@ -24,7 +24,7 @@ function ContributionsGrid({ contributions }: ContributionsGridProps) {
               sm={12}
               md={6}
               lg={4}
-              xl={4}
+              xl={3}
               key={contribution.document.index}
             >
               <Contribution

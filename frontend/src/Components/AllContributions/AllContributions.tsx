@@ -27,7 +27,7 @@ function AllContributions({
   selectedLanguage,
 }: AllContributionsProps) {
   return (
-    <div className="flex items-center justify-center max-w-[2560px]">
+    <div className="max-w-[2560px]">
       <Container>
         <div className="self-center">
           <div className="w-full">
