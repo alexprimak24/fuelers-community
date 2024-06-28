@@ -44,7 +44,7 @@ function LanguageSelector({
   const themeMui = useThemeMui();
   const isSmallScreen = useMediaQuery(themeMui.breakpoints.down("sm"));
   const { themeColor } = useTheme();
-  console.log(themeColor("white4"));
+
   return (
     <div className="max-h-[100px] mt-[140px] ax:mt-[200px] w-full">
       <div

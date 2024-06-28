@@ -6,6 +6,9 @@ interface ColorMapping {
   light: string;
   dark: string;
 }
+export interface Theme {
+  theme: "light" | "dark";
+}
 export type ColorName =
   | "white1"
   | "white2"
@@ -13,12 +16,15 @@ export type ColorName =
   | "white4"
   | "white5"
   | "white6"
+  | "white7"
   | "black1"
   | "black2"
   | "black3"
   | "black4"
   | "black5"
-  | "green1";
+  | "green1"
+  | "green2"
+  | "semiBlack";
 
 const COLORS: Record<ColorName, ColorMapping> = {
   white1: {
@@ -38,12 +44,16 @@ const COLORS: Record<ColorName, ColorMapping> = {
     dark: "#E9E7FB",
   },
   white5: {
-    light: "#000",
+    light: "rgba(30, 30, 30, 0.7)",
     dark: "#F5F5F5",
   },
   white6: {
     light: "rgba(0, 0, 0, 0.7)",
     dark: "#F5F5F5",
+  },
+  white7: {
+    light: "rgba(0, 0, 0, 0.3)",
+    dark: "rgba(255, 255, 255, 0.8)",
   },
   black1: {
     light: "#F5F5F5",
@@ -65,8 +75,16 @@ const COLORS: Record<ColorName, ColorMapping> = {
     light: "#FFF",
     dark: "#181818",
   },
+  semiBlack: {
+    light: "rgba(0, 0, 0, 0.5)",
+    dark: "rgba(245, 245, 245, 0.5)",
+  },
   green1: {
     light: "rgba(30, 30, 30, 0.7)",
+    dark: "#00F58C",
+  },
+  green2: {
+    light: "#00F58C",
     dark: "#B8FBCF",
   },
 };

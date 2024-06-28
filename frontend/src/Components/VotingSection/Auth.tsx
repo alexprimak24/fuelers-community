@@ -4,7 +4,7 @@ import Logout from "./Logout";
 import { Models } from "appwrite";
 import Avatar from "@mui/material/Avatar";
 import { Button, styled } from "@mui/material";
-import DiscordLogo from "../../images/DiscordLogo.svg";
+import { FaDiscord } from "react-icons/fa";
 
 const StyledButton = styled(Button)<{ theme?: string }>`
   ${(props) =>
@@ -70,13 +70,7 @@ function Auth() {
         <Button
           onClick={login}
           variant="outlined"
-          startIcon={
-            <img
-              src={DiscordLogo}
-              alt="Discord Logo"
-              style={{ width: 21, height: 21 }}
-            />
-          }
+          startIcon={<FaDiscord style={{ width: 21, height: 21 }} />}
           sx={{
             height: "42px",
             color: "white",
@@ -92,7 +86,7 @@ function Auth() {
       )}
       {loggedIn && voter && (
         <div className="px-[10px] w-full h-[45px] flex justify-evenly gap-[10px] items-center border border-solid border-defaultwhite hover:border-defaultgreen">
-          <img src={DiscordLogo} className="w-[21px] h-[21px] "></img>
+          startIcon={<FaDiscord style={{ width: 21, height: 21 }} />}
           <div className="flex flex-col overflow-hidden">
             <p className="truncate">
               <span className="text-defaultgreen">@</span>

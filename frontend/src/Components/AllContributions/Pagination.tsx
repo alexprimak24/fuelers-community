@@ -1,7 +1,7 @@
-// src/Components/Pagination/Pagination.tsx
-
 import React from "react";
-import { Pagination as MuiPagination, styled } from "@mui/material";
+import styled from "@emotion/styled";
+import Pagination from "@mui/material/Pagination";
+import useTheme from "../../Theme/themeContext";
 
 interface PaginationProps {
   count: number;
@@ -9,36 +9,43 @@ interface PaginationProps {
   onChange: (event: React.ChangeEvent<unknown>, page: number) => void;
 }
 
-const StyledPagination = styled(MuiPagination)<{ theme?: string }>`
+const StyledPagination = styled(Pagination)<{ theme: string }>`
   ${(props) =>
-    //uncomment it once doing dark theme
-    // props.theme === "dark" &&
-    `
+    props.theme === "dark"
+      ? `
     .MuiButtonBase-root.MuiPaginationItem-root {
       color: white;
       &:hover {
         background-color: rgba(0, 245, 140, 0.2);
-        border: 1px solid #00F58C
+        border: 1px solid #00F58C;
       }
     }
-      .MuiPaginationItem-root {
+    .MuiPaginationItem-root {
       color: white;
+    }
+  `
+      : `.MuiButtonBase-root.MuiPaginationItem-root {
+      border:transparent;
+      &:hover {
+        background-color: rgba(0, 245, 140, 0.2);
+        border: 1px solid #00F58C;
       }
-   
-  `}
+    }`}
 `;
 
-function Pagination({ count, page, onChange }: PaginationProps) {
+function Paginationn({ count, page, onChange }: PaginationProps) {
+  const { theme } = useTheme();
   return (
     <StyledPagination
+      theme={theme}
       count={count}
       page={page}
       onChange={onChange}
-      color="primary"
+      color={theme === "dark" ? "primary" : "standard"}
       variant="outlined"
       shape="rounded"
     />
   );
 }
 
-export default Pagination;
+export default Paginationn;

@@ -1,29 +1,42 @@
 import React from "react";
 import PlusSign from "../../images/PlusSign.svg";
+import useTheme from "../../Theme/themeContext";
+import { IconType } from "react-icons";
 
 export interface SocialsGrowthProps {
-  image: string;
+  Icon: IconType;
   socialLink: string;
   subsForMonth?: string;
+  discord?: boolean;
 }
 
 function SocialsGrowth({
-  image,
+  Icon,
   socialLink,
   subsForMonth,
+  discord,
 }: SocialsGrowthProps) {
   const handleSocialClick = () => {
     window.location.href = socialLink;
   };
+  const { themeColor } = useTheme();
   return (
     <div className="max-h-[45px] flex flex-col items-center gap-[8px]">
       <div className="cursor-pointer" onClick={handleSocialClick}>
-        <img src={image} alt="socialIcon" className="hover:text-[#00F58C]" />
+        <Icon
+          className={`hover:fill-[#00F58C] transition-colors duration-400`}
+          style={{ width: discord ? "32px" : "" }}
+          size="24px"
+          color={themeColor("semiBlack")}
+        />
       </div>
       {subsForMonth && (
         <div className="flex gap-[3px]">
           <img src={PlusSign} alt="PlusSign" />
-          <p className="[font-family:'Px_Grotesk-Light',Helvetica] font-light text-xs">
+          <p
+            style={{ color: themeColor("black2") }}
+            className="font-grotesk font-light text-xs"
+          >
             {subsForMonth}k
           </p>
         </div>
