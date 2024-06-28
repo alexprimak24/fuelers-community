@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
@@ -43,7 +43,6 @@ function Carousel({ settings, contributions }: CarouselComponentProps) {
     speed: 4000,
     pauseOnFocus: true,
     pauseOnHover: true,
-    // cssEase: "linear",
     autoplaySpeed: 0,
 
     responsive: [
@@ -77,18 +76,9 @@ function Carousel({ settings, contributions }: CarouselComponentProps) {
       },
     ],
   };
-  //const defaultShadow =
-  //  "inset 20px 0 20px -20px var(--Default-green, #00F58C), inset -20px 0 20px -20px var(--Default-green, #00F58C)";
   const finalSettings = { ...defaultSettings, ...settings };
-  //TO DO CAROUSEL FIX
   return (
-    // <div className=" bg-defaultblack2 flex items-center mt-[25px] ">
-    <div
-      className="mt-[25px] "
-      // style={{
-      //   boxShadow: defaultShadow,
-      // }}
-    >
+    <div className="mt-[5px]">
       <Slider {...finalSettings}>
         {contributions.slice(-10).map((contribution) => {
           return (
@@ -102,7 +92,6 @@ function Carousel({ settings, contributions }: CarouselComponentProps) {
         })}
       </Slider>
     </div>
-    // </div>
   );
 }
 

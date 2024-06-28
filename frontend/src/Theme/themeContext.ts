@@ -1,24 +1,85 @@
-import { createContext, useContext } from 'react';
-export type Theme = 'light' | 'dark';
+import { useCallback, useMemo } from "react";
+import { darkColors, lightColors } from "@fuel-ui/css";
+import { useFuelTheme } from "@fuel-ui/react";
 
-interface ThemeContext {
-  setTheme: (value: Theme) => void;
-  theme: Theme;
+interface ColorMapping {
+  light: string;
+  dark: string;
 }
+export type ColorName =
+  | "white1"
+  | "white2"
+  | "white3"
+  | "white4"
+  | "white5"
+  | "white6"
+  | "black1"
+  | "black2"
+  | "black3"
+  | "black4"
+  | "black5"
+  | "green1";
 
-export const ThemeContext = createContext<ThemeContext | undefined>(undefined);
-
-export const useThemeContext = () => {
-  {
-    const themeContext = useContext(ThemeContext);
-
-    if (!themeContext) {
-      throw new Error('Should be wrapped with ThemeContext.Provider!');
-    }
-
-    return {
-      setTheme: themeContext.setTheme,
-      theme: themeContext.theme,
-    };
-  }
+const COLORS: Record<ColorName, ColorMapping> = {
+  white1: {
+    light: "#1E1E1E",
+    dark: "#F5F5F5",
+  },
+  white2: {
+    light: "#FFF",
+    dark: "#000",
+  },
+  white3: {
+    light: "#000",
+    dark: "#F5F5F5",
+  },
+  white4: {
+    light: "#181818",
+    dark: "#E9E7FB",
+  },
+  white5: {
+    light: "#000",
+    dark: "#F5F5F5",
+  },
+  white6: {
+    light: "rgba(0, 0, 0, 0.7)",
+    dark: "#F5F5F5",
+  },
+  black1: {
+    light: "#F5F5F5",
+    dark: "rgba(30, 30, 30, 0.2)",
+  },
+  black2: {
+    light: "#000",
+    dark: "#FFF",
+  },
+  black3: {
+    light: "#E9E7FB",
+    dark: "#181818",
+  },
+  black4: {
+    light: "#000",
+    dark: "#00f58c",
+  },
+  black5: {
+    light: "#FFF",
+    dark: "#181818",
+  },
+  green1: {
+    light: "rgba(30, 30, 30, 0.7)",
+    dark: "#B8FBCF",
+  },
 };
+
+export default function useTheme() {
+  const { current: currentTheme, setTheme } = useFuelTheme();
+  const themeColor = useCallback(
+    (name: ColorName) => COLORS[name][currentTheme as "light" | "dark"],
+    [currentTheme]
+  );
+  return {
+    theme: currentTheme,
+    setTheme,
+    themeColor,
+  };
+}

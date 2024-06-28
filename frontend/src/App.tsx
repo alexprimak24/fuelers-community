@@ -1,10 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./App.css";
 import Header from "./Components/Header/Header";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import {
+  createTheme,
+  ThemeProvider as MuiThemeProvider,
+} from "@mui/material/styles";
 import LandingPart from "./Components/Landing/LandingPart";
 import Footer from "./Components/Footer/Footer";
-import { Theme, ThemeContext } from "./Theme/themeContext";
 import SectionTitle from "./Components/utils/shared";
 import Carousel from "./Components/Carousel/Carousel";
 import AllContributions from "./Components/AllContributions/AllContributions";
@@ -12,6 +14,7 @@ import appwriteService from "../src/appwrite/config";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import DividerImage from "./Components/DividerImage/DividerImage";
 import VotingSection from "./Components/VotingSection/VotingSection";
+import useTheme from "./Theme/themeContext";
 
 interface contributionsProps {
   contentImg: string;
@@ -62,9 +65,7 @@ function App() {
   const [languages, setLanguages] = useState<string[]>([]);
   const [selectedLanguage, setSelectedLanguage] = useState<string>("All");
   const values = [4, 2, 1, 3];
-  const [theme, setTheme] = useState<Theme>(
-    window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"
-  );
+
   const votingSectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -89,7 +90,6 @@ function App() {
           "All",
           ...new Set(mappedPosts.map((post) => post.document.language)),
         ];
-        // .sort()
         setLanguages(uniqueLanguages);
       } else {
         console.log("No documents found");
@@ -125,15 +125,15 @@ function App() {
   );
   const totalPages = Math.ceil(filteredContributions.length / postsPerPage);
 
-  // console.log(contributions);
-
   const handleLanguageChange = (event: SelectChangeEvent<string>) => {
     setSelectedLanguage(event.target.value);
   };
 
+  const { themeColor } = useTheme();
+
   return (
-    <ThemeProvider theme={colorsMaterial}>
-      <ThemeContext.Provider value={{ setTheme, theme }}>
+    <MuiThemeProvider theme={colorsMaterial}>
+      <div style={{ backgroundColor: themeColor("white2") }}>
         <Header />
         <LandingPart />
         <DividerImage />
@@ -151,8 +151,8 @@ function App() {
           selectedLanguage={selectedLanguage}
         />
         <Footer />
-      </ThemeContext.Provider>
-    </ThemeProvider>
+      </div>
+    </MuiThemeProvider>
   );
 }
 

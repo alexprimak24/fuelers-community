@@ -5,10 +5,17 @@ import DiscordLogo from "../../images/DiscordLogo.svg";
 import TelegramLogo from "../../images/TelegramLogo.svg";
 import XLogo from "../../images/XLogo.svg";
 import LogoAndName from "./LogoAndName";
+import useTheme from "../../Theme/themeContext";
+
 function Footer() {
+  const { themeColor } = useTheme();
+
   return (
     <div className="fixed w-full z-30 ">
-      <div className="w-full h-[70px] top-0 bg-semi-transparent-black pt-[10px] flex  justify-center">
+      <div
+        style={{ backgroundColor: themeColor("black1") }}
+        className="w-full h-[70px] top-0 bg-semi-transparent-black pt-[10px] flex  justify-center"
+      >
         <div className=" w-full max-w-[2560px] h-full flex justify-evenly md:justify-between md:mx-[40px] xl:mx-[140px] lg:mx-[70px]">
           <div className="hidden w-full max-w-[180px] am:max-w-[200px] lg:max-w-[219px] flex justify-between pt-[3px] md:flex">
             <SocialsGrowth

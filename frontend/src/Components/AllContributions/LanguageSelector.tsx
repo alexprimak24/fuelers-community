@@ -3,7 +3,8 @@ import styled from "@emotion/styled";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
-import { useMediaQuery, useTheme } from "@mui/material";
+import { useMediaQuery, useTheme as useThemeMui } from "@mui/material";
+import useTheme, { ColorName } from "../../Theme/themeContext";
 
 interface LanguageSelectorProps {
   languages: string[];
@@ -12,39 +13,27 @@ interface LanguageSelectorProps {
 }
 
 const StyledFormControl = styled(FormControl)<{
-  theme: string;
   isSmallScreen: boolean;
+  themeColor: (name: ColorName) => string;
 }>`
-  ${(props) =>
-    props.theme === "dark" &&
-    `
-   & fieldset {
-      border: none;
+  & fieldset {
+    border: none;
+  }
+  .MuiInputBase-root {
+    background-color: ${(props) => props.themeColor("black3")};
+    color: ${(props) => props.themeColor("white4")};
+    border-bottom: 1px solid ${(props) => props.themeColor("black4")};
+    border-right: 1px solid ${(props) => props.themeColor("black4")};
+    &:hover {
+      background: transparent;
+      border-bottom: 1px solid rgba(0, 245, 140, 0.7);
+      border-right: 1px solid rgba(0, 245, 140, 0.7);
     }
-    .MuiInputBase-root {
-      background-color: #181818;
-      color: #E9E7FB;
-      border-bottom: 1px solid #00F58C;
-      border-right: 1px solid #00F58C;
-
-      &:hover {
-        background: transparent;
-        border-bottom: 1px solid rgba(0, 245, 140, 0.7);
-        border-right: 1px solid rgba(0, 245, 140, 0.7);
-      }
-    }
-    .MuiSelect-select {
-      padding-left: 0;
-      padding-right: 0;
-    }
-    .MuiFormLabel-root {
-      color: #E0FFFF;
-    }
-    .MuiSvgIcon-root {
-      color: #E9E7FB;
-      font-size: ${props.isSmallScreen ? "24px" : "32px"};
-    }
-  `}
+  }
+  .MuiSvgIcon-root {
+    color: ${(props) => props.themeColor("white4")};
+    font-size: ${(props) => (props.isSmallScreen ? "24px" : "32px")};
+  }
 `;
 
 function LanguageSelector({
@@ -52,26 +41,33 @@ function LanguageSelector({
   handleLanguageChange,
   selectedLanguage,
 }: LanguageSelectorProps) {
-  const theme = useTheme();
-  const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
-
+  const themeMui = useThemeMui();
+  const isSmallScreen = useMediaQuery(themeMui.breakpoints.down("sm"));
+  const { themeColor } = useTheme();
+  console.log(themeColor("white4"));
   return (
     <div className="max-h-[100px] mt-[140px] ax:mt-[200px] w-full">
-      <div className="flex text-center justify-between w-full rounded-[30px] border border-solid border-defaultwhite px-[25px] py-[17px] aax:px-[30px] sm:px-[50px] aax:py-[20px] sx:py-[25px]">
-        <p className="text-center text-[20px] aax:text-[24px] ax:text-[28px] sm:text-[32px]">
+      <div
+        style={{ borderColor: themeColor("black2") }}
+        className="flex text-center justify-between w-full rounded-[30px] border border-solid px-[25px] py-[17px] aax:px-[30px] sm:px-[50px] aax:py-[20px] sx:py-[25px]"
+      >
+        <p
+          style={{ color: themeColor("black2") }}
+          className="text-center text-[20px] aax:text-[24px] ax:text-[28px] sm:text-[32px]"
+        >
           Best work of all time
         </p>
         <StyledFormControl
           size="small"
-          theme={"dark"}
           isSmallScreen={isSmallScreen}
+          themeColor={themeColor}
         >
           <Select
             MenuProps={{
               PaperProps: {
                 style: {
-                  background: "#181818",
-                  color: "white",
+                  background: themeColor("black5"),
+                  color: themeColor("white5"),
                 },
               },
             }}
