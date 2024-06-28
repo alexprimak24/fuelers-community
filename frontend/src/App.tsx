@@ -15,6 +15,7 @@ import Select, { SelectChangeEvent } from "@mui/material/Select";
 import DividerImage from "./Components/DividerImage/DividerImage";
 import VotingSection from "./Components/VotingSection/VotingSection";
 import useTheme from "./Theme/themeContext";
+import Particle from "./Components/Particles/Particle";
 
 interface contributionsProps {
   contentImg: string;
@@ -65,7 +66,7 @@ function App() {
   const [languages, setLanguages] = useState<string[]>([]);
   const [selectedLanguage, setSelectedLanguage] = useState<string>("All");
   const values = [4, 2, 1, 3];
-
+  const { themeColor, setTheme } = useTheme();
   const votingSectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -117,6 +118,14 @@ function App() {
     setCurrentPage(1);
   }, [selectedLanguage, contributions]);
 
+  useEffect(() => {
+    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+      setTheme("dark");
+    } else {
+      setTheme("light");
+    }
+  }, [setTheme]);
+
   const lastPostIndex = currentPage * postsPerPage;
   const firstPostIndex = lastPostIndex - postsPerPage;
   const currentPosts = filteredContributions.slice(
@@ -129,28 +138,31 @@ function App() {
     setSelectedLanguage(event.target.value);
   };
 
-  const { themeColor } = useTheme();
-
   return (
     <MuiThemeProvider theme={colorsMaterial}>
       <div style={{ backgroundColor: themeColor("white2") }}>
         <Header />
         <LandingPart />
         <DividerImage />
-        <SectionTitle title="Recent works." />
-        <Carousel contributions={contributions} />
-        <SectionTitle title="Best activity of the month." />
-        <VotingSection ref={votingSectionRef} values={values} />
-        <AllContributions
-          contributions={currentPosts}
-          currentPage={currentPage}
-          totalPages={totalPages}
-          onPageChange={(_event, page) => setCurrentPage(page)}
-          languages={languages}
-          handleLanguageChange={handleLanguageChange}
-          selectedLanguage={selectedLanguage}
-        />
-        <Footer />
+        <div className="">
+          <SectionTitle title="Recent works." />
+          <Carousel contributions={contributions} />
+          <SectionTitle title="Best activity of the month." />
+          <VotingSection ref={votingSectionRef} values={values} />
+          <AllContributions
+            contributions={currentPosts}
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={(_event, page) => setCurrentPage(page)}
+            languages={languages}
+            handleLanguageChange={handleLanguageChange}
+            selectedLanguage={selectedLanguage}
+          />
+          <Footer />
+          <div className="absolute inset-0 z-10">
+            <Particle />
+          </div>
+        </div>
       </div>
     </MuiThemeProvider>
   );
