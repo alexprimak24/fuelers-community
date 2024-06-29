@@ -47,11 +47,11 @@ const colorsMaterial = createTheme({
   },
   breakpoints: {
     values: {
-      xs: 0,
-      sm: 600,
-      md: 760,
-      lg: 1280,
-      xl: 2000,
+      xs: 600,
+      sm: 760,
+      md: 1280,
+      lg: 2000,
+      xl: 2560,
     },
   },
 });
