@@ -32,7 +32,7 @@ export default function Slide({ contentImg, title, contentLink }: SlideProps) {
           alt=""
           loading="lazy"
           onLoad={() => setLoading(false)}
-          className={`max-h-[420px] ${loading ? "blur-lg" : "blur-0"} transition-blur duration-300`}
+          className={` ${loading ? "blur-lg" : "blur-0"} transition-blur duration-300`}
         />
         {/* <img
           src={contentImg}

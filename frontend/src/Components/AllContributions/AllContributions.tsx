@@ -27,24 +27,22 @@ function AllContributions({
   selectedLanguage,
 }: AllContributionsProps) {
   return (
-    <div className="max-w-[2560px]">
+    <div className="flex justify-center items-center">
       <Container>
-        <div className="self-center">
-          <div className="w-full">
-            <LanguageSelector
-              languages={languages}
-              handleLanguageChange={handleLanguageChange}
-              selectedLanguage={selectedLanguage}
-            />
-          </div>
-          <ContributionsGrid contributions={contributions} />
-          <div className="flex justify-end mr-[10px]">
-            <Pagination
-              count={totalPages}
-              page={currentPage}
-              onChange={onPageChange}
-            />
-          </div>
+        <div className="w-full">
+          <LanguageSelector
+            languages={languages}
+            handleLanguageChange={handleLanguageChange}
+            selectedLanguage={selectedLanguage}
+          />
+        </div>
+        <ContributionsGrid contributions={contributions} />
+        <div className="flex justify-end mr-[10px]">
+          <Pagination
+            count={totalPages}
+            page={currentPage}
+            onChange={onPageChange}
+          />
         </div>
       </Container>
     </div>
