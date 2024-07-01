@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import Tab from "@mui/material/Tab";
 import TabContext from "@mui/lab/TabContext";
@@ -49,8 +49,8 @@ const StyledTab = styled(Tab)`
 `;
 
 export default function CategoryToVote({ values }: CategoryToVoteProps) {
-  const [value, setValue] = React.useState("1");
-  const [animate, setAnimate] = React.useState(false);
+  const [value, setValue] = useState(0);
+  const [animate, setAnimate] = useState(false);
   const { ref, inView } = useInView({
     triggerOnce: true,
     onChange: (inView) => {
@@ -68,7 +68,7 @@ export default function CategoryToVote({ values }: CategoryToVoteProps) {
     percentage: (value / total) * 100,
     value,
   }));
-  const handleChange = (event: React.SyntheticEvent, newValue: string) => {
+  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
   // Find the max value
@@ -84,9 +84,9 @@ export default function CategoryToVote({ values }: CategoryToVoteProps) {
             TabIndicatorProps={{ style: { display: "none" } }}
             className="self-end sm:inline-table"
           >
-            <StyledTab label="Best Content" value="1" />
-            <StyledTab label="Best Contributor" value="2" />
-            <StyledTab label="Best Activist" value="3" />
+            <StyledTab label="Best Content" value={0} />
+            <StyledTab label="Best Contributor" value={1} />
+            <StyledTab label="Best Activist" value={2} />
           </TabList>
         </Box>
         {data.map((item, index) => (
