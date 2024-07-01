@@ -39,37 +39,53 @@ const VotingSection = forwardRef<HTMLDivElement, VotingSectionProps>(
           style={{ borderColor: themeColor("black2") }}
           className="rounded-[30px] border border-solid px-[45px] py-[50px] mt-[60px]"
         >
-          <div className="flex self-end sm:inline-table">
+          <div className="">
             {/* <CategoryToVoteButton categoryName="Best Content" />
             <CategoryToVoteButton categoryName="Top contributor" />
             <CategoryToVoteButton categoryName="Best Activist" /> */}
             {/* <OptionsRadio /> */}
             <CategoryToVote values={values} />
-            <Auth />
           </div>
-          {isConnected ? (
-            <div>I am Connected</div>
-          ) : (
-            <div>
-              <Button
-                onClick={() => {
-                  connect();
-                }}
-                variant="outlined"
-                sx={{
-                  height: "42px",
-                  color: "white",
-                  borderColor: "white",
-                  ":hover": {
-                    bgcolor: "rgba(0, 245, 140, 0.2)",
-                    borderColor: "#00F58C",
-                  },
-                }}
-              >
-                {isConnecting ? "Connecting" : "Connect"}
-              </Button>
-            </div>
-          )}
+          <div className="inline-table sm:flex">
+            <Auth />
+            {isConnected ? (
+              <div>I am Connected</div>
+            ) : (
+              <div>
+                <Button
+                  onClick={() => {
+                    connect();
+                  }}
+                  variant="outlined"
+                  sx={{
+                    height: "42px",
+                    color: "white",
+                    borderColor: "white",
+                    ":hover": {
+                      bgcolor: "rgba(0, 245, 140, 0.2)",
+                      borderColor: "#00F58C",
+                    },
+                  }}
+                >
+                  {isConnecting ? "Connecting" : "Connect"}
+                </Button>
+              </div>
+            )}
+            <Button
+              variant="outlined"
+              sx={{
+                height: "42px",
+                color: "white",
+                borderColor: "white",
+                ":hover": {
+                  bgcolor: "rgba(0, 245, 140, 0.2)",
+                  borderColor: "#00F58C",
+                },
+              }}
+            >
+              Vote
+            </Button>
+          </div>
         </div>
       </Container>
     );
