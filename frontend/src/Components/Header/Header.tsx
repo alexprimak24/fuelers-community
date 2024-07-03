@@ -23,18 +23,18 @@ function Footer() {
             <SocialsGrowth
               Icon={FaDiscord}
               socialLink={"https://discord.com/invite/fuelnetwork"}
-              subsForMonth={String(15.8)}
+              subsForMonth={String(28.3)}
               discord={true}
             />
             <SocialsGrowth
               Icon={FaXTwitter}
               socialLink={"https://twitter.com/fuel_network"}
-              subsForMonth={String(10.1)}
+              subsForMonth={String(32.2)}
             />
             <SocialsGrowth
               Icon={FaTelegramPlane}
               socialLink={"https://t.me/fuelcommunity"}
-              subsForMonth={String(5.9)}
+              subsForMonth={String(3.2)}
             />
           </div>
           <LogoAndName />
