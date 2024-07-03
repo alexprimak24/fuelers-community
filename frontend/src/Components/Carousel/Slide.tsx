@@ -10,7 +10,7 @@ interface SlideProps {
 
 export default function Slide({ contentImg, title, contentLink }: SlideProps) {
   const [hover, setHover] = useState(false);
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
   const defaultShadow = "0 0 10px 7px var(--Default-green, #00F58C)";
   const hoverShadow = "0 0 5px 7px var(--Default-green, #00F58C)";
 
@@ -32,8 +32,8 @@ export default function Slide({ contentImg, title, contentLink }: SlideProps) {
             fileId: contentImg,
           })}
           alt=""
-          onLoad={() => setLoading(false)}
-          className={` ${loading ? "blur-lg" : "blur-0"} transition-blur duration-300`}
+          // onLoad={() => setLoading(false)}
+          // className={` ${loading ? "blur-lg" : "blur-0"} transition-blur duration-300`}
         />
         {/* <img
           src={cybercity}
