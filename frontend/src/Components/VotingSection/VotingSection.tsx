@@ -44,7 +44,7 @@ const VotingSection = forwardRef<HTMLDivElement, VotingSectionProps>(
             <CategoryToVoteButton categoryName="Top contributor" />
             <CategoryToVoteButton categoryName="Best Activist" /> */}
             {/* <OptionsRadio /> */}
-            <CategoryToVote values={values} />
+            <CategoryToVote contract={ contract} />
           </div>
           <div className="inline-table sm:flex">
             <Auth />

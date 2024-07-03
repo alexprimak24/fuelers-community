@@ -82,7 +82,32 @@ export class Service {
       return false;
     }
   }
+  async getVoteCategories() {
+    const limit = 100;
+    let offset = 0;
+    let allDocuments: any[] = [];
+    let hasMore = true;
 
+    try {
+      while (hasMore) {
+        const response = await this.databases.listDocuments(
+          conf.appwriteDatabaseId,
+          conf.appwriteCollectionIdActivityMonth,
+          [Query.limit(limit), Query.offset(offset)]
+        );
+        if (response.documents.length > 0) {
+          allDocuments = allDocuments.concat(response.documents);
+          offset += response.documents.length;
+        } else {
+          hasMore = false;
+        }
+      }
+      return { documents: allDocuments };
+    } catch (error) {
+      console.log("Appwrite service :: getPosts() ::", error);
+      return false;
+    }
+  }
   getFilePreview({ fileId }: FileIdProps) {
     return this.bucket.getFilePreview(conf.appwriteBucketId, fileId).href;
   }

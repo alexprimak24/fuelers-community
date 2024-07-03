@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Tab from "@mui/material/Tab";
 import TabContext from "@mui/lab/TabContext";
@@ -7,17 +7,32 @@ import TabPanel from "@mui/lab/TabPanel";
 import styled from "@emotion/styled";
 import { Tabs, alpha } from "@mui/material";
 import { darkColors, lightColors } from "@fuel-ui/css";
-
+import appwriteService from "../../../src/appwrite/config";
 import OptionsRadio from "./OptionsRadio";
+import { ContractAbi } from "../../contracts";
 
-interface CategoryToVoteProps {
-  values: number[];
+interface AllItemsProps {
+  contract: ContractAbi | null;
 }
 
 interface TabPanelProps {
   children?: React.ReactNode;
   index: number;
   value: number;
+}
+
+interface categoryProps {
+  image: string;
+  discordHandle: string;
+  contentlink: string;
+}
+
+export interface VoteCategoriesProps {
+  document: categoryProps;
+}
+
+export interface CategoryToVoteProps extends VoteCategoriesProps {
+  values: number[];
 }
 
 const StyledTab = styled(Tab)`
@@ -66,26 +81,48 @@ function a11yProps(index: number) {
   };
 }
 
-interface NumsOfVotesForCatProps {
-  best_contributor: number[];
-  best_contribution: number[];
-  best_activist: number[];
-}
-const NumsOfVotesForCat: NumsOfVotesForCatProps = {
-  best_contributor: Array(5).fill(0),
-  best_contribution: Array(5).fill(0),
-  best_activist: Array(5).fill(0),
-};
-
-export default function CategoryToVote({ values }: CategoryToVoteProps) {
+export default function CategoryToVote({ contract }: AllItemsProps) {
   const [value, setValue] = useState(0);
+  const [voteCategories, setVoteCategories] = useState<VoteCategoriesProps[]>(
+    []
+  );
+  useEffect(() => {
+    const fetchPosts = async () => {
+      const response = await appwriteService.getVoteCategories();
+      if (response && response.documents) {
+        const mappedPosts = response.documents.map((doc: any) => ({
+          document: {
+            image: doc.image,
+            discordHandle: doc.discordHandle,
+            contentlink: doc.contentlink,
+          },
+        }));
+        setVoteCategories(mappedPosts.reverse());
+      } else {
+        console.log("No documents found");
+      }
+    };
+
+    fetchPosts();
+  }, []);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
 
   const categories = ["Best Contributor", "Best Contribution", "Best Activist"];
-  console.log(value);
+  const data1 = {
+    voteCategories: voteCategories.slice(0, 5),
+    values: [4, 6, 12, 6, 8],
+  };
+  const data2 = {
+    voteCategories: voteCategories.slice(5, 10),
+    values: [3, 7, 8, 9, 2],
+  };
+  const data3 = {
+    voteCategories: voteCategories.slice(10, 15),
+    values: [6, 5, 23, 6, 1],
+  };
 
   return (
     <Box sx={{ width: "100%" }}>
@@ -103,35 +140,14 @@ export default function CategoryToVote({ values }: CategoryToVoteProps) {
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>
-        <OptionsRadio values={[4, 6, 12, 6, 8]} />
+        <OptionsRadio data={data1} />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
-        <OptionsRadio values={[3, 7, 8, 9, 2]} />
+        <OptionsRadio data={data2} />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={2}>
-        <OptionsRadio values={[6, 5, 23, 6, 1]} />
+        <OptionsRadio data={data3} />
       </CustomTabPanel>
     </Box>
   );
 }
-//  {data.map((item, index) => (
-//   <TabPanel value="1" key={index} className="mb-3">
-//     <div ref={ref}>
-//       <p className="text-defaultwhite text-2xl">
-//         Discord - nikitasvitanko
-//       </p>
-//       {animate && (
-//         <CustomProgressBar
-//           bgColor={item.value === maxValue ? "#00F58C" : "#F5F5F5"}
-//           height="40px"
-//           labelColor="black"
-//           baseBgColor="transparent"
-//           animateOnRender={true}
-//           completed={item.percentage}
-//           customLabel={`${item.percentage.toFixed(2)}%`}
-//           // className="border-[3px] border-solid border-defaultwhite"
-//         />
-//       )}
-//     </div>
-//   </TabPanel>
-// ))}

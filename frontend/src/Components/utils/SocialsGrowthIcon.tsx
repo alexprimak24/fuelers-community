@@ -16,20 +16,17 @@ function SocialsGrowth({
   subsForMonth,
   discord,
 }: SocialsGrowthProps) {
-  const handleSocialClick = () => {
-    window.location.href = socialLink;
-  };
   const { themeColor } = useTheme();
   return (
     <div className="max-h-[45px] flex flex-col items-center gap-[8px]">
-      <div className="cursor-pointer" onClick={handleSocialClick}>
+      <a href={socialLink} target="_blank">
         <Icon
           className={`hover:fill-[#00F58C] transition-all duration-500`}
           style={{ width: discord ? "32px" : "" }}
           size="24px"
           color={themeColor("semiBlack")}
         />
-      </div>
+      </a>
       {subsForMonth && (
         <div className="flex gap-[3px]">
           <img src={PlusSign} alt="PlusSign" />

@@ -8,6 +8,7 @@ import { styled } from "@mui/material/styles";
 import cyberCity from "../../images/cyberFuelCity.jpg";
 import ProgressBar from "@ramonak/react-progress-bar";
 import { useInView } from "react-intersection-observer";
+import { CategoryToVoteProps, VoteCategoriesProps } from "./CategoryToVote";
 
 const CustomRadio = styled(Radio)(({ theme }) => ({
   "&:checked + .custom-label": {
@@ -39,7 +40,15 @@ const CustomProgressBar = styled(ProgressBar)`
   }
 `;
 
-function OptionsRadio({ values }: { values: number[] }) {
+interface OptionsRadioProps {
+  data: {
+    values: number[];
+    voteCategories: VoteCategoriesProps[];
+  };
+}
+
+function OptionsRadio({ data }: OptionsRadioProps) {
+  const { values, voteCategories } = data;
   const [optionToVote, setOptionToVote] = useState<number>();
   const [animate, setAnimate] = useState(false);
   const { ref, inView } = useInView({
@@ -54,15 +63,21 @@ function OptionsRadio({ values }: { values: number[] }) {
     setOptionToVote(Number(event.target.value));
   };
   // Sum of all the values aka numbers of votes
-  const total = values.reduce((acc, value) => acc + value, 0);
+  const total = data.values.reduce((acc, value) => acc + value, 0);
   // Data to give to the percentage bar
-  const data = values.map((value, index) => ({
+  const dataToSend = values.map((value, index) => ({
     label: `Value ${index + 1}`,
     percentage: (value / total) * 100,
     value,
   }));
   // Find the max value
   const maxValue = Math.max(...values);
+
+  // Combine voteCategories and dataToSend
+  const combinedData = voteCategories.map((category, index) => ({
+    category,
+    ...dataToSend[index],
+  }));
   console.log(optionToVote);
   return (
     <div className="flex flex-col gap-[50px] w-full">
@@ -73,14 +88,21 @@ function OptionsRadio({ values }: { values: number[] }) {
           value={optionToVote}
           onChange={handleChange}
         >
-          {data.map((item, index) => (
+          voteCategories.map
+          {combinedData.map((item, index) => (
             <CustomFormControlLabel
               value={index}
               key={index}
               control={<CustomRadio />}
               label={
-                <div className=" flex">
-                  <img src={cyberCity} alt="Cyber City" width={"200px"} />
+                <div className="flex">
+                  <a href={item.category.document.contentlink} target="_blank">
+                    <img
+                      src={item.category.document.image}
+                      alt="UserToVoteImage"
+                      width={"200px"}
+                    />
+                  </a>
                   <div className="flex flex-col">
                     <CustomProgressBar
                       bgColor={item.value === maxValue ? "#00F58C" : "#F5F5F5"}
@@ -92,7 +114,7 @@ function OptionsRadio({ values }: { values: number[] }) {
                       customLabel={`${item.percentage.toFixed(2)}%`}
                       // className="border-[3px] border-solid border-defaultwhite"
                     />
-                    <p>I am Nitita {index}</p>
+                    <p>{item.category.document.discordHandle}</p>
                   </div>
                 </div>
               }
