@@ -86,6 +86,60 @@ export default function CategoryToVote({ contract }: AllItemsProps) {
   const [voteCategories, setVoteCategories] = useState<VoteCategoriesProps[]>(
     []
   );
+  const [bestContributorOptions, setBestContributorOptions] = useState<
+    number[]
+  >(Array(5).fill(0));
+  const [bestContributionOptions, setBestContributionOptions] = useState<
+    number[]
+  >(Array(5).fill(0));
+  const [bestActivistOptions, setBestActivistOptions] = useState<number[]>(
+    Array(5).fill(0)
+  );
+  const [status, setStatus] = useState<"success" | "loading" | "error">(
+    "loading"
+  );
+  useEffect(() => {
+    async function getAllItems() {
+      if (contract !== null) {
+        try {
+          let contributor = await contract.functions
+            .read_contributor()
+            .txParams({
+              gasLimit: 100_000,
+            })
+            .get();
+          const contributorArr = Array.from(contributor?.value);
+          setBestContributorOptions(contributorArr);
+
+          let contribution = await contract.functions
+            .read_contribution()
+            .txParams({
+              gasLimit: 100_000,
+            })
+            .get();
+          const contributionArr = Array.from(contribution?.value);
+          setBestContributionOptions(contributionArr);
+
+          let activist = await contract.functions
+            .read_activist()
+            .txParams({
+              gasLimit: 100_000,
+            })
+            .get();
+          const activistArr = Array.from(activist?.value);
+          setBestActivistOptions(activistArr);
+
+          setStatus("success");
+        } catch (e) {
+          setStatus("error");
+          console.log("ERROR:", e);
+        }
+      }
+    }
+    getAllItems();
+  }, [contract]);
+  // console.log(bestContributorOptions);
+  // console.log(status);
   useEffect(() => {
     const fetchPosts = async () => {
       const response = await appwriteService.getVoteCategories();
@@ -111,17 +165,18 @@ export default function CategoryToVote({ contract }: AllItemsProps) {
   };
 
   const categories = ["Best Contributor", "Best Contribution", "Best Activist"];
-  const data1 = {
+
+  const bestActivist = {
     voteCategories: voteCategories.slice(0, 5),
-    values: [4, 6, 12, 6, 8],
+    values: bestActivistOptions,
   };
-  const data2 = {
+  const bestContributionData = {
     voteCategories: voteCategories.slice(5, 10),
-    values: [3, 7, 8, 9, 2],
+    values: bestContributionOptions,
   };
-  const data3 = {
+  const bestContributorData = {
     voteCategories: voteCategories.slice(10, 15),
-    values: [6, 5, 23, 6, 1],
+    values: bestContributorOptions,
   };
 
   return (
@@ -140,13 +195,13 @@ export default function CategoryToVote({ contract }: AllItemsProps) {
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>
-        <OptionsRadio data={data1} />
+        <OptionsRadio data={bestContributorData} />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
-        <OptionsRadio data={data2} />
+        <OptionsRadio data={bestContributionData} />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={2}>
-        <OptionsRadio data={data3} />
+        <OptionsRadio data={bestActivist} />
       </CustomTabPanel>
     </Box>
   );

@@ -15,7 +15,7 @@ interface VotingSectionProps {
 }
 
 const CONTRACT_ID =
-  "0x39e65eddac8cc09f3e6698cdcc21da3b4a87445df708cf2d130bb3f1fbc053c4";
+  "0x61f8873aa040ff407cbeac482f6f142403acb673b559934314999e6d9e963b87";
 
 const VotingSection = forwardRef<HTMLDivElement, VotingSectionProps>(
   ({ values }, ref) => {
@@ -31,6 +31,7 @@ const VotingSection = forwardRef<HTMLDivElement, VotingSectionProps>(
       }
       return null;
     }, [wallet]);
+    console.log(contract);
     return (
       <Container>
         <div
@@ -40,11 +41,7 @@ const VotingSection = forwardRef<HTMLDivElement, VotingSectionProps>(
           className="rounded-[30px] border border-solid px-[45px] py-[50px] mt-[60px]"
         >
           <div className="">
-            {/* <CategoryToVoteButton categoryName="Best Content" />
-            <CategoryToVoteButton categoryName="Top contributor" />
-            <CategoryToVoteButton categoryName="Best Activist" /> */}
-            {/* <OptionsRadio /> */}
-            <CategoryToVote contract={ contract} />
+            <CategoryToVote contract={contract} />
           </div>
           <div className="inline-table sm:flex">
             <Auth />
