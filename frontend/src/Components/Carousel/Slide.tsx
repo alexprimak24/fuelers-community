@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import appwriteService from "../../appwrite/config";
+import cybercity from "../../images/cyberFuelCity.jpg";
+
 interface SlideProps {
   contentImg: string;
   title: string;
@@ -30,12 +32,11 @@ export default function Slide({ contentImg, title, contentLink }: SlideProps) {
             fileId: contentImg,
           })}
           alt=""
-          loading="lazy"
           onLoad={() => setLoading(false)}
           className={` ${loading ? "blur-lg" : "blur-0"} transition-blur duration-300`}
         />
         {/* <img
-          src={contentImg}
+          src={cybercity}
           alt=""
           loading="lazy"
           onLoad={() => setLoading(false)}
