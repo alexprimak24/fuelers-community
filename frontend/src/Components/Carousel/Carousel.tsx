@@ -80,7 +80,7 @@ function Carousel({ settings, contributions }: CarouselComponentProps) {
   return (
     <div className="mt-[5px]">
       <Slider {...finalSettings}>
-        {contributions.slice(-10).map((contribution) => {
+        {contributions.map((contribution) => {
           return (
             <Slide
               key={contribution.document.index}
