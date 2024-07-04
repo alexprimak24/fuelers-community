@@ -40,42 +40,43 @@ function Carousel({ settings, contributions }: CarouselComponentProps) {
     arrows: false,
     slidesToShow: 3.5,
     autoplay: true,
-    speed: 4000,
+    speed: 1500, // Adjusted speed
     pauseOnFocus: true,
     pauseOnHover: true,
-    autoplaySpeed: 0,
+    autoplaySpeed: 2000, // Adjusted autoplay speed
 
     responsive: [
       {
         breakpoint: 1560,
         settings: {
           slidesToShow: 2,
-          speed: 3000,
+          speed: 1500, // Adjusted speed
         },
       },
       {
         breakpoint: 1024,
         settings: {
           slidesToShow: 1.5,
-          speed: 2000,
+          speed: 1500, // Adjusted speed
         },
       },
       {
         breakpoint: 764,
         settings: {
           slidesToShow: 1.2,
-          speed: 2000,
+          speed: 1500, // Adjusted speed
         },
       },
       {
         breakpoint: 560,
         settings: {
           slidesToShow: 1,
-          speed: 2000,
+          speed: 1500, // Adjusted speed
         },
       },
     ],
   };
+
   const finalSettings = { ...defaultSettings, ...settings };
   return (
     <div className="mt-[5px]">

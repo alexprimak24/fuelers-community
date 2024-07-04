@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, memo } from "react";
 import appwriteService from "../../appwrite/config";
 import cybercity from "../../images/cyberFuelCity.jpg";
 
@@ -8,9 +8,9 @@ interface SlideProps {
   contentLink: string;
 }
 
-export default function Slide({ contentImg, title, contentLink }: SlideProps) {
+const Slide = memo(({ contentImg, title, contentLink }: SlideProps) => {
   const [hover, setHover] = useState(false);
-  // const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
   const defaultShadow = "0 0 10px 7px var(--Default-green, #00F58C)";
   const hoverShadow = "0 0 5px 7px var(--Default-green, #00F58C)";
 
@@ -28,13 +28,13 @@ export default function Slide({ contentImg, title, contentLink }: SlideProps) {
         }}
       >
         <img
-          src={appwriteService.getFilePreview({
-            fileId: contentImg,
-          })}
+          src={appwriteService.getFilePreview({ fileId: contentImg })}
           alt=""
-          // onLoad={() => setLoading(false)}
-          // className={` ${loading ? "blur-lg" : "blur-0"} transition-blur duration-300`}
+          loading="lazy"
+          onLoad={() => setLoading(false)}
+          className={` ${loading ? "blur-lg" : "blur-0"} transition-blur duration-300`}
         />
+
         {/* <img
           src={cybercity}
           alt=""
@@ -46,7 +46,9 @@ export default function Slide({ contentImg, title, contentLink }: SlideProps) {
       <p className="text-defaultwhite text-opacity-50 text-2xl">{title}</p>
     </div>
   );
-}
+});
+
+export default Slide;
 
 // const dbPost = await appwriteService.createPost({
 //   title: data.title,
