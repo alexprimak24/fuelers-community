@@ -5,8 +5,8 @@ import Particle from "../Particles/Particle";
 const LandingPart = () => (
   <section className="relative w-full h-screen">
     <BackgroundImage src={LandingImg} />
-    <OverlayContent />
     <ParticleContainer />
+    <OverlayContent />
   </section>
 );
 
@@ -17,7 +17,7 @@ const BackgroundImage = ({ src }: { src: string }) => (
 );
 
 const OverlayContent = () => (
-  <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white z-10">
+  <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white z-20">
     <Title />
     <Separator />
     <PoweredBy />
@@ -26,7 +26,7 @@ const OverlayContent = () => (
 );
 
 const Title = () => (
-  <div className="flex  flex-col lg:flex-row gap-6">
+  <div className="flex flex-col lg:flex-row gap-6">
     <h1 className="text-[68px] aax:text-[74px] ax:text-[96px] sm:text-[110px] aas:text-[128px] md:text-[144px] tracking-tight leading-none opacity-20">
       Fuelers
     </h1>
@@ -37,7 +37,7 @@ const Title = () => (
 );
 
 const Separator = () => (
-  <div className="w-[210px]  aax:w-[231px] ax:w-[260px] sm:w-[291px] w-240px h-[2px] bg-white mt-9" />
+  <div className="w-[210px] aax:w-[231px] ax:w-[260px] sm:w-[291px] w-240px h-[2px] bg-white mt-9" />
 );
 
 const PoweredBy = () => (
@@ -61,7 +61,7 @@ const Tagline = () => (
 );
 
 const ParticleContainer = () => (
-  <div className="absolute inset-0 z-0">
+  <div className="absolute inset-0 z-10">
     <Particle />
   </div>
 );
