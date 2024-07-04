@@ -38,40 +38,40 @@ function Carousel({ settings, contributions }: CarouselComponentProps) {
     dots: false,
     infinite: true,
     arrows: false,
-    slidesToShow: 3.5,
+    slidesToShow: 4,
     autoplay: true,
     speed: 1500, // Adjusted speed
     pauseOnFocus: true,
     pauseOnHover: true,
-    autoplaySpeed: 1400, // Adjusted autoplay speed
+    autoplaySpeed: 1400,
 
     responsive: [
       {
         breakpoint: 1560,
         settings: {
           slidesToShow: 2,
-          speed: 1500, // Adjusted speed
+          speed: 1500,
         },
       },
       {
         breakpoint: 1024,
         settings: {
           slidesToShow: 1.5,
-          speed: 1500, // Adjusted speed
+          speed: 1500,
         },
       },
       {
         breakpoint: 764,
         settings: {
           slidesToShow: 1.2,
-          speed: 1500, // Adjusted speed
+          speed: 1500,
         },
       },
       {
         breakpoint: 560,
         settings: {
           slidesToShow: 1,
-          speed: 1500, // Adjusted speed
+          speed: 1500,
         },
       },
     ],
