@@ -43,7 +43,7 @@ function Carousel({ settings, contributions }: CarouselComponentProps) {
     speed: 1500, // Adjusted speed
     pauseOnFocus: true,
     pauseOnHover: true,
-    autoplaySpeed: 2000, // Adjusted autoplay speed
+    autoplaySpeed: 1400, // Adjusted autoplay speed
 
     responsive: [
       {
