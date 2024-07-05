@@ -13,6 +13,10 @@ import { ContractAbi } from "../../contracts";
 
 interface AllItemsProps {
   contract: ContractAbi | null;
+  sectionSelected: number;
+  setSectionSelected: React.Dispatch<React.SetStateAction<number>>;
+  optionToVote: number | null;
+  setOptionToVote: React.Dispatch<React.SetStateAction<number | null>>;
 }
 
 interface TabPanelProps {
@@ -81,8 +85,13 @@ function a11yProps(index: number) {
   };
 }
 
-export default function CategoryToVote({ contract }: AllItemsProps) {
-  const [value, setValue] = useState(0);
+export default function CategoryToVote({
+  contract,
+  sectionSelected,
+  setSectionSelected,
+  optionToVote,
+  setOptionToVote,
+}: AllItemsProps) {
   const [voteCategories, setVoteCategories] = useState<VoteCategoriesProps[]>(
     []
   );
@@ -138,7 +147,8 @@ export default function CategoryToVote({ contract }: AllItemsProps) {
     }
     getAllItems();
   }, [contract]);
-  // console.log(bestContributorOptions);
+  console.log(sectionSelected);
+  // console.log(bestContributionOptions);
   // console.log(status);
   useEffect(() => {
     const fetchPosts = async () => {
@@ -161,7 +171,7 @@ export default function CategoryToVote({ contract }: AllItemsProps) {
   }, []);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue);
+    setSectionSelected(newValue);
   };
 
   const categories = ["Best Contributor", "Best Contribution", "Best Activist"];
@@ -185,7 +195,7 @@ export default function CategoryToVote({ contract }: AllItemsProps) {
         <Tabs
           TabIndicatorProps={{ style: { display: "none" } }}
           className="self-end sm:inline-table"
-          value={value}
+          value={sectionSelected}
           onChange={handleChange}
           aria-label="basic tabs example"
         >
@@ -194,14 +204,26 @@ export default function CategoryToVote({ contract }: AllItemsProps) {
           ))}
         </Tabs>
       </Box>
-      <CustomTabPanel value={value} index={0}>
-        <OptionsRadio data={bestContributorData} />
+      <CustomTabPanel value={sectionSelected} index={0}>
+        <OptionsRadio
+          data={bestContributorData}
+          optionToVote={optionToVote}
+          setOptionToVote={setOptionToVote}
+        />
       </CustomTabPanel>
-      <CustomTabPanel value={value} index={1}>
-        <OptionsRadio data={bestContributionData} />
+      <CustomTabPanel value={sectionSelected} index={1}>
+        <OptionsRadio
+          data={bestContributionData}
+          optionToVote={optionToVote}
+          setOptionToVote={setOptionToVote}
+        />
       </CustomTabPanel>
-      <CustomTabPanel value={value} index={2}>
-        <OptionsRadio data={bestActivist} />
+      <CustomTabPanel value={sectionSelected} index={2}>
+        <OptionsRadio
+          data={bestActivist}
+          optionToVote={optionToVote}
+          setOptionToVote={setOptionToVote}
+        />
       </CustomTabPanel>
     </Box>
   );

@@ -40,7 +40,7 @@ function Carousel({ settings, contributions }: CarouselComponentProps) {
     arrows: false,
     slidesToShow: 4,
     autoplay: true,
-    speed: 1500, // Adjusted speed
+    speed: 1500,
     pauseOnFocus: true,
     pauseOnHover: true,
     autoplaySpeed: 1400,

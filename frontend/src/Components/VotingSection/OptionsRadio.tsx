@@ -45,11 +45,16 @@ interface OptionsRadioProps {
     values: number[];
     voteCategories: VoteCategoriesProps[];
   };
+  optionToVote: number | null;
+  setOptionToVote: React.Dispatch<React.SetStateAction<number | null>>;
 }
 
-function OptionsRadio({ data }: OptionsRadioProps) {
+function OptionsRadio({
+  data,
+  optionToVote,
+  setOptionToVote,
+}: OptionsRadioProps) {
   const { values, voteCategories } = data;
-  const [optionToVote, setOptionToVote] = useState<number>();
   const [animate, setAnimate] = useState(false);
   const { ref, inView } = useInView({
     triggerOnce: true,
@@ -120,7 +125,6 @@ function OptionsRadio({ data }: OptionsRadioProps) {
               }
             />
           ))}
-          {/* Add more CustomFormControlLabel components as needed */}
         </RadioGroup>
       </FormControl>
     </div>
