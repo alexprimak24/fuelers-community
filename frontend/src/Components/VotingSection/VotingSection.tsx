@@ -17,7 +17,7 @@ interface VotingSectionProps {
 }
 
 const CONTRACT_ID =
-  "0x02638ba74a98ab88cf07413b597bdb52c30bd438dcdaa6fd7b560e0ad7cff294";
+  "0x5e37e24bc815556891e93e2ea3ac686e9eb36934839b50e3d4cd8900d52c74a0";
 
 const VotingSection = forwardRef<HTMLDivElement, VotingSectionProps>(
   ({ values }, ref) => {
