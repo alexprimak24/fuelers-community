@@ -18,6 +18,10 @@ interface checkAndAddUserProps {
 interface createUserProps {
   username: string;
 }
+interface updateVoteStatusProps {
+  userId: string;
+  sectionSelected: number;
+}
 
 export class AuthService {
   client = new Client();
@@ -45,6 +49,7 @@ export class AuthService {
       console.log("Appwrite service :: handleLogin() ::", error);
     }
   }
+  // "http://localhost:3000/"
   //get current active user
   async getCurrentUser() {
     try {
@@ -114,6 +119,24 @@ export class AuthService {
       }
     } catch (error) {
       console.log("Appwrite service :: logout() ::", error);
+    }
+  }
+  async updateVoteStatus({ userId, sectionSelected }: updateVoteStatusProps) {
+    try {
+      const voteField = `vote${sectionSelected + 1}`;
+
+      const response = await this.databases.updateDocument(
+        conf.appwriteDatabaseId,
+        conf.appwriteCollectionIdVoters,
+        userId,
+        {
+          [voteField]: true,
+        }
+      );
+
+      return response;
+    } catch (error) {
+      console.error("Error updating vote status:", error);
     }
   }
 }

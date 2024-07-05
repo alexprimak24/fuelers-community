@@ -9,6 +9,8 @@ import { useState, useMemo } from "react";
 import { useConnectUI, useIsConnected, useWallet } from "@fuels/react";
 import { ContractAbi__factory } from "../../contracts";
 import Button from "@mui/material/Button";
+import { Models } from "appwrite/types/models";
+import authService from "../../appwrite/auth";
 
 interface VotingSectionProps {
   values: number[];
@@ -25,8 +27,16 @@ const VotingSection = forwardRef<HTMLDivElement, VotingSectionProps>(
     const { wallet } = useWallet();
     const [sectionSelected, setSectionSelected] = useState(0);
     const [optionToVote, setOptionToVote] = useState<number | null>(null);
+    const [voter, setVoter] = useState<Models.Document | undefined>();
 
     const onIncrementPressed = async () => {
+      if (!voter) {
+        return alert("Please log in first.");
+      }
+      const voteField = `vote${sectionSelected + 1}`;
+      if (voter[voteField]) {
+        return alert("You have already voted for this section.");
+      }
       if (!contract) {
         return alert("Contract not loaded");
       }
@@ -37,6 +47,22 @@ const VotingSection = forwardRef<HTMLDivElement, VotingSectionProps>(
         await contract.functions
           .submit_vote(sectionSelected, optionToVote)
           .call();
+        await authService.updateVoteStatus({
+          userId: voter.$id,
+          sectionSelected: sectionSelected,
+        });
+        // Update the local state to reflect the new vote status
+        setVoter((prevVoter) => {
+          if (!prevVoter) {
+            return prevVoter;
+          }
+          return {
+            ...prevVoter,
+            [voteField]: true,
+          };
+        });
+
+        alert("Your vote has been submitted successfully!");
         // await getCount(contract);
       } catch (error) {
         console.error(error);
@@ -50,12 +76,13 @@ const VotingSection = forwardRef<HTMLDivElement, VotingSectionProps>(
       }
       return null;
     }, [wallet]);
-    console.log(contract);
+    console.log(wallet);
+    console.log(wallet?.address.toB256());
     return (
       <Container>
         <div
-          ref={ref} // Added ref to the div
-          id="voting-section" // Added ID for scrolling
+          ref={ref}
+          id="voting-section"
           style={{ borderColor: themeColor("black2") }}
           className="rounded-[30px] border border-solid px-[45px] py-[50px] mt-[60px]"
         >
@@ -69,7 +96,7 @@ const VotingSection = forwardRef<HTMLDivElement, VotingSectionProps>(
             />
           </div>
           <div className="inline-table sm:flex">
-            <Auth />
+            <Auth setVoter={setVoter} voter={voter} />
             {isConnected ? (
               <Button
                 variant="outlined"

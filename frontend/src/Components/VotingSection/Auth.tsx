@@ -6,6 +6,11 @@ import Avatar from "@mui/material/Avatar";
 import { Button, styled } from "@mui/material";
 import { FaDiscord } from "react-icons/fa";
 
+interface AuthProps {
+  setVoter: React.Dispatch<React.SetStateAction<Models.Document | undefined>>;
+  voter: Models.Document | undefined;
+}
+
 const StyledButton = styled(Button)<{ theme?: string }>`
   ${(props) =>
     //uncomment it once doing dark theme
@@ -22,8 +27,7 @@ const StyledButton = styled(Button)<{ theme?: string }>`
   `}
 `;
 
-function Auth() {
-  const [voter, setVoter] = useState<Models.Document | undefined>();
+function Auth({ setVoter, voter }: AuthProps) {
   const [loading, setLoading] = useState<boolean>(true);
   const [loggedIn, setLoggedIn] = useState<boolean>(false);
 
