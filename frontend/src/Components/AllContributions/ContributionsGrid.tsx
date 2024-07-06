@@ -10,8 +10,7 @@ interface ContributionsGridProps {
   contributions: DocumentProps[];
 }
 
-//https://mui.com/material-ui/customization/breakpoints/#custom-breakpoints
-//when I'll make an adaptive check this.
+
 function ContributionsGrid({ contributions }: ContributionsGridProps) {
   return (
     <>
