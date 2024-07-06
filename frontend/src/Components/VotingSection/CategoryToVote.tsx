@@ -146,7 +146,12 @@ export default function CategoryToVote({
       }
     }
     getAllItems();
-  }, [contract]);
+  }, [
+    contract,
+    bestContributorOptions,
+    bestContributionOptions,
+    bestActivistOptions,
+  ]);
   console.log(sectionSelected);
   // console.log(bestContributionOptions);
   // console.log(status);
@@ -209,6 +214,7 @@ export default function CategoryToVote({
           data={bestContributionData}
           optionToVote={optionToVote}
           setOptionToVote={setOptionToVote}
+          isContribution={true}
         />
       </CustomTabPanel>
       <CustomTabPanel value={sectionSelected} index={1}>

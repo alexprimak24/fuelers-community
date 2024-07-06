@@ -10,10 +10,12 @@ import ProgressBar from "@ramonak/react-progress-bar";
 import { useInView } from "react-intersection-observer";
 import { CategoryToVoteProps, VoteCategoriesProps } from "./CategoryToVote";
 import useTheme from "../../Theme/themeContext";
+import Avatar from "@mui/material/Avatar";
 
 const CustomFormControlLabel = styled(FormControlLabel)(({ theme }) => ({
   display: "flex",
   alignItems: "center",
+  gap: "30px",
   margin: 0,
   padding: "8px",
   cursor: "pointer",
@@ -30,12 +32,14 @@ interface OptionsRadioProps {
   };
   optionToVote: number | null;
   setOptionToVote: React.Dispatch<React.SetStateAction<number | null>>;
+  isContribution?: boolean;
 }
 
 function OptionsRadio({
   data,
   optionToVote,
   setOptionToVote,
+  isContribution,
 }: OptionsRadioProps) {
   const { values, voteCategories } = data;
   const [animate, setAnimate] = useState(false);
@@ -71,7 +75,7 @@ function OptionsRadio({
 
   console.log(optionToVote);
   return (
-    <div className="flex flex-col gap-[50px] w-full">
+    <div className="flex flex-col justify-between gap-[50px] w-full">
       <FormControl component="fieldset">
         <RadioGroup
           aria-label="optionToVote"
@@ -96,15 +100,23 @@ function OptionsRadio({
                 />
               }
               label={
-                <div className="flex justify-between">
+                <div className="w-full flex justify-between gap-[50px]">
                   <a href={item.category.document.contentlink} target="_blank">
-                    <img
-                      src={item.category.document.image}
-                      alt="UserToVoteImage"
-                      width={"320px"}
-                    />
+                    {isContribution ? (
+                      <img
+                        src={item.category.document.image}
+                        alt="UserToVoteImage"
+                        className="max-w-[320px] rounded-[10px] border-[3px] border-solid border-defaultgreen"
+                      />
+                    ) : (
+                      <img
+                        src={item.category.document.image}
+                        alt="UserToVoteImage"
+                        className="max-w-[180px] max-h-[180px] rounded-full border-[3px] border-solid border-defaultgreen"
+                      />
+                    )}
                   </a>
-                  <div className="flex flex-col justify-center gap-[10px]">
+                  <div className="flex flex-col justify-center gap-[10px] w-full">
                     <p
                       className="text-2xl pl-[20px]"
                       style={{ color: themeColor("white3") }}
@@ -112,7 +124,7 @@ function OptionsRadio({
                       {item.category.document.discordHandle}
                     </p>
                     <div
-                      className="border-[1px] border-solid rounded-[21px]"
+                      className="border-[1px] border-solid rounded-[21px] w-full"
                       style={{ borderColor: themeColor("white3") }}
                     >
                       <ProgressBar
@@ -130,9 +142,10 @@ function OptionsRadio({
                         baseBgColor="transparent"
                         animateOnRender={true}
                         borderRadius="18px"
+                        width="100%"
                         completed={item.percentage}
                         customLabel={`${item.percentage.toFixed(0)}%`}
-                        className="min-w-[780px] w-full items-center"
+                        // className="min-w-[1200px] w-full items-center"
                       />
                     </div>
                   </div>
