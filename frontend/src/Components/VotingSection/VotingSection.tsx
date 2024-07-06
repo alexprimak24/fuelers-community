@@ -3,7 +3,6 @@ import Container from "../Container/Container";
 import OptionsRadio from "./OptionsRadio";
 import Auth from "./Auth";
 import CategoryToVote from "./CategoryToVote";
-import CategoryToVoteButton from "../utils/CategoryToVoteButton";
 import useTheme from "../../Theme/themeContext";
 import { useState, useMemo } from "react";
 import { useConnectUI, useIsConnected, useWallet } from "@fuels/react";
@@ -46,6 +45,9 @@ const VotingSection = forwardRef<HTMLDivElement, VotingSectionProps>(
       try {
         await contract.functions
           .submit_vote(sectionSelected, optionToVote)
+          .txParams({
+            gasLimit: 100_000,
+          })
           .call();
         await authService.updateVoteStatus({
           userId: voter.$id,

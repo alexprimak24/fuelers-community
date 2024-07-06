@@ -9,13 +9,7 @@ import cyberCity from "../../images/cyberFuelCity.jpg";
 import ProgressBar from "@ramonak/react-progress-bar";
 import { useInView } from "react-intersection-observer";
 import { CategoryToVoteProps, VoteCategoriesProps } from "./CategoryToVote";
-
-const CustomRadio = styled(Radio)(({ theme }) => ({
-  "&:checked + .custom-label": {
-    borderColor: "green",
-    backgroundColor: "lightgreen",
-  },
-}));
+import useTheme from "../../Theme/themeContext";
 
 const CustomFormControlLabel = styled(FormControlLabel)(({ theme }) => ({
   display: "flex",
@@ -28,17 +22,6 @@ const CustomFormControlLabel = styled(FormControlLabel)(({ theme }) => ({
     marginRight: "8px",
   },
 }));
-
-const CustomProgressBar = styled(ProgressBar)`
-  .wrapper {
-    border: 3px solid blue;
-    border-radius: 20px; /* Add border radius to the wrapper */
-    overflow: hidden; /* Ensure the content doesn't overflow */
-  }
-  .completed {
-    border-radius: 20px; /* Add border radius to the completed part */
-  }
-`;
 
 interface OptionsRadioProps {
   data: {
@@ -83,6 +66,9 @@ function OptionsRadio({
     category,
     ...dataToSend[index],
   }));
+  //imported theme color for white theme
+  const { themeColor } = useTheme();
+
   console.log(optionToVote);
   return (
     <div className="flex flex-col gap-[50px] w-full">
@@ -93,33 +79,62 @@ function OptionsRadio({
           value={optionToVote}
           onChange={handleChange}
         >
-          voteCategories.map
           {combinedData.map((item, index) => (
             <CustomFormControlLabel
               value={index}
               key={index}
-              control={<CustomRadio />}
+              control={
+                <Radio
+                  sx={{
+                    "&.MuiRadio-root": {
+                      color: themeColor("white3"),
+                    },
+                    "&.Mui-checked": {
+                      color: "#00F58C",
+                    },
+                  }}
+                />
+              }
               label={
-                <div className="flex">
+                <div className="flex justify-between">
                   <a href={item.category.document.contentlink} target="_blank">
                     <img
                       src={item.category.document.image}
                       alt="UserToVoteImage"
-                      width={"200px"}
+                      width={"320px"}
                     />
                   </a>
-                  <div className="flex flex-col">
-                    <CustomProgressBar
-                      bgColor={item.value === maxValue ? "#00F58C" : "#F5F5F5"}
-                      height="40px"
-                      labelColor="black"
-                      baseBgColor="transparent"
-                      animateOnRender={true}
-                      completed={item.percentage}
-                      customLabel={`${item.percentage.toFixed(2)}%`}
-                      // className="border-[3px] border-solid border-defaultwhite"
-                    />
-                    <p>{item.category.document.discordHandle}</p>
+                  <div className="flex flex-col justify-center gap-[10px]">
+                    <p
+                      className="text-2xl pl-[20px]"
+                      style={{ color: themeColor("white3") }}
+                    >
+                      {item.category.document.discordHandle}
+                    </p>
+                    <div
+                      className="border-[1px] border-solid rounded-[21px]"
+                      style={{ borderColor: themeColor("white3") }}
+                    >
+                      <ProgressBar
+                        bgColor={
+                          item.value === maxValue
+                            ? "#00F58C"
+                            : themeColor("white3")
+                        }
+                        height="40px"
+                        labelColor={
+                          item.value === maxValue
+                            ? "#000"
+                            : themeColor("black5")
+                        }
+                        baseBgColor="transparent"
+                        animateOnRender={true}
+                        borderRadius="18px"
+                        completed={item.percentage}
+                        customLabel={`${item.percentage.toFixed(0)}%`}
+                        className="min-w-[780px] w-full items-center"
+                      />
+                    </div>
                   </div>
                 </div>
               }

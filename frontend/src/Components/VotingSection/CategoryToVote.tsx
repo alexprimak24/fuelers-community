@@ -174,7 +174,7 @@ export default function CategoryToVote({
     setSectionSelected(newValue);
   };
 
-  const categories = ["Best Contributor", "Best Contribution", "Best Activist"];
+  const categories = ["Best Contribution", "Best Contributor", "Best Activist"];
 
   const bestActivist = {
     voteCategories: voteCategories.slice(0, 5),
@@ -194,7 +194,7 @@ export default function CategoryToVote({
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
         <Tabs
           TabIndicatorProps={{ style: { display: "none" } }}
-          className="self-end sm:inline-table"
+          className="inline-table self-end sm:flex"
           value={sectionSelected}
           onChange={handleChange}
           aria-label="basic tabs example"
@@ -206,14 +206,14 @@ export default function CategoryToVote({
       </Box>
       <CustomTabPanel value={sectionSelected} index={0}>
         <OptionsRadio
-          data={bestContributorData}
+          data={bestContributionData}
           optionToVote={optionToVote}
           setOptionToVote={setOptionToVote}
         />
       </CustomTabPanel>
       <CustomTabPanel value={sectionSelected} index={1}>
         <OptionsRadio
-          data={bestContributionData}
+          data={bestContributorData}
           optionToVote={optionToVote}
           setOptionToVote={setOptionToVote}
         />
