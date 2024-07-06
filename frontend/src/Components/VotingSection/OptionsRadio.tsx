@@ -107,12 +107,14 @@ function OptionsRadio({
                         src={item.category.document.image}
                         alt="UserToVoteImage"
                         className="max-w-[320px] rounded-[10px] border-[3px] border-solid border-defaultgreen"
+                        loading="lazy"
                       />
                     ) : (
                       <img
                         src={item.category.document.image}
                         alt="UserToVoteImage"
                         className="max-w-[180px] max-h-[180px] rounded-full border-[3px] border-solid border-defaultgreen"
+                        loading="lazy"
                       />
                     )}
                   </a>
