@@ -9,7 +9,10 @@ import { useConnectUI, useIsConnected, useWallet } from "@fuels/react";
 import { ContractAbi__factory } from "../../contracts";
 import Button from "@mui/material/Button";
 import { Models } from "appwrite/types/models";
+import { Tabs } from "@mui/material";
 import authService from "../../appwrite/auth";
+import { PiWallet } from "react-icons/pi";
+import { IoCheckmarkDoneOutline } from "react-icons/io5";
 
 interface VotingSectionProps {
   values: number[];
@@ -97,13 +100,52 @@ const VotingSection = forwardRef<HTMLDivElement, VotingSectionProps>(
               setOptionToVote={setOptionToVote}
             />
           </div>
-          <div className="inline-table sm:flex">
+          <Tabs
+            TabIndicatorProps={{ style: { display: "none" } }}
+            sx={{
+              color: themeColor("white3"),
+              // "&:Mui-disabled": {
+              //   color: themeColor("white3"),
+              // },
+            }}
+            aria-label="basic tabs example"
+            allowScrollButtonsMobile={true}
+            variant="scrollable"
+          >
+            <Button
+              onClick={onIncrementPressed}
+              variant="contained"
+              startIcon={
+                <IoCheckmarkDoneOutline
+                  style={{ minWidth: 21, minHeight: 21 }}
+                />
+              }
+              sx={{
+                minHeight: "40px",
+                height: "40px",
+                width: "128px",
+                padding: "auto",
+                marginRight: "15px",
+                background: "#B8FBCF",
+                ":hover": {
+                  bgcolor: "rgba(0, 245, 140, 0.2)",
+                  borderColor: "#00F58C",
+                },
+              }}
+            >
+              Vote
+            </Button>
             <Auth setVoter={setVoter} voter={voter} />
             {isConnected ? (
               <Button
                 variant="outlined"
                 sx={{
-                  height: "42px",
+                  minHeight: "40px",
+                  height: "40px",
+                  minWidth: "165px",
+                  maxWidth: "180px",
+                  padding: "auto",
+                  marginRight: "15px",
                   color: "white",
                   borderColor: "white",
                   ":hover": {
@@ -121,8 +163,15 @@ const VotingSection = forwardRef<HTMLDivElement, VotingSectionProps>(
                     connect();
                   }}
                   variant="outlined"
+                  startIcon={
+                    <PiWallet style={{ minWidth: 21, minHeight: 21 }} />
+                  }
                   sx={{
-                    height: "42px",
+                    minHeight: "40px",
+                    height: "40px",
+                    minWidth: "165px",
+                    padding: "auto",
+                    marginRight: "15px",
                     color: "white",
                     borderColor: "white",
                     ":hover": {
@@ -135,22 +184,7 @@ const VotingSection = forwardRef<HTMLDivElement, VotingSectionProps>(
                 </Button>
               </div>
             )}
-            <Button
-              variant="outlined"
-              sx={{
-                height: "42px",
-                color: "white",
-                borderColor: "white",
-                ":hover": {
-                  bgcolor: "rgba(0, 245, 140, 0.2)",
-                  borderColor: "#00F58C",
-                },
-              }}
-              onClick={onIncrementPressed}
-            >
-              Vote
-            </Button>
-          </div>
+          </Tabs>
         </div>
       </Container>
     );

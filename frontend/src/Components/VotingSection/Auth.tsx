@@ -69,14 +69,17 @@ function Auth({ setVoter, voter }: AuthProps) {
   console.log(voter);
 
   return (
-    <div className="max-w-[190px]">
+    <div className="max-w-[190px] mr-[15px]">
       {!voter && (
         <Button
           onClick={login}
           variant="outlined"
-          startIcon={<FaDiscord style={{ width: 21, height: 21 }} />}
+          startIcon={<FaDiscord style={{ minWidth: 21, minHeight: 21 }} />}
           sx={{
-            height: "42px",
+            minHeight: "40px",
+            height: "40px",
+            minWidth: "165px",
+            padding: "auto",
             color: "white",
             borderColor: "white",
             ":hover": {
@@ -85,22 +88,24 @@ function Auth({ setVoter, voter }: AuthProps) {
             },
           }}
         >
-          Connect Discord
+          Connect
         </Button>
       )}
       {loggedIn && voter && (
-        <div className="px-[10px] w-full h-[45px] flex justify-evenly gap-[10px] items-center border border-solid border-defaultwhite hover:border-defaultgreen">
-          startIcon={<FaDiscord style={{ width: 21, height: 21 }} />}
+        <div className="w-[165px] h-[40px] rounded-[4px] px-[10px] w-full h-[45px] flex justify-evenly gap-[10px] items-center border border-solid border-defaultwhite hover:border-defaultgreen">
+          {<FaDiscord style={{ minWidth: 21, minHeight: 21 }} />}
           <div className="flex flex-col overflow-hidden">
-            <p className="truncate">
-              <span className="text-defaultgreen">@</span>
-              {voter.username}
-            </p>
+            {!loading && (
+              <p className="truncate">
+                <span className="text-defaultgreen">@</span>
+                {voter.username}
+              </p>
+            )}
+            {loading && <p>Loading...</p>}
             <Logout logOut={setLoggedIn} setVoter={setVoter} />
           </div>
         </div>
       )}
-      {loading && <p>Loading...</p>}
     </div>
   );
 }
