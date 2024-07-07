@@ -10,6 +10,7 @@ import { darkColors, lightColors } from "@fuel-ui/css";
 import appwriteService from "../../../src/appwrite/config";
 import OptionsRadio from "./OptionsRadio";
 import { ContractAbi } from "../../contracts";
+import useTheme, { ColorName } from "../../Theme/themeContext";
 
 interface AllItemsProps {
   contract: ContractAbi | null;
@@ -39,27 +40,54 @@ export interface CategoryToVoteProps extends VoteCategoriesProps {
   values: number[];
 }
 
-const StyledTab = styled(Tab)`
-  min-width: 105px;
-  max-width: 180px;
-  height: 40px;
-  font-size: 1;
-  margin-right: 15px;
-  min-height: 40px;
-  padding: auto;
-  border-radius: 5px;
-  border: 1px solid ${darkColors.gray8};
-  color: ${darkColors.gray8};
-  transition: all 0.3s ease;
-  &:hover {
-    color: white;
-    border-color: ${alpha("#00F58C", 0.5)};
-    background: ${alpha("#00F58C", 0.1)};
-  }
-  &.Mui-selected {
-    border-color: ${darkColors.gray12};
-    color: ${darkColors.gray12};
-  }
+// const StyledTab = styled(Tab)<{ themeColor: string }>`
+//   min-width: 90px;
+//   max-width: 180px;
+//   height: 40px;
+//   font-size: 1;
+//   margin-right: 15px;
+//   min-height: 40px;
+//   padding: auto;
+//   border-radius: 5px;
+//   border: 1px solid ${darkColors.gray8};
+//   color: ${darkColors.gray8};
+//   transition: all 0.3s ease;
+//   &:hover {
+//     color: white;
+//     border-color: ${alpha("#00F58C", 0.5)};
+//     background: ${alpha("#00F58C", 0.1)};
+//   }
+//   &.Mui-selected {
+//     border-color: ${darkColors.gray12};
+//     color: ${darkColors.gray12};
+//   }
+// `;
+const StyledTab = styled(Tab)<{
+  themeColor: (name: ColorName) => string;
+}>`
+  ${(props) =>
+    `
+      min-width: 90px;
+      max-width: 180px;
+      height: 40px;
+      font-size: 1;
+      margin-right: 15px;
+      min-height: 40px;
+      padding: auto;
+      border-radius: 5px;
+      border: 1px solid ${props.themeColor("white8")};
+      color: ${props.themeColor("white8")};
+      transition: all 0.3s ease;
+    &:hover {
+      color: ${props.themeColor("white1")};
+      border-color: ${alpha("#00F58C", 0.5)};
+      background: ${alpha("#00F58C", 0.1)};
+     }
+    &.Mui-selected {
+      border-color: ${props.themeColor("white3")};
+      color: ${props.themeColor("white3")};
+    }
+  `}
 `;
 
 function CustomTabPanel(props: TabPanelProps) {
@@ -194,22 +222,36 @@ export default function CategoryToVote({
     values: bestContributorOptions,
   };
 
+  const { themeColor } = useTheme();
+
   return (
     <Box sx={{ width: "100%" }}>
-      <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+      <Box>
         <Tabs
           TabIndicatorProps={{ style: { display: "none" } }}
-          className="inline-table self-end sm:flex"
+          sx={{
+            color: themeColor("white3"),
+            // "&:Mui-disabled": {
+            //   color: themeColor("white3"),
+            // },
+          }}
           value={sectionSelected}
           onChange={handleChange}
           aria-label="basic tabs example"
+          allowScrollButtonsMobile={true}
+          variant="scrollable"
         >
           {categories.map((category, index) => (
-            <StyledTab label={category} value={index} {...a11yProps(0)} />
+            <StyledTab
+              label={category}
+              value={index}
+              {...a11yProps(0)}
+              themeColor={themeColor}
+            />
           ))}
         </Tabs>
       </Box>
-      <CustomTabPanel value={sectionSelected} index={0}>
+      {/* <CustomTabPanel value={sectionSelected} index={0}>
         <OptionsRadio
           data={bestContributionData}
           optionToVote={optionToVote}
@@ -230,7 +272,7 @@ export default function CategoryToVote({
           optionToVote={optionToVote}
           setOptionToVote={setOptionToVote}
         />
-      </CustomTabPanel>
+      </CustomTabPanel> */}
     </Box>
   );
 }

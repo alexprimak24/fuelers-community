@@ -17,6 +17,7 @@ export type ColorName =
   | "white5"
   | "white6"
   | "white7"
+  | "white8"
   | "black1"
   | "black2"
   | "black3"
@@ -55,6 +56,11 @@ const COLORS: Record<ColorName, ColorMapping> = {
     light: "rgba(0, 0, 0, 0.3)",
     dark: "rgba(255, 255, 255, 0.8)",
   },
+  white8: {
+    light: lightColors.gray8,
+    dark: darkColors.gray8,
+  },
+
   black1: {
     light: "#F5F5F5",
     dark: "rgba(30, 30, 30, 0.2)",
