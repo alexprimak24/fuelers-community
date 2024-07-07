@@ -146,7 +146,7 @@ function App() {
         <DividerImage />
         <div className="">
           <SectionTitle title="Recent works." />
-          <Carousel contributions={contributions.slice(10)} />
+          <Carousel contributions={contributions.slice(0, 10)} />
           <SectionTitle title="Best activity of the month." />
           <VotingSection ref={votingSectionRef} values={values} />
           <AllContributions
