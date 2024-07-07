@@ -123,7 +123,7 @@ const VotingSection = forwardRef<HTMLDivElement, VotingSectionProps>(
               sx={{
                 minHeight: "40px",
                 height: "40px",
-                width: "128px",
+                minWidth: "128px",
                 padding: "auto",
                 marginRight: "15px",
                 background: "#B8FBCF",
