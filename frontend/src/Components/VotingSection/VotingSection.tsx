@@ -240,8 +240,12 @@ const VotingSection = forwardRef<HTMLDivElement, VotingSectionProps>(
           </Tabs>
         </div>
         <p
-          style={{ color: themeColor("white3") }}
-          className="bg-defaultdarkgreen border border-white mt-[10px] px-4 py-2 rounded flex justify-center md:hidden"
+          style={{
+            color: themeColor("white3"),
+            backgroundColor: "rgba(0, 245, 140, 0.1)",
+            borderColor: "#00F58C",
+          }}
+          className="bg-defaultgreen border mt-[10px] px-4 py-2 rounded-[30px] flex justify-center md:hidden"
         >
           To be able to vote please switch to PC
         </p>
