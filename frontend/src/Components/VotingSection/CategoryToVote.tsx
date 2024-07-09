@@ -152,6 +152,7 @@ export default function CategoryToVote({
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setSectionSelected(newValue);
+    setOptionToVote(null);
   };
 
   const categories = ["Best Contributor", "Best Contribution", "Best Activist"];
