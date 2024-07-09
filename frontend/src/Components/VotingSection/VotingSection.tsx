@@ -110,7 +110,7 @@ const VotingSection = forwardRef<HTMLDivElement, VotingSectionProps>(
           ref={ref}
           id="voting-section"
           style={{ borderColor: themeColor("black2") }}
-          className="rounded-[30px] border border-solid px-[45px] py-[50px] mt-[60px]"
+          className="rounded-[30px] border border-solid px-[10px] ax:px-[30px] sm:px-[40px] as:px-[50px] py-[50px] mt-[60px]"
         >
           <div className="">
             <CategoryToVote
@@ -168,10 +168,16 @@ const VotingSection = forwardRef<HTMLDivElement, VotingSectionProps>(
                   padding: "auto",
                   color: themeColor("white3"),
                   borderColor: themeColor("white3"),
+                  ":hover": {
+                    borderColor: themeColor("white3"),
+                  },
                 }}
               >
                 <div className="flex flex-col gap-[5px] mr-[30px] mt-[3px]">
-                  <p className="text-[10px] leading-none">
+                  <p
+                    className="text-[10px] leading-none "
+                    style={{ color: themeColor("white3") }}
+                  >
                     Connected with<span className="text-defaultgreen">:</span>
                   </p>
                   <Tooltip
@@ -189,7 +195,7 @@ const VotingSection = forwardRef<HTMLDivElement, VotingSectionProps>(
                           />
                         </div>
                       ) : (
-                        "Copy Username"
+                        "Copy Address"
                       )
                     }
                   >
@@ -233,6 +239,12 @@ const VotingSection = forwardRef<HTMLDivElement, VotingSectionProps>(
             )}
           </Tabs>
         </div>
+        <p
+          style={{ color: themeColor("white3") }}
+          className="bg-defaultdarkgreen border border-white mt-[10px] px-4 py-2 rounded flex justify-center md:hidden"
+        >
+          To be able to vote please switch to PC
+        </p>
       </Container>
     );
   }

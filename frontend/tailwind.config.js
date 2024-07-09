@@ -10,6 +10,7 @@ module.exports = {
         sm: "600px",
         aas: "720px",
         as: "770px",
+        amd: "810px",
         md: "900px",
         am: "1100px",
         lg: "1290px",

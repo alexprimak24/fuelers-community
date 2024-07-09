@@ -85,3 +85,19 @@ a:active {
   fill: var(--hover-color);
   transition: fill 0.5s;
 }
+
+@keyframes borderAnimation {
+  0% {
+    border-color: white;
+  }
+  50% {
+    border-color: #00f58c;
+  }
+  100% {
+    border-color: #b8fbcf;
+  }
+}
+
+.animated-border {
+  animation: borderAnimation 4s infinite ease-in-out;
+}
