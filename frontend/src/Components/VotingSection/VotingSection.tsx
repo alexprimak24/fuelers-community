@@ -15,13 +15,14 @@ import { PiWallet } from "react-icons/pi";
 import { IoCheckmarkDoneOutline } from "react-icons/io5";
 import DoneIcon from "@mui/icons-material/Done";
 import Tooltip from "@mui/material/Tooltip";
+import { getAllItems } from "./GetUsersVotes";
 
 interface VotingSectionProps {
   values: number[];
 }
 
 const CONTRACT_ID =
-  "0xf9b2b36bbc7a8ee81f7dfb60437adbc3a08f32cf2440b1e6b1ff047895ceba2b";
+  "0xaef6aacff8f7ac5c0cdd9bc6a94aa3365eca2f2a9bdf2de4c5641c77e212aac8";
 
 const VotingSection = forwardRef<HTMLDivElement, VotingSectionProps>(
   ({ values }, ref) => {
@@ -33,8 +34,20 @@ const VotingSection = forwardRef<HTMLDivElement, VotingSectionProps>(
     const [optionToVote, setOptionToVote] = useState<number | null>(null);
     const [voter, setVoter] = useState<Models.Document | undefined>();
     const [isCopied, setIsCopied] = useState(false);
+    const [bestContributorOptions, setBestContributorOptions] = useState<
+      number[]
+    >(Array(5).fill(0));
+    const [bestContributionOptions, setBestContributionOptions] = useState<
+      number[]
+    >(Array(5).fill(0));
+    const [bestActivistOptions, setBestActivistOptions] = useState<number[]>(
+      Array(5).fill(0)
+    );
+    const [status, setStatus] = useState<"success" | "loading" | "error">(
+      "loading"
+    );
 
-    const onIncrementPressed = async () => {
+    const submitVote = async () => {
       if (!voter) {
         return alert("Please log in first.");
       }
@@ -68,7 +81,13 @@ const VotingSection = forwardRef<HTMLDivElement, VotingSectionProps>(
         });
 
         alert("Your vote has been submitted successfully!");
-        // await getCount(contract);
+        await getAllItems({
+          contract,
+          setBestContributorOptions,
+          setBestContributionOptions,
+          setBestActivistOptions,
+          setStatus,
+        });
       } catch (error) {
         console.error(error);
       }
@@ -119,6 +138,13 @@ const VotingSection = forwardRef<HTMLDivElement, VotingSectionProps>(
               setSectionSelected={setSectionSelected}
               optionToVote={optionToVote}
               setOptionToVote={setOptionToVote}
+              setBestContributorOptions={setBestContributorOptions}
+              setBestContributionOptions={setBestContributionOptions}
+              setBestActivistOptions={setBestActivistOptions}
+              setStatus={setStatus}
+              bestActivistOptions={bestActivistOptions}
+              bestContributionOptions={bestContributionOptions}
+              bestContributorOptions={bestContributorOptions}
             />
           </div>
           <Tabs
@@ -135,7 +161,7 @@ const VotingSection = forwardRef<HTMLDivElement, VotingSectionProps>(
             variant="scrollable"
           >
             <Button
-              onClick={onIncrementPressed}
+              onClick={submitVote}
               variant="contained"
               startIcon={
                 <IoCheckmarkDoneOutline

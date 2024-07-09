@@ -11,6 +11,7 @@ import appwriteService from "../../../src/appwrite/config";
 import OptionsRadio from "./OptionsRadio";
 import { ContractAbi } from "../../contracts";
 import useTheme, { ColorName } from "../../Theme/themeContext";
+import { getAllItems } from "./GetUsersVotes";
 
 interface AllItemsProps {
   contract: ContractAbi | null;
@@ -18,6 +19,15 @@ interface AllItemsProps {
   setSectionSelected: React.Dispatch<React.SetStateAction<number>>;
   optionToVote: number | null;
   setOptionToVote: React.Dispatch<React.SetStateAction<number | null>>;
+  setBestContributorOptions: React.Dispatch<React.SetStateAction<number[]>>;
+  setBestContributionOptions: React.Dispatch<React.SetStateAction<number[]>>;
+  setBestActivistOptions: React.Dispatch<React.SetStateAction<number[]>>;
+  setStatus: React.Dispatch<
+    React.SetStateAction<"loading" | "success" | "error">
+  >;
+  bestActivistOptions: number[];
+  bestContributionOptions: number[];
+  bestContributorOptions: number[];
 }
 
 interface TabPanelProps {
@@ -40,28 +50,6 @@ export interface CategoryToVoteProps extends VoteCategoriesProps {
   values: number[];
 }
 
-// const StyledTab = styled(Tab)<{ themeColor: string }>`
-//   min-width: 90px;
-//   max-width: 180px;
-//   height: 40px;
-//   font-size: 1;
-//   margin-right: 15px;
-//   min-height: 40px;
-//   padding: auto;
-//   border-radius: 5px;
-//   border: 1px solid ${darkColors.gray8};
-//   color: ${darkColors.gray8};
-//   transition: all 0.3s ease;
-//   &:hover {
-//     color: white;
-//     border-color: ${alpha("#00F58C", 0.5)};
-//     background: ${alpha("#00F58C", 0.1)};
-//   }
-//   &.Mui-selected {
-//     border-color: ${darkColors.gray12};
-//     color: ${darkColors.gray12};
-//   }
-// `;
 const StyledTab = styled(Tab)<{
   themeColor: (name: ColorName) => string;
 }>`
@@ -119,67 +107,26 @@ export default function CategoryToVote({
   setSectionSelected,
   optionToVote,
   setOptionToVote,
+  setBestContributorOptions,
+  setBestContributionOptions,
+  setBestActivistOptions,
+  setStatus,
+  bestActivistOptions,
+  bestContributionOptions,
+  bestContributorOptions,
 }: AllItemsProps) {
   const [voteCategories, setVoteCategories] = useState<VoteCategoriesProps[]>(
     []
   );
-  const [bestContributorOptions, setBestContributorOptions] = useState<
-    number[]
-  >(Array(5).fill(0));
-  const [bestContributionOptions, setBestContributionOptions] = useState<
-    number[]
-  >(Array(5).fill(0));
-  const [bestActivistOptions, setBestActivistOptions] = useState<number[]>(
-    Array(5).fill(0)
-  );
-  const [status, setStatus] = useState<"success" | "loading" | "error">(
-    "loading"
-  );
   useEffect(() => {
-    async function getAllItems() {
-      if (contract !== null) {
-        try {
-          let contributor = await contract.functions
-            .read_contributor()
-            .txParams({
-              gasLimit: 100_000,
-            })
-            .get();
-          const contributorArr = Array.from(contributor?.value);
-          setBestContributorOptions(contributorArr);
-
-          let contribution = await contract.functions
-            .read_contribution()
-            .txParams({
-              gasLimit: 100_000,
-            })
-            .get();
-          const contributionArr = Array.from(contribution?.value);
-          setBestContributionOptions(contributionArr);
-
-          let activist = await contract.functions
-            .read_activist()
-            .txParams({
-              gasLimit: 100_000,
-            })
-            .get();
-          const activistArr = Array.from(activist?.value);
-          setBestActivistOptions(activistArr);
-
-          setStatus("success");
-        } catch (e) {
-          setStatus("error");
-          console.log("ERROR:", e);
-        }
-      }
-    }
-    getAllItems();
-  }, [
-    contract,
-    // bestContributorOptions,
-    // bestContributionOptions,
-    // bestActivistOptions,
-  ]);
+    getAllItems({
+      contract,
+      setBestContributorOptions,
+      setBestContributionOptions,
+      setBestActivistOptions,
+      setStatus,
+    });
+  }, [contract]);
   console.log(sectionSelected);
   // console.log(bestContributionOptions);
   // console.log(status);
