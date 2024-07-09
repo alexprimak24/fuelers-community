@@ -176,9 +176,9 @@ export default function CategoryToVote({
     getAllItems();
   }, [
     contract,
-    bestContributorOptions,
-    bestContributionOptions,
-    bestActivistOptions,
+    // bestContributorOptions,
+    // bestContributionOptions,
+    // bestActivistOptions,
   ]);
   console.log(sectionSelected);
   // console.log(bestContributionOptions);
@@ -207,7 +207,7 @@ export default function CategoryToVote({
     setSectionSelected(newValue);
   };
 
-  const categories = ["Best Contribution", "Best Contributor", "Best Activist"];
+  const categories = ["Best Contributor", "Best Contribution", "Best Activist"];
 
   const bestActivist = {
     voteCategories: voteCategories.slice(0, 5),
@@ -251,19 +251,19 @@ export default function CategoryToVote({
           ))}
         </Tabs>
       </Box>
-      {/* <CustomTabPanel value={sectionSelected} index={0}>
+      <CustomTabPanel value={sectionSelected} index={0}>
+        <OptionsRadio
+          data={bestContributorData}
+          optionToVote={optionToVote}
+          setOptionToVote={setOptionToVote}
+        />
+      </CustomTabPanel>
+      <CustomTabPanel value={sectionSelected} index={1}>
         <OptionsRadio
           data={bestContributionData}
           optionToVote={optionToVote}
           setOptionToVote={setOptionToVote}
           isContribution={true}
-        />
-      </CustomTabPanel>
-      <CustomTabPanel value={sectionSelected} index={1}>
-        <OptionsRadio
-          data={bestContributorData}
-          optionToVote={optionToVote}
-          setOptionToVote={setOptionToVote}
         />
       </CustomTabPanel>
       <CustomTabPanel value={sectionSelected} index={2}>
@@ -272,7 +272,7 @@ export default function CategoryToVote({
           optionToVote={optionToVote}
           setOptionToVote={setOptionToVote}
         />
-      </CustomTabPanel> */}
+      </CustomTabPanel>
     </Box>
   );
 }

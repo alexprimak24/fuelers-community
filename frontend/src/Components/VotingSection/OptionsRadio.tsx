@@ -11,6 +11,7 @@ import { useInView } from "react-intersection-observer";
 import { CategoryToVoteProps, VoteCategoriesProps } from "./CategoryToVote";
 import useTheme from "../../Theme/themeContext";
 import Avatar from "@mui/material/Avatar";
+import appwriteService from "../../appwrite/config";
 
 const CustomFormControlLabel = styled(FormControlLabel)(({ theme }) => ({
   display: "flex",
@@ -72,8 +73,8 @@ function OptionsRadio({
   }));
   //imported theme color for white theme
   const { themeColor } = useTheme();
+  console.log(combinedData);
 
-  console.log(optionToVote);
   return (
     <div className="flex flex-col justify-between gap-[50px] w-full">
       <FormControl component="fieldset">
@@ -101,23 +102,40 @@ function OptionsRadio({
               }
               label={
                 <div className="w-full flex justify-between gap-[50px]">
-                  <a href={item.category.document.contentlink} target="_blank">
-                    {isContribution ? (
-                      <img
-                        src={item.category.document.image}
-                        alt="UserToVoteImage"
-                        className="max-w-[320px] rounded-[10px] border-[3px] border-solid border-defaultgreen"
-                        loading="lazy"
-                      />
-                    ) : (
-                      <img
-                        src={item.category.document.image}
-                        alt="UserToVoteImage"
-                        className="max-w-[180px] max-h-[180px] rounded-full border-[3px] border-solid border-defaultgreen"
-                        loading="lazy"
-                      />
-                    )}
-                  </a>
+                  {isContribution ? (
+                    <a
+                      href={item.category.document.contentlink}
+                      target="_blank"
+                    >
+                      <div className="w-[320px] overflow-hidden">
+                        <img
+                          src={appwriteService.getFilePreviewBestWorks({
+                            fileId: item.category.document.image,
+                          })}
+                          alt="ContributionToVoteImage"
+                          className="w-full rounded-[10px] border-[3px] border-solid border-defaultgreen"
+                          loading="lazy"
+                        />
+                      </div>
+                    </a>
+                  ) : (
+                    <a
+                      href={item.category.document.contentlink}
+                      target="_blank"
+                    >
+                      <div className="w-[180px] h-[180px] overflow-hidden">
+                        <img
+                          src={appwriteService.getFilePreviewBestWorks({
+                            fileId: item.category.document.image,
+                          })}
+                          alt="UserToVoteImage"
+                          className="w-full h-full rounded-full border-[3px] border-solid border-defaultgreen"
+                          loading="lazy"
+                        />
+                      </div>
+                    </a>
+                  )}
+
                   <div className="flex flex-col justify-center gap-[10px] w-full">
                     <p
                       className="text-2xl pl-[20px]"

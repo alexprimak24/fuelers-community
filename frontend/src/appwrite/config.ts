@@ -111,6 +111,9 @@ export class Service {
   getFilePreview({ fileId }: FileIdProps) {
     return this.bucket.getFilePreview(conf.appwriteBucketId, fileId).href;
   }
+  getFilePreviewBestWorks({ fileId }: FileIdProps) {
+    return this.bucket.getFilePreview(conf.appwriteBucketBest, fileId).href;
+  }
 }
 
 const service = new Service();

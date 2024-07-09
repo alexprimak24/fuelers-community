@@ -9,6 +9,7 @@ const conf = {
   appwriteCollectionIdActivityMonth: process.env
     .REACT_APP_APPWRITE_COLLECTION_BEST_ACTIVITY_MONTH as string,
   appwriteBucketId: process.env.REACT_APP_APPWRITE_BUCKET_ID as string,
+  appwriteBucketBest: process.env.REACT_APP_APPWRITE_BUCKET_ID_BEST as string,
 };
 
 export default conf;

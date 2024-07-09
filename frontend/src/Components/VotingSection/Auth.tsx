@@ -5,6 +5,7 @@ import { Models } from "appwrite";
 import Avatar from "@mui/material/Avatar";
 import { Button, styled } from "@mui/material";
 import { FaDiscord } from "react-icons/fa";
+import useTheme from "../../Theme/themeContext";
 
 interface AuthProps {
   setVoter: React.Dispatch<React.SetStateAction<Models.Document | undefined>>;
@@ -68,6 +69,8 @@ function Auth({ setVoter, voter }: AuthProps) {
   }, [authService.account]);
   console.log(voter);
 
+  const { themeColor } = useTheme();
+
   return (
     <div className="max-w-[190px] mr-[15px]">
       {!voter && (
@@ -80,8 +83,8 @@ function Auth({ setVoter, voter }: AuthProps) {
             height: "40px",
             minWidth: "165px",
             padding: "auto",
-            color: "white",
-            borderColor: "white",
+            color: themeColor("white3"),
+            borderColor: themeColor("white3"),
             ":hover": {
               bgcolor: "rgba(0, 245, 140, 0.2)",
               borderColor: "#00F58C",
@@ -92,18 +95,23 @@ function Auth({ setVoter, voter }: AuthProps) {
         </Button>
       )}
       {loggedIn && voter && (
-        <div className="w-[165px] h-[40px] rounded-[4px] px-[10px] w-full h-[45px] flex justify-evenly gap-[10px] items-center border border-solid border-defaultwhite hover:border-defaultgreen">
-          {<FaDiscord style={{ minWidth: 21, minHeight: 21 }} />}
-          <div className="flex flex-col overflow-hidden">
+        <div
+          style={{
+            color: themeColor("white3"),
+            borderColor: themeColor("white3"),
+          }} //edit this to make it work with hover
+          className="min-w-[165px] h-[40px] rounded-[4px] px-[10px] w-full flex justify-evenly gap-[10px] items-center border border-solid hover:border-defaultgreen"
+        >
+          <div className="overflow-hidden">
             {!loading && (
               <p className="truncate">
                 <span className="text-defaultgreen">@</span>
                 {voter.username}
               </p>
             )}
-            {loading && <p>Loading...</p>}
-            <Logout logOut={setLoggedIn} setVoter={setVoter} />
           </div>
+          {loading && <p>Loading...</p>}
+          <Logout logOut={setLoggedIn} setVoter={setVoter} />
         </div>
       )}
     </div>

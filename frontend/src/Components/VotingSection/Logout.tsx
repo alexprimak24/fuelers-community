@@ -1,6 +1,8 @@
 import React, { SetStateAction, useEffect } from "react";
 import authService from "../../appwrite/auth";
 import { Models } from "appwrite";
+import { IoExitOutline } from "react-icons/io5";
+import { Button } from "@mui/material";
 
 interface LogoutProps {
   logOut: React.Dispatch<SetStateAction<boolean>>;
@@ -19,13 +21,22 @@ function Logout({ logOut, setVoter }: LogoutProps) {
     }
   };
   return (
-    <button
-      className="text-[9px] underline text-left ml-1"
+    <Button
+      variant="outlined"
+      color="primary"
+      sx={{
+        minHeight: "20px",
+        minWidth: "24px",
+        ":hover": {
+          bgcolor: "rgba(0, 245, 140, 0.2)",
+          borderColor: "#00F58C",
+        },
+      }}
       title="disconnect from discord"
       onClick={logoutHandler}
     >
-      disconnect
-    </button>
+      <IoExitOutline />
+    </Button>
   );
 }
 

@@ -13,13 +13,15 @@ import { Tabs } from "@mui/material";
 import authService from "../../appwrite/auth";
 import { PiWallet } from "react-icons/pi";
 import { IoCheckmarkDoneOutline } from "react-icons/io5";
+import DoneIcon from "@mui/icons-material/Done";
+import Tooltip from "@mui/material/Tooltip";
 
 interface VotingSectionProps {
   values: number[];
 }
 
 const CONTRACT_ID =
-  "0x21aaf19581c5368fb5c597c3e6016cae131e1d865672cf66fd164f4f35a2a708";
+  "0xf9b2b36bbc7a8ee81f7dfb60437adbc3a08f32cf2440b1e6b1ff047895ceba2b";
 
 const VotingSection = forwardRef<HTMLDivElement, VotingSectionProps>(
   ({ values }, ref) => {
@@ -30,6 +32,7 @@ const VotingSection = forwardRef<HTMLDivElement, VotingSectionProps>(
     const [sectionSelected, setSectionSelected] = useState(0);
     const [optionToVote, setOptionToVote] = useState<number | null>(null);
     const [voter, setVoter] = useState<Models.Document | undefined>();
+    const [isCopied, setIsCopied] = useState(false);
 
     const onIncrementPressed = async () => {
       if (!voter) {
@@ -48,9 +51,6 @@ const VotingSection = forwardRef<HTMLDivElement, VotingSectionProps>(
       try {
         await contract.functions
           .submit_vote(sectionSelected, optionToVote)
-          .txParams({
-            gasLimit: 100_000,
-          })
           .call();
         await authService.updateVoteStatus({
           userId: voter.$id,
@@ -81,8 +81,29 @@ const VotingSection = forwardRef<HTMLDivElement, VotingSectionProps>(
       }
       return null;
     }, [wallet]);
-    console.log(wallet);
-    console.log(wallet?.address.toB256());
+
+    const formatWalletAddress = (address: string) => {
+      const start = address.slice(0, 6);
+      const end = address.slice(-4);
+      return `${start}...${end}`;
+    };
+
+    const copyAddressToClipboard = (address: string) => {
+      navigator.clipboard
+        .writeText(address)
+        .then(() => {
+          setIsCopied(true);
+          setTimeout(() => {
+            setIsCopied(false);
+          }, 2000);
+        })
+        .catch((err) => {
+          console.error("Failed to copy address: ", err);
+        });
+    };
+
+    const address = wallet ? wallet.address.toB256() : "";
+
     return (
       <Container>
         <div
@@ -101,6 +122,7 @@ const VotingSection = forwardRef<HTMLDivElement, VotingSectionProps>(
             />
           </div>
           <Tabs
+            value={1}
             TabIndicatorProps={{ style: { display: "none" } }}
             sx={{
               color: themeColor("white3"),
@@ -128,8 +150,7 @@ const VotingSection = forwardRef<HTMLDivElement, VotingSectionProps>(
                 marginRight: "15px",
                 background: "#B8FBCF",
                 ":hover": {
-                  bgcolor: "rgba(0, 245, 140, 0.2)",
-                  borderColor: "#00F58C",
+                  bgcolor: "#00F58C",
                 },
               }}
             >
@@ -145,16 +166,42 @@ const VotingSection = forwardRef<HTMLDivElement, VotingSectionProps>(
                   minWidth: "165px",
                   maxWidth: "180px",
                   padding: "auto",
-                  marginRight: "15px",
-                  color: "white",
-                  borderColor: "white",
-                  ":hover": {
-                    bgcolor: "rgba(0, 245, 140, 0.2)",
-                    borderColor: "#00F58C",
-                  },
+                  color: themeColor("white3"),
+                  borderColor: themeColor("white3"),
                 }}
               >
-                I am Connected
+                <div className="flex flex-col gap-[5px] mr-[30px] mt-[3px]">
+                  <p className="text-[10px] leading-none">
+                    Connected with<span className="text-defaultgreen">:</span>
+                  </p>
+                  <Tooltip
+                    title={
+                      isCopied ? (
+                        <div style={{ display: "flex", alignItems: "center" }}>
+                          Copied{" "}
+                          <DoneIcon
+                            style={{
+                              marginLeft: 4,
+                              width: "12px",
+                              height: "12px",
+                            }}
+                            color="primary"
+                          />
+                        </div>
+                      ) : (
+                        "Copy Username"
+                      )
+                    }
+                  >
+                    <p
+                      style={{ color: themeColor("white5") }}
+                      className="leading-none max-w-[100px] truncate text-[12px] cursor-pointer  text-left"
+                      onClick={() => copyAddressToClipboard(address)}
+                    >
+                      {wallet ? formatWalletAddress(address) : ""}
+                    </p>
+                  </Tooltip>
+                </div>
               </Button>
             ) : (
               <div>
@@ -172,8 +219,8 @@ const VotingSection = forwardRef<HTMLDivElement, VotingSectionProps>(
                     minWidth: "165px",
                     padding: "auto",
                     marginRight: "15px",
-                    color: "white",
-                    borderColor: "white",
+                    color: themeColor("white3"),
+                    borderColor: themeColor("white3"),
                     ":hover": {
                       bgcolor: "rgba(0, 245, 140, 0.2)",
                       borderColor: "#00F58C",
