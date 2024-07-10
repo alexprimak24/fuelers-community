@@ -12,22 +12,6 @@ interface AuthProps {
   voter: Models.Document | undefined;
 }
 
-const StyledButton = styled(Button)<{ theme?: string }>`
-  ${(props) =>
-    //uncomment it once doing dark theme
-    // props.theme === "dark" &&
-    `
-    .MuiButton-root {
-      background:white;
-      color: white;
-      &:hover {
-        background-color: rgba(0, 245, 140, 0.2);
-        border: 1px solid #00F58C
-      }
-    } 
-  `}
-`;
-
 function Auth({ setVoter, voter }: AuthProps) {
   const [loading, setLoading] = useState<boolean>(true);
   const [loggedIn, setLoggedIn] = useState<boolean>(false);

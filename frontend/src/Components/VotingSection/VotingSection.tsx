@@ -16,6 +16,7 @@ import { IoCheckmarkDoneOutline } from "react-icons/io5";
 import DoneIcon from "@mui/icons-material/Done";
 import Tooltip from "@mui/material/Tooltip";
 import { getAllItems } from "./GetUsersVotes";
+import { ButtonSpinner } from "../utils/shared";
 
 interface VotingSectionProps {
   values: number[];
@@ -43,11 +44,16 @@ const VotingSection = forwardRef<HTMLDivElement, VotingSectionProps>(
     const [bestActivistOptions, setBestActivistOptions] = useState<number[]>(
       Array(5).fill(0)
     );
-    const [status, setStatus] = useState<"success" | "loading" | "error">(
-      "loading"
-    );
+    const [status, setStatus] = useState<
+      "success" | "loading" | "error" | "none"
+    >("none");
+
+    const [submittingVoteStatus, setSubmittingVoteStatus] = useState<
+      "success" | "loading" | "error" | "none"
+    >("none");
 
     const submitVote = async () => {
+      setSubmittingVoteStatus("loading");
       if (!voter) {
         return alert("Please log in first.");
       }
@@ -56,10 +62,10 @@ const VotingSection = forwardRef<HTMLDivElement, VotingSectionProps>(
         return alert("You have already voted for this section.");
       }
       if (!contract) {
-        return alert("Contract not loaded");
+        return alert("Please connect the wallet.");
       }
       if (!optionToVote) {
-        return alert("kidly pick the candidate you like");
+        return alert("Pick the candidate you like.");
       }
       try {
         await contract.functions
@@ -80,7 +86,7 @@ const VotingSection = forwardRef<HTMLDivElement, VotingSectionProps>(
           };
         });
 
-        alert("Your vote has been submitted successfully!");
+        alert("Congratulations!Your vote is in!");
         await getAllItems({
           contract,
           setBestContributorOptions,
@@ -88,7 +94,9 @@ const VotingSection = forwardRef<HTMLDivElement, VotingSectionProps>(
           setBestActivistOptions,
           setStatus,
         });
+        setSubmittingVoteStatus("success");
       } catch (error) {
+        setSubmittingVoteStatus("error");
         console.error(error);
       }
     };
@@ -145,6 +153,7 @@ const VotingSection = forwardRef<HTMLDivElement, VotingSectionProps>(
               bestActivistOptions={bestActivistOptions}
               bestContributionOptions={bestContributionOptions}
               bestContributorOptions={bestContributorOptions}
+              setSubmittingVoteStatus={setSubmittingVoteStatus}
             />
           </div>
           <Tabs
@@ -164,9 +173,13 @@ const VotingSection = forwardRef<HTMLDivElement, VotingSectionProps>(
               onClick={submitVote}
               variant="contained"
               startIcon={
-                <IoCheckmarkDoneOutline
-                  style={{ minWidth: 21, minHeight: 21 }}
-                />
+                submittingVoteStatus === "loading" ? (
+                  <ButtonSpinner />
+                ) : (
+                  <IoCheckmarkDoneOutline
+                    style={{ minWidth: 21, minHeight: 21 }}
+                  />
+                )
               }
               sx={{
                 minHeight: "40px",

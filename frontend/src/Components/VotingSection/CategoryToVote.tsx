@@ -23,11 +23,14 @@ interface AllItemsProps {
   setBestContributionOptions: React.Dispatch<React.SetStateAction<number[]>>;
   setBestActivistOptions: React.Dispatch<React.SetStateAction<number[]>>;
   setStatus: React.Dispatch<
-    React.SetStateAction<"loading" | "success" | "error">
+    React.SetStateAction<"loading" | "success" | "error" | "none">
   >;
   bestActivistOptions: number[];
   bestContributionOptions: number[];
   bestContributorOptions: number[];
+  setSubmittingVoteStatus: (
+    value: React.SetStateAction<"loading" | "success" | "error" | "none">
+  ) => void;
 }
 
 interface TabPanelProps {
@@ -114,6 +117,7 @@ export default function CategoryToVote({
   bestActivistOptions,
   bestContributionOptions,
   bestContributorOptions,
+  setSubmittingVoteStatus,
 }: AllItemsProps) {
   const [voteCategories, setVoteCategories] = useState<VoteCategoriesProps[]>(
     []
@@ -153,6 +157,7 @@ export default function CategoryToVote({
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setSectionSelected(newValue);
     setOptionToVote(null);
+    setSubmittingVoteStatus("none");
   };
 
   const categories = ["Best Contributor", "Best Contribution", "Best Activist"];

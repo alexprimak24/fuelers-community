@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import Container from "../Container/Container";
 import useTheme from "../../Theme/themeContext";
+import { CircularProgress } from "@mui/material";
 // export const StyledBorder = styled.div<{
 //   themeColor: (name: ColorName) => string;
 // }>`
@@ -33,3 +34,17 @@ export default function SectionTitle({ title }: { title: string }) {
     </Container>
   );
 }
+
+export const ButtonSpinner = () => {
+  const { themeColor } = useTheme();
+  return (
+    <CircularProgress
+      style={{
+        margin: "2px",
+        height: "14px",
+        width: "14px",
+        color: themeColor("white2"),
+      }}
+    />
+  );
+};

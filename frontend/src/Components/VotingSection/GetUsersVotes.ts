@@ -6,7 +6,7 @@ interface getAllItemsProps {
   setBestContributionOptions: React.Dispatch<React.SetStateAction<number[]>>;
   setBestActivistOptions: React.Dispatch<React.SetStateAction<number[]>>;
   setStatus: React.Dispatch<
-    React.SetStateAction<"loading" | "success" | "error">
+    React.SetStateAction<"loading" | "success" | "error" | "none">
   >;
 }
 
