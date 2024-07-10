@@ -17,13 +17,14 @@ import DoneIcon from "@mui/icons-material/Done";
 import Tooltip from "@mui/material/Tooltip";
 import { getAllItems } from "./GetUsersVotes";
 import { ButtonSpinner } from "../utils/shared";
+import { useUserAlert } from "../utils/shared";
 
 interface VotingSectionProps {
   values: number[];
 }
 
 const CONTRACT_ID =
-  "0xd1cdd1c5cea2a8dd89f4869dfc107e9b007706b69d9a60dac373e0e49aff5994";
+  "0xaf2f9081c42e4c028b8cf8633c44becadb0d4301bd71656b2b124fb51a1c6394";
 
 const VotingSection = forwardRef<HTMLDivElement, VotingSectionProps>(
   ({ values }, ref) => {
@@ -51,21 +52,42 @@ const VotingSection = forwardRef<HTMLDivElement, VotingSectionProps>(
     const [submittingVoteStatus, setSubmittingVoteStatus] = useState<
       "success" | "loading" | "error" | "none"
     >("none");
+    const showUserAlert = useUserAlert();
 
     const submitVote = async () => {
       setSubmittingVoteStatus("loading");
       if (!voter) {
-        return alert("Please log in first.");
+        setSubmittingVoteStatus("none");
+        showUserAlert({
+          variant: "info",
+          message: "Please log in first.",
+        });
+        return;
       }
       const voteField = `vote${sectionSelected + 1}`;
       if (voter[voteField]) {
-        return alert("You have already voted for this section.");
+        setSubmittingVoteStatus("none");
+        showUserAlert({
+          variant: "info",
+          message: "Oops..You already voted for this section.",
+        });
+        return;
       }
       if (!contract) {
-        return alert("Please connect the wallet.");
+        setSubmittingVoteStatus("none");
+        showUserAlert({
+          variant: "info",
+          message: "Please connect the wallet.",
+        });
+        return;
       }
       if (!optionToVote) {
-        return alert("Pick the candidate you like.");
+        setSubmittingVoteStatus("none");
+        showUserAlert({
+          variant: "info",
+          message: "Pick the candidate you like.",
+        });
+        return;
       }
       try {
         await contract.functions
@@ -85,8 +107,10 @@ const VotingSection = forwardRef<HTMLDivElement, VotingSectionProps>(
             [voteField]: true,
           };
         });
-
-        alert("Congratulations!Your vote is in!");
+        showUserAlert({
+          variant: "success",
+          message: "Congratulations!Your vote is in!🎉",
+        });
         await getAllItems({
           contract,
           setBestContributorOptions,
@@ -284,7 +308,7 @@ const VotingSection = forwardRef<HTMLDivElement, VotingSectionProps>(
             backgroundColor: "rgba(0, 245, 140, 0.1)",
             borderColor: "#00F58C",
           }}
-          className="bg-defaultgreen border mt-[10px] px-4 py-2 rounded-[30px] flex justify-center md:hidden"
+          className="border mt-[10px] px-4 py-2 rounded-[30px] flex justify-center md:hidden"
         >
           To be able to vote please switch to PC
         </p>

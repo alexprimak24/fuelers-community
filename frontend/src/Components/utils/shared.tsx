@@ -2,12 +2,7 @@ import styled from "@emotion/styled";
 import Container from "../Container/Container";
 import useTheme from "../../Theme/themeContext";
 import { CircularProgress } from "@mui/material";
-// export const StyledBorder = styled.div<{
-//   themeColor: (name: ColorName) => string;
-// }>`
-//   border: 4px solid ${(props) => props.themeColor("gray4")};
-//   border-radius: 5px;
-// `;
+import { useSnackbar, VariantType } from "notistack";
 
 export default function SectionTitle({ title }: { title: string }) {
   const words = title.split(" ");
@@ -43,8 +38,32 @@ export const ButtonSpinner = () => {
         margin: "2px",
         height: "14px",
         width: "14px",
-        color: themeColor("white2"),
+        color: "#000",
       }}
     />
   );
+};
+
+export const useUserAlert = () => {
+  const { enqueueSnackbar } = useSnackbar();
+  const showUserAlert = ({
+    variant,
+    message,
+  }: {
+    variant: VariantType;
+    message: string;
+  }) => {
+    enqueueSnackbar(message, {
+      style: {
+        // background: variant === "info" ? "#B8FBCF" : "#00F58C",
+        // color: "#000",
+        color: variant === "info" ? "white" : "black",
+        backgroundColor:
+          variant === "info" ? "rgba(0, 40, 200, 1)" : "rgba(0, 245, 140, 1)",
+        border: variant === "info" ? "1px solid #0028C8" : "1px solid #00F58C",
+      },
+    });
+  };
+
+  return showUserAlert;
 };

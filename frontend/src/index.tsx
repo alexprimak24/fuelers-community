@@ -9,6 +9,7 @@ import {
   FueletWalletConnector,
 } from "@fuels/connectors";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { SnackbarProvider } from "notistack";
 
 const queryClient = new QueryClient();
 
@@ -27,7 +28,9 @@ root.render(
           ],
         }}
       >
-        <App />
+        <SnackbarProvider maxSnack={3}>
+          <App />
+        </SnackbarProvider>
       </FuelProvider>
     </QueryClientProvider>
   </React.StrictMode>

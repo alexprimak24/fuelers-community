@@ -3,6 +3,7 @@ import authService from "../../appwrite/auth";
 import { Models } from "appwrite";
 import { IoExitOutline } from "react-icons/io5";
 import { Button } from "@mui/material";
+import useTheme from "../../Theme/themeContext";
 
 interface LogoutProps {
   logOut: React.Dispatch<SetStateAction<boolean>>;
@@ -10,6 +11,7 @@ interface LogoutProps {
 }
 
 function Logout({ logOut, setVoter }: LogoutProps) {
+  const { theme } = useTheme();
   const logoutHandler = async () => {
     try {
       const logout = await authService.logout();
@@ -23,7 +25,7 @@ function Logout({ logOut, setVoter }: LogoutProps) {
   return (
     <Button
       variant="outlined"
-      color="primary"
+      color={theme === "dark" ? "primary" : "inherit"}
       sx={{
         minHeight: "20px",
         minWidth: "24px",
