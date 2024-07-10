@@ -65,7 +65,6 @@ function App() {
   const [postsPerPage, _setPostsPerPage] = useState(9);
   const [languages, setLanguages] = useState<string[]>([]);
   const [selectedLanguage, setSelectedLanguage] = useState<string>("All");
-  const values = [4, 2, 1, 3];
   const { themeColor, setTheme } = useTheme();
   const votingSectionRef = useRef<HTMLDivElement>(null);
 
@@ -126,6 +125,22 @@ function App() {
     }
   }, [setTheme]);
 
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(min-width: 1360px)");
+    const handleChange = (e: MediaQueryListEvent) => {
+      if (e.matches) {
+        _setPostsPerPage(12);
+      } else {
+        _setPostsPerPage(9);
+      }
+    };
+    if (mediaQuery.matches) {
+      _setPostsPerPage(12);
+    }
+    mediaQuery.addEventListener("change", handleChange);
+    return () => mediaQuery.removeEventListener("change", handleChange);
+  }, []);
+
   const lastPostIndex = currentPage * postsPerPage;
   const firstPostIndex = lastPostIndex - postsPerPage;
   const currentPosts = filteredContributions.slice(
@@ -148,7 +163,7 @@ function App() {
           <SectionTitle title="Recent works." />
           <Carousel contributions={contributions.slice(0, 10)} />
           <SectionTitle title="Best activity of the month." />
-          <VotingSection ref={votingSectionRef} values={values} />
+          <VotingSection ref={votingSectionRef} />
           <AllContributions
             contributions={currentPosts}
             currentPage={currentPage}

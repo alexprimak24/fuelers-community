@@ -15,7 +15,7 @@ module.exports = {
         am: "1100px",
         lg: "1290px",
         xl: "1360px",
-        xxl: "2560",
+        xxl: "2560px",
       },
       zIndex: {
         "-1": "-1",

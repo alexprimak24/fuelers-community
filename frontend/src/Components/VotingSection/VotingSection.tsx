@@ -20,7 +20,7 @@ import { ButtonSpinner } from "../utils/shared";
 import { useUserAlert } from "../utils/shared";
 
 interface VotingSectionProps {
-  values: number[];
+  values?: number[];
 }
 
 const CONTRACT_ID =

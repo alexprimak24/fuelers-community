@@ -10,7 +10,6 @@ interface ContributionsGridProps {
   contributions: DocumentProps[];
 }
 
-
 function ContributionsGrid({ contributions }: ContributionsGridProps) {
   return (
     <>
@@ -22,8 +21,8 @@ function ContributionsGrid({ contributions }: ContributionsGridProps) {
               xs={12}
               sm={6}
               md={4}
-              lg={3}
-              xl={2}
+              lg={4}
+              xl={3}
               key={contribution.document.index}
             >
               <Contribution
