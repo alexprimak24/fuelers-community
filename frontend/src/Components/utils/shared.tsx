@@ -1,4 +1,3 @@
-import styled from "@emotion/styled";
 import Container from "../Container/Container";
 import useTheme from "../../Theme/themeContext";
 import { CircularProgress } from "@mui/material";
@@ -31,7 +30,6 @@ export default function SectionTitle({ title }: { title: string }) {
 }
 
 export const ButtonSpinner = () => {
-  const { themeColor } = useTheme();
   return (
     <CircularProgress
       style={{

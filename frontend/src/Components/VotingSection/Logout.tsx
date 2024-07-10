@@ -1,4 +1,4 @@
-import React, { SetStateAction, useEffect } from "react";
+import React, { SetStateAction } from "react";
 import authService from "../../appwrite/auth";
 import { Models } from "appwrite";
 import { IoExitOutline } from "react-icons/io5";

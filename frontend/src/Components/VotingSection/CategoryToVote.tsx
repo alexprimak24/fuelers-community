@@ -1,12 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Tab from "@mui/material/Tab";
-import TabContext from "@mui/lab/TabContext";
-import TabList from "@mui/lab/TabList";
-import TabPanel from "@mui/lab/TabPanel";
 import styled from "@emotion/styled";
 import { Tabs, alpha } from "@mui/material";
-import { darkColors, lightColors } from "@fuel-ui/css";
 import appwriteService from "../../../src/appwrite/config";
 import OptionsRadio from "./OptionsRadio";
 import { ContractAbi } from "../../contracts";
@@ -130,8 +126,14 @@ export default function CategoryToVote({
       setBestActivistOptions,
       setStatus,
     });
-  }, [contract]);
-  console.log(sectionSelected);
+  }, [
+    contract,
+    setBestContributorOptions,
+    setBestContributionOptions,
+    setBestActivistOptions,
+    setStatus,
+  ]);
+  // console.log(sectionSelected);
   // console.log(bestContributionOptions);
   // console.log(status);
   useEffect(() => {

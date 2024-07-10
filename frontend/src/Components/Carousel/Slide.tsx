@@ -1,6 +1,5 @@
 import React, { useState, memo } from "react";
 import appwriteService from "../../appwrite/config";
-import cybercity from "../../images/cyberFuelCity.jpg";
 
 interface SlideProps {
   contentImg: string;
@@ -19,6 +18,7 @@ const Slide = memo(({ contentImg, title, contentLink }: SlideProps) => {
       <a
         href={contentLink}
         target="_blank"
+        rel="noreferrer"
         onMouseOver={() => setHover(true)}
         onMouseOut={() => setHover(false)}
         className="transition-shadow duration-400 ease-in-out border-4 border-defaultgreen shadow-fancy hover:shadow-fancy-hover transition-shadow duration-300 ease-in-out rounded-lg"
@@ -34,14 +34,6 @@ const Slide = memo(({ contentImg, title, contentLink }: SlideProps) => {
           onLoad={() => setLoading(false)}
           className={` ${loading ? "blur-lg" : "blur-0"} transition-blur duration-300`}
         />
-
-        {/* <img
-          src={cybercity}
-          alt=""
-          loading="lazy"
-          onLoad={() => setLoading(false)}
-          className={`max-h-[420px] ${loading ? "blur-lg" : "blur-0"} transition-blur duration-300`}
-        /> */}
       </a>
       <p className="text-defaultwhite text-opacity-50 text-2xl">{title}</p>
     </div>
@@ -49,12 +41,3 @@ const Slide = memo(({ contentImg, title, contentLink }: SlideProps) => {
 });
 
 export default Slide;
-
-// const dbPost = await appwriteService.createPost({
-//   title: data.title,
-//   slug: data.slug,
-//   content: data.content,
-//   featuredImage: fileId,
-//   status: data.status,
-//   userId: userData.$id,
-// });

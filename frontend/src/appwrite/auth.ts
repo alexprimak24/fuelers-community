@@ -50,6 +50,7 @@ export class AuthService {
     }
   }
   // "http://localhost:3000/"
+  // https://fuelerscommunity.com/
   //get current active user
   async getCurrentUser() {
     try {
@@ -76,7 +77,7 @@ export class AuthService {
         }
         //if the user exist => return existing user
         else {
-          console.log("User already exists:", response.documents[0]);
+          // console.log("User already exists:", response.documents[0]);
           return response.documents[0];
         }
       } catch (error) {

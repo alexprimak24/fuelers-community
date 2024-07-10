@@ -1,9 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Contribution from "./Contribution";
 import Grid from "@mui/material/Grid";
-import appwriteService from "../../appwrite/config";
-import { ContributionObj } from "./Contribution";
-import { useInView } from "react-intersection-observer";
 import { DocumentProps } from "../../App";
 
 interface ContributionsGridProps {

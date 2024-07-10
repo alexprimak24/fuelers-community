@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from "react";
+import { useCallback } from "react";
 import { darkColors, lightColors } from "@fuel-ui/css";
 import { useFuelTheme } from "@fuel-ui/react";
 

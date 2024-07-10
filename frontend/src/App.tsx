@@ -11,7 +11,7 @@ import SectionTitle from "./Components/utils/shared";
 import Carousel from "./Components/Carousel/Carousel";
 import AllContributions from "./Components/AllContributions/AllContributions";
 import appwriteService from "../src/appwrite/config";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
+import { SelectChangeEvent } from "@mui/material/Select";
 import DividerImage from "./Components/DividerImage/DividerImage";
 import VotingSection from "./Components/VotingSection/VotingSection";
 import useTheme from "./Theme/themeContext";

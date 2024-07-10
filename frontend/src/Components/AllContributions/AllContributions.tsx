@@ -1,6 +1,5 @@
 import React from "react";
 import LanguageSelector from "./LanguageSelector";
-import Contribution from "./Contribution";
 import ContributionsGrid from "./ContributionsGrid";
 import { DocumentProps } from "../../App";
 import Pagination from "./Pagination";

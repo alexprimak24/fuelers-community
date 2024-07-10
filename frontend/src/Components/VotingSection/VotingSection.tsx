@@ -1,6 +1,5 @@
 import React, { forwardRef } from "react";
 import Container from "../Container/Container";
-import OptionsRadio from "./OptionsRadio";
 import Auth from "./Auth";
 import CategoryToVote from "./CategoryToVote";
 import useTheme from "../../Theme/themeContext";
@@ -45,6 +44,7 @@ const VotingSection = forwardRef<HTMLDivElement, VotingSectionProps>(
     const [bestActivistOptions, setBestActivistOptions] = useState<number[]>(
       Array(5).fill(0)
     );
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [status, setStatus] = useState<
       "success" | "loading" | "error" | "none"
     >("none");

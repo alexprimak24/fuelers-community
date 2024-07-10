@@ -1,16 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
-import FormLabel from "@mui/material/FormLabel";
 import { styled } from "@mui/material/styles";
-import cyberCity from "../../images/cyberFuelCity.jpg";
 import ProgressBar from "@ramonak/react-progress-bar";
-import { useInView } from "react-intersection-observer";
-import { CategoryToVoteProps, VoteCategoriesProps } from "./CategoryToVote";
+import { VoteCategoriesProps } from "./CategoryToVote";
 import useTheme from "../../Theme/themeContext";
-import Avatar from "@mui/material/Avatar";
 import appwriteService from "../../appwrite/config";
 
 const CustomFormControlLabel = styled(FormControlLabel)(({ theme }) => ({
@@ -41,15 +37,6 @@ function OptionsRadio({
   isContribution,
 }: OptionsRadioProps) {
   const { values, voteCategories } = data;
-  const [animate, setAnimate] = useState(false);
-  const { ref, inView } = useInView({
-    triggerOnce: true,
-    onChange: (inView) => {
-      if (inView) {
-        setAnimate(true); // Set animate to true on view
-      }
-    },
-  });
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setOptionToVote(Number(event.target.value));
   };
@@ -71,7 +58,7 @@ function OptionsRadio({
   }));
   //imported theme color for white theme
   const { themeColor } = useTheme();
-  console.log(combinedData);
+  // console.log(combinedData);
 
   return (
     <div className="flex flex-col justify-between gap-[50px] w-full">
@@ -107,7 +94,11 @@ function OptionsRadio({
               />
               <div className="w-full flex flex-col aas:flex-row items-center gap-[10px] aas:gap-[50px]">
                 {isContribution ? (
-                  <a href={item.category.document.contentlink} target="_blank">
+                  <a
+                    href={item.category.document.contentlink}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
                     <div className="w-[240px] aax:w-[270px] ax:w-[320px] aas:w-[270px] amd:w-[320px] overflow-hidden">
                       <img
                         src={appwriteService.getFilePreviewBestWorks({
@@ -120,7 +111,11 @@ function OptionsRadio({
                     </div>
                   </a>
                 ) : (
-                  <a href={item.category.document.contentlink} target="_blank">
+                  <a
+                    href={item.category.document.contentlink}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
                     <div className="w-[180px] h-[180px] overflow-hidden ">
                       <img
                         src={appwriteService.getFilePreviewBestWorks({

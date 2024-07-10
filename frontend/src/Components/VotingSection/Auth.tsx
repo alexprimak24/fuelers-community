@@ -1,9 +1,8 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import authService from "../../appwrite/auth";
 import Logout from "./Logout";
 import { Models } from "appwrite";
-import Avatar from "@mui/material/Avatar";
-import { Button, styled } from "@mui/material";
+import { Button } from "@mui/material";
 import { FaDiscord } from "react-icons/fa";
 import useTheme from "../../Theme/themeContext";
 
@@ -28,7 +27,7 @@ function Auth({ setVoter, voter }: AuthProps) {
       try {
         const user = await authService.getCurrentUser();
         const username = user?.name ?? "";
-        console.log(user);
+        // console.log(user);
         try {
           const voter = await authService.checkAndAddUser({ username });
           setVoter(voter);
@@ -50,8 +49,8 @@ function Auth({ setVoter, voter }: AuthProps) {
     };
 
     handleOAuth2Response();
-  }, [authService.account]);
-  console.log(voter);
+  }, [setVoter]);
+  // console.log(voter);
 
   const { themeColor } = useTheme();
 
@@ -83,7 +82,7 @@ function Auth({ setVoter, voter }: AuthProps) {
           style={{
             color: themeColor("white3"),
             borderColor: themeColor("white3"),
-          }} //edit this to make it work with hover
+          }}
           className="min-w-[165px] h-[40px] rounded-[4px] px-[10px] w-full flex justify-evenly gap-[10px] items-center border border-solid hover:border-defaultgreen"
         >
           <div className="overflow-hidden">

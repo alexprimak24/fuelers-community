@@ -1,11 +1,6 @@
 import React from "react";
 import Box from "@mui/material/Box";
 import SocialsGrowth from "../utils/SocialsGrowthIcon";
-import XLogo from "../../images/XLogo.svg";
-import ForumLogo from "../../images/ForumLogo.svg";
-import DiscordLogo from "../../images/DiscordLogo.svg";
-import GithubLogo from "../../images/GithubLogo.svg";
-import TelegramLogo from "../../images/TelegramLogo.svg";
 import useTheme from "../../Theme/themeContext";
 import { FaDiscord, FaTelegramPlane, FaGithub } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";

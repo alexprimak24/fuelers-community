@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-import cyberCity from "../../images/cyberFuelCity.jpg";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
@@ -66,7 +64,7 @@ function Contribution({
           <div className="relative">
             <div className="absolute inset-0 border-2 border-defaultgreen rounded-lg z-10 pointer-events-none"></div>
             <div className="relative">
-              <a href={contentLink} target="_blank">
+              <a href={contentLink} target="_blank" rel="noreferrer">
                 <CardMedia
                   component="img"
                   image={appwriteService.getFilePreview({
@@ -81,7 +79,7 @@ function Contribution({
           <CardContent
             sx={{ paddingLeft: 0, paddingRight: 0, paddingTop: "20px" }}
           >
-            <a href={contentLink} target="_blank">
+            <a href={contentLink} target="_blank" rel="noreferrer">
               <p
                 style={{ color: themeColor("white5") }}
                 className="font-questrial text-2xl mb-[10px]"

@@ -13,12 +13,12 @@ function LogoAndName() {
       className="flex gap-[20px] cursor-pointer items-center justify-center md:max-w-[177px] w-full h-[50px] md:mr-[170px]"
     >
       <FuelCommunityLogo color={themeColor("white1")} />
-      <a
+      <button
         style={{ color: themeColor("white1") }}
         className="font-normal text-[24px] aax:text-[28px] sm:text-[32px]"
       >
         Fuelers
-      </a>
+      </button>
     </div>
   );
 }
