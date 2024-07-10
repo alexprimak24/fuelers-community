@@ -109,7 +109,7 @@ const VotingSection = forwardRef<HTMLDivElement, VotingSectionProps>(
         });
         showUserAlert({
           variant: "success",
-          message: "Congratulations!Your vote is in!🎉",
+          message: "Congratulations! Your vote is in!🎉",
         });
         await getAllItems({
           contract,
