@@ -62,7 +62,7 @@ function App() {
     DocumentProps[]
   >([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage, _setPostsPerPage] = useState(9);
+  const [postsPerPage, _setPostsPerPage] = useState(12);
   const [languages, setLanguages] = useState<string[]>([]);
   const [selectedLanguage, setSelectedLanguage] = useState<string>("All");
   const { themeColor, setTheme } = useTheme();
@@ -124,22 +124,6 @@ function App() {
       setTheme("light");
     }
   }, [setTheme]);
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia("(min-width: 1360px)");
-    const handleChange = (e: MediaQueryListEvent) => {
-      if (e.matches) {
-        _setPostsPerPage(12);
-      } else {
-        _setPostsPerPage(9);
-      }
-    };
-    if (mediaQuery.matches) {
-      _setPostsPerPage(12);
-    }
-    mediaQuery.addEventListener("change", handleChange);
-    return () => mediaQuery.removeEventListener("change", handleChange);
-  }, []);
 
   const lastPostIndex = currentPage * postsPerPage;
   const firstPostIndex = lastPostIndex - postsPerPage;
