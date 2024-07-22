@@ -23,10 +23,12 @@ interface VotingSectionProps {
 }
 
 const CONTRACT_ID =
-  "0x6add81c4654d6a74438cb17cbab9de9d46151db990ec42e9a11c7efee93dce1c";
+  "0x8bdbb4c4f4accdf66478ca6e32013f89af3d613c92f70303cee786e07cd0abc5";
 
 const VotingSection = forwardRef<HTMLDivElement, VotingSectionProps>(
   ({ values }, ref) => {
+    // const assetId =
+    //   "0xf8f8b6283d7fa5b672b530cbb84fcccb4ff8dc40f8176ef4544ddb1f1952ad07";
     const { themeColor } = useTheme();
     const { isConnected } = useIsConnected();
     const { connect, isConnecting } = useConnectUI();
@@ -53,7 +55,6 @@ const VotingSection = forwardRef<HTMLDivElement, VotingSectionProps>(
       "success" | "loading" | "error" | "none"
     >("none");
     const showUserAlert = useUserAlert();
-
     const submitVote = async () => {
       setSubmittingVoteStatus("loading");
       if (!voter) {
@@ -86,6 +87,26 @@ const VotingSection = forwardRef<HTMLDivElement, VotingSectionProps>(
         showUserAlert({
           variant: "info",
           message: "Pick the candidate you like.",
+        });
+        return;
+      }
+      if (wallet && (await wallet.getBalance()).toNumber() === 0) {
+        setSubmittingVoteStatus("none");
+        showUserAlert({
+          variant: "info",
+          message: (
+            <p>
+              Get testnet funds from the{" "}
+              <a
+                href={`https://faucet-testnet.fuel.network/?address=${wallet.address.toAddress()}`}
+                rel="noreferrer"
+                target="_blank"
+                className="underline"
+              >
+                faucet
+              </a>
+            </p>
+          ),
         });
         return;
       }

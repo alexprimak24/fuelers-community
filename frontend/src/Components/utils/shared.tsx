@@ -49,7 +49,7 @@ export const useUserAlert = () => {
     message,
   }: {
     variant: VariantType;
-    message: string;
+    message: string | React.ReactNode;
   }) => {
     enqueueSnackbar(message, {
       style: {
