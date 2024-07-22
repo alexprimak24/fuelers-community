@@ -35,7 +35,9 @@ const Slide = memo(({ contentImg, title, contentLink }: SlideProps) => {
           className={` ${loading ? "blur-lg" : "blur-0"} transition-blur duration-300`}
         />
       </a>
-      <p className="text-defaultwhite text-opacity-50 text-2xl">{title}</p>
+      <p className="font-grotesk text-defaultwhite text-opacity-50 text-2xl">
+        {title}
+      </p>
     </div>
   );
 });

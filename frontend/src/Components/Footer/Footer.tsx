@@ -44,7 +44,7 @@ function Footer() {
       </h1>
       <p
         style={{ color: themeColor("white3") }}
-        className="text-base max-w-[340px] aax:max-w-[450px] sm:max-w-[500px] aas:max-w-[582px]"
+        className="font-grotesk text-base max-w-[340px] aax:max-w-[450px] sm:max-w-[500px] aas:max-w-[582px]"
       >
         This site is not official Fuel resource, it has been done by the
         community members. It was created for the purpose of highlighting Fuel

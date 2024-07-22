@@ -10,7 +10,7 @@ function Footer() {
   const { themeColor } = useTheme();
 
   return (
-    <div className="fixed w-full z-30 ">
+    <header className="fixed w-full z-30 ">
       <div
         style={{ backgroundColor: themeColor("black1") }}
         className="w-full h-[70px] top-0 bg-semi-transparent-black pt-[10px] flex  justify-center"
@@ -40,7 +40,7 @@ function Footer() {
           </div>
         </div>
       </div>
-    </div>
+    </header>
   );
 }
 

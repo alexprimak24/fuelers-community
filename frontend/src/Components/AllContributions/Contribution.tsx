@@ -98,7 +98,7 @@ function Contribution({
                     {date}
                   </p>
                 </div>
-                <div className="flex gap-[10px] items-center mr-[50px]">
+                <div className="flex gap-[10px] items-center mr-[50px] ml-[10px]">
                   <Avatar
                     alt="ContributorPfp"
                     src={pfp}
