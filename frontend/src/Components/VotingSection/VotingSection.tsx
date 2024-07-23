@@ -23,7 +23,7 @@ interface VotingSectionProps {
 }
 
 const CONTRACT_ID =
-  "0x8bdbb4c4f4accdf66478ca6e32013f89af3d613c92f70303cee786e07cd0abc5";
+  "0xc86e2e35c0be989a4db0d7a1ea29e53f819ef4ea9da86d7ba8772f1df0b3b718";
 
 const VotingSection = forwardRef<HTMLDivElement, VotingSectionProps>(
   ({ values }, ref) => {
@@ -82,7 +82,7 @@ const VotingSection = forwardRef<HTMLDivElement, VotingSectionProps>(
         });
         return;
       }
-      if (!optionToVote) {
+      if (optionToVote === null) {
         setSubmittingVoteStatus("none");
         showUserAlert({
           variant: "info",

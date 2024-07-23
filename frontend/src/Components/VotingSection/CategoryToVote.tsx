@@ -133,8 +133,8 @@ export default function CategoryToVote({
     setBestActivistOptions,
     setStatus,
   ]);
-  // console.log(sectionSelected);
-  // console.log(bestContributionOptions);
+  console.log("sectionSelected:", sectionSelected);
+  console.log("optionToVote:", optionToVote);
   // console.log(status);
   useEffect(() => {
     const fetchPosts = async () => {
